@@ -1,6 +1,6 @@
 export default {
   name: 'videoShort',
-  title: 'Video Shorts',
+  title: 'Videos',
   type: 'document',
   fields: [
     {
@@ -9,7 +9,7 @@ export default {
       type: 'string',
     },
     {
-      name: 'mainImage', // Added this as a thumbnail
+      name: 'mainImage',
       title: 'Thumbnail Image',
       type: 'image',
       options: { hotspot: true },
