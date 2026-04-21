@@ -1,3 +1,5 @@
+// the-double-take/schemaTypes/article.js
+
 export default {
   name: 'article',
   title: 'Deep Dives',
@@ -28,6 +30,13 @@ export default {
       rows: 3,
     },
     {
+      name: 'threadPost',
+      title: 'The Post That Started This',
+      type: 'text',
+      rows: 4,
+      description: 'Paste your original Threads post here. Edit for clarity — this appears as the social card at the top of the article.',
+    },
+    {
       name: 'mainImage',
       title: 'Main Image',
       type: 'image',
@@ -53,9 +62,7 @@ export default {
       title: 'Tags',
       type: 'array',
       of: [{ type: 'string' }],
-      options: {
-        layout: 'tags',
-      },
+      options: { layout: 'tags' },
       description: 'Add keywords to help organise and filter Deep Dives (e.g. "Federal Reserve", "Macro", "Liquidity").',
     },
 
