@@ -1,5 +1,3 @@
-// the-double-take/schemaTypes/homepage.js
-
 export default {
   name: 'homepage',
   title: 'Homepage Editor',
@@ -7,34 +5,40 @@ export default {
   fields: [
     {
       name: 'doubleTake',
-      title: 'Double Take of the Day',
+      title: 'Double Take (Left Intel Memo)',
       type: 'object',
-      description: 'The tweet card on the left side of the Hero. Write your sharpest take here.',
+      description: 'The "Raw Intel" memo that establishes the skeptical hook for the day.',
       fields: [
         {
           name: 'quote',
-          title: 'Pull Quote',
+          title: 'The Intel / Take',
           type: 'text',
           rows: 4,
-          description: '1–3 punchy sentences. This appears as the tweet card quote in the Hero.',
+          description: 'Paste and edit your 1-3 sentences here. Be sharp, be skeptical.',
           validation: Rule => Rule.required().max(400)
         },
         {
+          name: 'sourceOverride',
+          title: 'Source Override (Optional)',
+          type: 'string',
+          description: 'Defaults to @kimrampling. Fill this in ONLY if the quote is from someone else.',
+        },
+        {
           name: 'linkedDive',
-          title: 'Linked Deep Dive (optional)',
+          title: 'Linked Investigation (Optional)',
           type: 'reference',
           to: [{ type: 'article' }],
-          description: 'If this take relates to a Deep Dive article, link it here. Powers the READ THE FULL BREAKDOWN link.',
+          description: 'Link this intel to a specific Deep Dive report.',
           options: { disableNew: true }
         }
       ]
     },
     {
       name: 'featuredDive',
-      title: 'Featured Deep Dive',
+      title: 'Primary Featured Investigation (Right)',
       type: 'reference',
       to: [{ type: 'article' }],
-      description: 'The article shown on the right side of the Hero. Title and excerpt display here.',
+      description: 'The main long-form analysis report for the Hero section.',
       options: { disableNew: true }
     }
   ],
@@ -45,8 +49,8 @@ export default {
     },
     prepare({ title, subtitle }) {
       return {
-        title: title ? title.substring(0, 60) + '…' : 'No quote set',
-        subtitle: subtitle ? `Featured: ${subtitle}` : 'No featured dive set'
+        title: title ? `INTEL: ${title.substring(0, 50)}...` : 'No Intel set',
+        subtitle: subtitle ? `REPORT: ${subtitle}` : 'No report set'
       }
     }
   }
