@@ -16,9 +16,10 @@ export default {
       name: 'linkType',
       title: 'Links To',
       type: 'string',
-      description: 'What type of content does this headline relate to?',
+      description: 'Optional — what type of content does this headline relate to? Leave blank if not yet linked.',
       options: {
         list: [
+          { title: 'None — standalone signal', value: 'none' },
           { title: 'Deep Dive Article', value: 'deepDive' },
           { title: 'Video', value: 'video' }
         ],
@@ -33,14 +34,15 @@ export default {
         { type: 'article' },
         { type: 'videoShort' }
       ],
-      description: 'Link to the Deep Dive or Video this headline refers to. Keeps visitors on the site.',
+      description: 'Optional — link to the Deep Dive or Video this headline refers to. Leave blank if not yet published.',
       options: { disableNew: true }
     },
     {
       name: 'publishedAt',
       title: 'Published At',
       type: 'datetime',
-      description: 'Used to order entries in the ticker (newest first).'
+      description: 'Used to order entries in the ticker (newest first).',
+      initialValue: () => new Date().toISOString()
     }
   ],
   preview: {
@@ -48,7 +50,9 @@ export default {
     prepare({ title, subtitle }) {
       return {
         title: title || 'Untitled signal',
-        subtitle: subtitle === 'deepDive' ? '→ Deep Dive' : subtitle === 'video' ? '→ Video' : 'No link set'
+        subtitle: subtitle === 'deepDive' ? '→ Deep Dive'
+          : subtitle === 'video' ? '→ Video'
+          : '→ Standalone signal'
       }
     }
   }

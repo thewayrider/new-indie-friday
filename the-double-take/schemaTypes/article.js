@@ -36,6 +36,12 @@ export default {
       rows: 4,
       description: 'Paste your original Threads post here. Edit for clarity — this appears as the social card at the top of the article.',
     },
+	{
+     name: 'threadUrl',
+     title: 'Threads Post URL',
+     type: 'url',
+     description: 'Paste the direct link to the original Threads post.',
+    },
     {
       name: 'mainImage',
       title: 'Main Image',
