@@ -1,14 +1,12 @@
 import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure' // Switched to modern structureTool
+import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 
 export default defineConfig({
   name: 'default',
   title: 'The Double Take',
-
-  // KEEP YOUR ACTUAL PROJECT ID HERE
-  projectId: '9weej2ir', 
+  projectId: '9weej2ir',
   dataset: 'production',
 
   plugins: [
@@ -22,12 +20,12 @@ export default defineConfig({
               .title('Homepage Editor')
               .id('homepage')
               .child(
-                S.document()
+                S.editor()
+                  .id('homepage')
                   .schemaType('homepage')
                   .documentId('homepage')
               ),
             S.divider(),
-            // All other document types
             ...S.documentTypeListItems().filter(
               (listItem) => !['homepage'].includes(listItem.getId())
             ),
@@ -38,5 +36,14 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+
+  document: {
+    actions: (prev, context) =>
+      context.schemaType === 'homepage'
+        ? prev.filter(({ action }) =>
+            !['delete', 'unpublish', 'discardChanges'].includes(action)
+          )
+        : prev,
   },
 })

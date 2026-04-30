@@ -1,57 +1,54 @@
 export default {
   name: 'homepage',
-  title: 'Homepage Editor',
+  title: 'Homepage Manager',
   type: 'document',
   fields: [
     {
+      name: 'title',
+      title: 'Internal Document Title',
+      type: 'string',
+    },
+    // ── THE DOUBLE TAKE (LEFT HERO BOX) ──
+    {
       name: 'doubleTake',
-      title: 'Double Take (Left Intel Memo)',
+      title: 'The Double Take (Memo Box)',
       type: 'object',
-      description: 'The "Raw Intel" memo that establishes the skeptical hook for the day.',
       fields: [
         {
           name: 'quote',
-          title: 'The Intel / Take',
+          title: 'Intel Quote',
           type: 'text',
-          rows: 4,
-          description: 'Paste and edit your 1-3 sentences here. Be sharp, be skeptical.',
-          validation: Rule => Rule.required().max(400)
+          rows: 3,
+        },
+        {
+          name: 'intelImage',
+          title: 'Intel / Evidence Image (Optional)',
+          type: 'image',
+          options: { hotspot: true },
+          description: 'A small visual reference that appears in the memo box.',
         },
         {
           name: 'sourceOverride',
-          title: 'Source Override (Optional)',
+          title: 'Source Label Override',
           type: 'string',
-          description: 'Defaults to @kimrampling. Fill this in ONLY if the quote is from someone else.',
+          description: 'e.g., @KIMRAMPLING // THREADS',
         },
         {
           name: 'linkedDive',
-          title: 'Linked Investigation (Optional)',
+          title: 'Link to Deep Dive',
           type: 'reference',
           to: [{ type: 'article' }],
-          description: 'Link this intel to a specific Deep Dive report.',
-          options: { disableNew: true }
-        }
-      ]
+          description: 'Clicking the memo will take users to this article.',
+        },
+      ],
     },
+    // ── FEATURED ANALYSIS (RIGHT HERO BOX) ──
     {
       name: 'featuredDive',
-      title: 'Primary Featured Investigation (Right)',
+      title: 'Featured Deep Analysis',
       type: 'reference',
       to: [{ type: 'article' }],
-      description: 'The main long-form analysis report for the Hero section.',
-      options: { disableNew: true }
-    }
-  ],
-  preview: {
-    select: {
-      title: 'doubleTake.quote',
-      subtitle: 'featuredDive.title'
+      description: 'The main report featured on the right side of the hero.',
     },
-    prepare({ title, subtitle }) {
-      return {
-        title: title ? `INTEL: ${title.substring(0, 50)}...` : 'No Intel set',
-        subtitle: subtitle ? `REPORT: ${subtitle}` : 'No report set'
-      }
-    }
-  }
+  ],
 }
