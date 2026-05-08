@@ -36,11 +36,11 @@ export default {
       rows: 4,
       description: 'Paste your original Threads post here. Edit for clarity — this appears as the social card at the top of the article.',
     },
-	{
-     name: 'threadUrl',
-     title: 'Threads Post URL',
-     type: 'url',
-     description: 'Paste the direct link to the original Threads post.',
+    {
+      name: 'threadUrl',
+      title: 'Threads Post URL',
+      type: 'url',
+      description: 'Paste the direct link to the original Threads post.',
     },
     {
       name: 'mainImage',
@@ -70,6 +70,12 @@ export default {
       of: [{ type: 'string' }],
       options: { layout: 'tags' },
       description: 'Add keywords to help organise and filter Deep Dives (e.g. "Federal Reserve", "Macro", "Liquidity").',
+    },
+    {
+      name: 'readTime',
+      title: 'Read Time (minutes)',
+      type: 'number',
+      description: 'Estimated reading time in minutes (e.g. 8). Displayed on article cards and at the top of the article.',
     },
 
     // ── Author ───────────────────────────────────────────────

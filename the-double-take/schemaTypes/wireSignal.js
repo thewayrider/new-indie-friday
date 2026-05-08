@@ -13,6 +13,20 @@ export default {
       validation: Rule => Rule.required().max(120)
     },
     {
+      name: 'threadText',
+      title: 'Original Threads Post Text',
+      type: 'text',
+      rows: 4,
+      description: 'Paste the full text of the original Threads post. Shown in the popover preview on the site.'
+    },
+    {
+      name: 'threadsUrl',
+      title: 'Threads Post URL',
+      type: 'url',
+      description: 'Direct URL to the original Threads post. Enables the popover and "View on Threads ↗" link.',
+      validation: Rule => Rule.uri({ scheme: ['https'] })
+    },
+    {
       name: 'linkType',
       title: 'Links To',
       type: 'string',
