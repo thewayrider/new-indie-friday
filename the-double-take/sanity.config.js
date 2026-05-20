@@ -1,7 +1,10 @@
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemaTypes'
+import { defineConfig } from 'sanity'
+import { structureTool } from 'sanity/structure'
+import { visionTool } from '@sanity/vision'
+import { schemaTypes } from './schemaTypes'
+import {
+  orderableDocumentListDeskItem
+} from '@sanity/orderable-document-list'
 
 export default defineConfig({
   name: 'default',
@@ -11,7 +14,7 @@ export default defineConfig({
 
   plugins: [
     structureTool({
-      structure: (S) =>
+      structure: (S, context) =>
         S.list()
           .title('Content')
           .items([
@@ -26,8 +29,18 @@ export default defineConfig({
                   .documentId('homepage')
               ),
             S.divider(),
+
+            // Orderable Live Feed (Ticker)
+            orderableDocumentListDeskItem({
+              type: 'wireSignal',
+              title: 'Live Feed (Ticker)',
+              S,
+              context,
+            }),
+
+            // All other document types (excluding homepage and wireSignal)
             ...S.documentTypeListItems().filter(
-              (listItem) => !['homepage'].includes(listItem.getId())
+              (listItem) => !['homepage', 'wireSignal'].includes(listItem.getId())
             ),
           ]),
     }),

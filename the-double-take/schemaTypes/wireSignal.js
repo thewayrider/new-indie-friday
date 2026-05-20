@@ -1,10 +1,30 @@
 // the-double-take/schemaTypes/wireSignal.js
+import { orderRankField } from '@sanity/orderable-document-list'
 
 export default {
   name: 'wireSignal',
   title: 'Live Feed (Ticker)',
   type: 'document',
+
+  __experimental_actions: ['create', 'update', 'delete', 'publish'],
+
+  orderings: [
+    {
+      title: 'Manual Order',
+      name: 'manualOrder',
+      by: [{ field: 'orderRank', direction: 'asc' }]
+    },
+    {
+      title: 'Published Date, Newest',
+      name: 'publishedAtDesc',
+      by: [{ field: 'publishedAt', direction: 'desc' }]
+    }
+  ],
+
   fields: [
+    // DRAG-AND-DROP: plugin field — stores rank string internally
+    orderRankField({ type: 'wireSignal' }),
+
     {
       name: 'title',
       title: 'Headline',
@@ -55,19 +75,28 @@ export default {
       name: 'publishedAt',
       title: 'Published At',
       type: 'datetime',
-      description: 'Used to order entries in the ticker (newest first).',
+      description: 'Used to display the date in the list view.',
       initialValue: () => new Date().toISOString()
     }
   ],
+
   preview: {
-    select: { title: 'title', subtitle: 'linkType' },
-    prepare({ title, subtitle }) {
+    select: {
+      title: 'title',
+      subtitle: 'linkType',
+      date: 'publishedAt'
+    },
+    prepare({ title, subtitle, date }) {
+      const d = date ? new Date(date) : null;
+      const dd = d ? String(d.getDate()).padStart(2, '0') : '--';
+      const mm = d ? String(d.getMonth() + 1).padStart(2, '0') : '--';
+      const linkLabel = subtitle === 'deepDive' ? '→ Deep Dive'
+        : subtitle === 'video' ? '→ Video'
+        : '→ Standalone signal';
       return {
         title: title || 'Untitled signal',
-        subtitle: subtitle === 'deepDive' ? '→ Deep Dive'
-          : subtitle === 'video' ? '→ Video'
-          : '→ Standalone signal'
-      }
+        subtitle: `${dd}/${mm}  ${linkLabel}`
+      };
     }
   }
 }

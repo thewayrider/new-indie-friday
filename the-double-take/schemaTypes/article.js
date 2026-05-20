@@ -78,6 +78,14 @@ export default {
       description: 'Estimated reading time in minutes (e.g. 8). Displayed on article cards and at the top of the article.',
     },
 
+    {
+  name: 'archived',
+  title: 'Archived',
+  type: 'boolean',
+  description: 'Toggle on to hide this Deep Dive from the listing page. It remains in Sanity and accessible via direct URL.',
+  initialValue: false,
+},
+
     // ── Author ───────────────────────────────────────────────
     {
       name: 'author',
@@ -136,12 +144,20 @@ export default {
     },
   ],
 
-  // ── Studio Preview ───────────────────────────────────────
+    // ── Studio Preview ───────────────────────────────────────
   preview: {
     select: {
       title: 'title',
       subtitle: 'excerpt',
       media: 'mainImage',
+      archived: 'archived',
+    },
+    prepare({ title, subtitle, media, archived }) {
+      return {
+        title: archived ? `[ARCHIVED] ${title}` : title,
+        subtitle,
+        media,
+      };
     },
   },
 }
