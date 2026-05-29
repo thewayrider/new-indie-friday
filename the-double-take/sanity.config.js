@@ -30,13 +30,7 @@ export default defineConfig({
               ),
             S.divider(),
 
-            // Orderable Live Feed (Ticker)
-            orderableDocumentListDeskItem({
-              type: 'wireSignal',
-              title: 'Live Feed (Ticker)',
-              S,
-              context,
-            }),
+           
 
             // All other document types (excluding homepage and wireSignal)
             ...S.documentTypeListItems().filter(
