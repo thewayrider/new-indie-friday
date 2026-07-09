@@ -1,0 +1,24 @@
+ALWAYS use cd frontend in Terminal before git commands:
+cd
+git add .
+git commit -m "describe your change here"
+git push
+
+TERMINAL CHECK — prompt should show:
+PS C:\Users\kimra\Desktop\Frequency Files\The-Double-Take\frontend>
+
+TROUBLESHOOTING:
+Missing/Wrong Text? → Check Sanity Studio (is it published?)
+Visual Glitches? → Check VS Code (Tailwind/CSS)
+Site not updating? → Check Vercel Build Logs
+Loading loop/Data Error? → Check Sanity Manage (CORS/API keys)
+
+
+Stuck:
+
+cd ..
+cd frontend
+
+Sanity
+
+cd the-double-take
