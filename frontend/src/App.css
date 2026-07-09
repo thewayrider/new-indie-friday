@@ -1,0 +1,32 @@
+/* ---/* --- 1. GLOBAL RESET --- */
+:root {
+  --neon-cyan: #00e5cc;
+  --cyber-black: #1a1816;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #e7e1d7;
+  /* We keep the font stacks clean so Tailwind can handle the rest */
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+
+/* --- 2. THE GRID BACKGROUND --- */
+/* This creates that subtle digital texture behind your Lab content */
+.bg-grid {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* --- 3. CLEAN UP --- */
+/* We remove the h1:hover and @keyframes glitch entirely 
+   so the headline stays perfectly still. */
+h1 {
+  margin: 0;
+  padding: 0;
+}
