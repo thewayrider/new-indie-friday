@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PortableText } from '@portabletext/react';
 import { client } from '../client';
+import LikeDislike from './LikeDislike';
 
 const QUERY = `*[_type == "release" && slug.current == $slug][0]{
   _id,
@@ -183,6 +184,7 @@ export default function ReleaseDetail() {
               ) : null}
             </main>
           </div>
+          <LikeDislike slug={data.slug} />
         </article>
 
       </div>
