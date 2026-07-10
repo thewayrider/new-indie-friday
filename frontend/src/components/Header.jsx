@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { client } from '../client';
 
 const ThreadsIcon = () => (
   <svg width="16" height="16" viewBox="0 0 192 192" fill="currentColor">
@@ -47,6 +48,16 @@ export default function Header() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('idle');
 
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [searching, setSearching] = useState(false);
+
+  const searchRef = useRef(null);
+  const searchInputRef = useRef(null);
+  const debounceRef = useRef(null);
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('sending');
@@ -66,6 +77,78 @@ export default function Header() {
   const handleHomeClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const handleSearchOpen = () => {
+    setSearchOpen(true);
+    setSearchQuery('');
+    setSearchResults([]);
+    setTimeout(function () {
+      if (searchInputRef.current) searchInputRef.current.focus();
+    }, 50);
+  };
+
+  const handleSearchClose = () => {
+    setSearchOpen(false);
+    setSearchQuery('');
+    setSearchResults([]);
+  };
+
+  const handleSearchInput = (e) => {
+    const val = e.target.value;
+    setSearchQuery(val);
+
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    if (!val.trim()) {
+      setSearchResults([]);
+      return;
+    }
+
+    debounceRef.current = setTimeout(function () {
+      setSearching(true);
+      client.fetch(
+        `*[_type == "release" && (
+          songTitle match $q ||
+          artistName match $q
+        )] | order(orderRank asc)[0...8]{
+          _id,
+          songTitle,
+          artistName,
+          "slug": slug.current
+        }`,
+        { q: val + '*' }
+      ).then(function (results) {
+        setSearchResults(results || []);
+        setSearching(false);
+      }).catch(function () {
+        setSearching(false);
+      });
+    }, 300);
+  };
+
+  const handleResultClick = (slug) => {
+    navigate('/new-releases/' + slug);
+    handleSearchClose();
+  };
+
+  useEffect(function () {
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') handleSearchClose();
+    }
+    function handleClickOutside(e) {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        handleSearchClose();
+      }
+    }
+    if (searchOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return function () {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [searchOpen]);
 
   return (
     <nav className="sticky top-0 z-[200] bg-[#e8e2d9] isolate py-5 md:py-6 px-6 md:px-12 flex justify-between items-center border-b-2 border-black/70 relative">
@@ -90,7 +173,7 @@ export default function Header() {
             New Indie Friday
           </NavLink>
           <span className="text-gray-800 text-[1px] md:text-[11px] font-mono tracking-[0.15em] md:tracking-[0.3em] mt-1.5 ml-[0.5ch]">
-             New Independent Music curated by Kim Rampling
+            New Independent Music curated by Kim Rampling
           </span>
         </div>
       </div>
@@ -106,12 +189,76 @@ export default function Header() {
 
       {/* RIGHT — Song Search + Subscribe + Social */}
       <div className="flex flex-col items-end gap-3">
-        <button className="hidden lg:flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 hover:text-black transition">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
-          </svg>
-          Song Search
-        </button>
+
+        {/* SONG SEARCH */}
+        <div ref={searchRef} className="relative hidden lg:block w-full text-center">
+          {!searchOpen ? (
+            <button
+              onClick={handleSearchOpen}
+              className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 hover:text-black transition"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+              </svg>
+              Song Search
+            </button>
+          ) : (
+            <div className="flex items-center gap-2">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-black/40 flex-shrink-0">
+                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+              </svg>
+              <input
+                ref={searchInputRef}
+                type="text"
+                value={searchQuery}
+                onChange={handleSearchInput}
+                placeholder="Search songs or artists..."
+                className="bg-transparent border-b border-black text-[11px] font-mono text-black placeholder:text-black/30 outline-none w-48 py-0.5 tracking-wide"
+              />
+              <button
+                onClick={handleSearchClose}
+                className="text-black/30 hover:text-black text-xs font-bold ml-1"
+              >
+                ✕
+              </button>
+            </div>
+          )}
+
+          {/* SEARCH RESULTS DROPDOWN */}
+          {searchOpen && (searchQuery.trim().length > 0) && (
+            <div className="absolute top-full right-0 mt-2 w-80 bg-white border border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-[110]">
+              {searching ? (
+                <p className="text-[11px] font-mono text-gray-400 uppercase tracking-widest px-4 py-3">
+                  Searching...
+                </p>
+              ) : searchResults.length === 0 ? (
+                <p className="text-[11px] font-mono text-gray-400 uppercase tracking-widest px-4 py-3">
+                  No results found
+                </p>
+              ) : (
+                <ul>
+                  {searchResults.map(function (result) {
+                    return (
+                      <li key={result._id}>
+                        <button
+                          onClick={function () { handleResultClick(result.slug); }}
+                          className="w-full text-left px-4 py-3 border-b border-black/10 last:border-b-0 hover:bg-gray-50 transition-colors"
+                        >
+                          <p className="text-[12px] font-black font-mono uppercase tracking-wide text-black">
+                            {result.songTitle}
+                          </p>
+                          <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mt-0.5">
+                            {result.artistName}
+                          </p>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </div>
+          )}
+        </div>
 
         <button
           onClick={() => setOpen(!open)}
@@ -120,7 +267,7 @@ export default function Header() {
           Subscribe
         </button>
 
-        <div className="hidden lg:flex items-center justify-center gap-4 opacity-40 hover:opacity-100 transition-opacity">
+        <div className="hidden lg:flex items-center justify-center gap-4 opacity-40 hover:opacity-100 transition-opacity w-full">
           <a href="https://www.threads.com/@kimrampling" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-500">
             <ThreadsIcon />
           </a>

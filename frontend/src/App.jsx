@@ -55,6 +55,7 @@ const App = () => {
         genre,
         spotifyUrl,
         releaseDate,
+        "slug": slug.current,
         "albumArtUrl": albumArt.asset->url
       }
     }`;
