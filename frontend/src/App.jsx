@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import { client } from './client';
 
 import Header from './components/Header';
@@ -76,6 +77,7 @@ const App = () => {
   return (
     <Router>
       <ScrollToTop />
+      <Analytics />
       <div className="min-h-screen bg-[#e8e2d9] text-black font-manrope">
         <Header />
 
