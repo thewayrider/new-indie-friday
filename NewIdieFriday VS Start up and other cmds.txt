@@ -1,0 +1,10 @@
+Start-up: npm run dev
+
+(which produces the 'node' terminal - both frontend and sanity studio running - input cannot be made. To close usual cmd+c)
+
+Open another terminal, which is the NIF (New Indie Friday) root (C:\Users\kimra\Desktop\Projects\NewIndieFriday).
+
+The run the separate cmds from there as follows: 
+
+npm --prefix studio run <script>      # studio only
+npm --prefix frontend run <script>    # frontend only

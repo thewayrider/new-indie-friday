@@ -1,5 +1,13 @@
 {
-  "dependencies": {
-    "@portabletext/react": "^6.2.0"
+  "name": "new-indie-friday",
+  "private": true,
+  "version": "1.0.0",
+  "description": "New Indie Friday (NIF) root — launches the frontend and Sanity studio together.",
+  "scripts": {
+    "dev": "concurrently -n frontend,studio -c blue,magenta \"npm --prefix frontend run dev\" \"npm --prefix studio run dev\"",
+    "install:all": "npm install && npm --prefix frontend install && npm --prefix studio install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
   }
 }

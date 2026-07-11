@@ -1,0 +1,28 @@
+# New Indie Friday — https://www.kimrampling.com
+# Independent music discovery, curated weekly.
+
+# Default: everything is crawlable
+User-agent: *
+Allow: /
+
+# AI / answer-engine crawlers are explicitly welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Sitemap (generated during the SSG migration; harmless until then)
+Sitemap: https://www.kimrampling.com/sitemap.xml
