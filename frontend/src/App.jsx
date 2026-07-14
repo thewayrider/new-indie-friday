@@ -102,6 +102,7 @@ const App = () => {
 
         <Footer weeklyPick={data.weeklyPick} />
       </div>
+      <Analytics />
     </Router>
   );
 };
