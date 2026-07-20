@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLoaderData } from 'react-router';
 import { client } from '../client';
 import SpotlightArticle from './SpotlightArticle';
 
@@ -24,26 +23,13 @@ const QUERY = `*[_type == "spotlightArtist" && slug.current == $slug][0]{
   }
 }`;
 
+export async function loader({ params }) {
+  const data = await client.fetch(QUERY, { slug: params.slug });
+  return { data: data || null };
+}
+
 export default function SpotlightDetail() {
-  const params = useParams();
-  const slug = params.slug;
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(function () {
-    setLoading(true);
-    client.fetch(QUERY, { slug: slug }).then(function (res) {
-      setData(res);
-      setLoading(false);
-    }).catch(function (err) {
-      console.error('Sanity Fetch Error:', err);
-      setLoading(false);
-    });
-  }, [slug]);
-
-  if (loading) {
-    return <div className="min-h-screen bg-[#e8e2d9]" />;
-  }
+  const { data } = useLoaderData();
 
   if (!data) {
     return (

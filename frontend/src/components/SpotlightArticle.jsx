@@ -91,7 +91,7 @@ export default function SpotlightArticle(props) {
     <div>
     <div className="w-full border-b-2 border-black/70 bg-[#e8e2d9]">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-14">
-          <div className="relative flex items-center min-h-[140px] md:min-h-[180px]">
+          <div className="flex items-center gap-4 md:gap-8 min-h-[140px] md:min-h-[180px]">
 
             <div className="flex items-center gap-4 flex-shrink-0">
               <div className="w-40 h-40 md:w-48 md:h-48 flex-shrink-0 overflow-hidden bg-gray-300">
@@ -109,7 +109,7 @@ export default function SpotlightArticle(props) {
               </span>
             </div>
 
-            <h1 className="absolute left-0 right-0 text-center font-fraunces font-black text-black text-5xl md:text-7xl tracking-tight leading-none pointer-events-none">
+            <h1 className="flex-1 min-w-0 text-center font-fraunces font-black text-black text-5xl md:text-7xl tracking-tight leading-none">
               {artistName}
             </h1>
 

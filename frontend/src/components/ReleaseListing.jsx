@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router';
 import { PortableText } from '@portabletext/react';
-import { client } from '../client';
 
-const RELEASES_PER_PAGE = 5;
+export const RELEASES_PER_PAGE = 5;
 
-function buildQuery(page) {
+export function buildQuery(page) {
   const start = (page - 1) * RELEASES_PER_PAGE;
   const end = start + RELEASES_PER_PAGE;
   return `{
@@ -160,42 +159,15 @@ function ReleaseEntry({ release }) {
   );
 }
 
-export default function ReleaseListing() {
-  const params = useParams();
-  const currentPage = params.page ? parseInt(params.page, 10) : 1;
-
-  const [data, setData] = useState({ releases: [], total: 0 });
-  const [loading, setLoading] = useState(true);
-
-  useEffect(function () {
-    setLoading(true);
-    client.fetch(buildQuery(currentPage)).then(function (res) {
-      setData({
-        releases: res.releases || [],
-        total: res.total || 0,
-      });
-      setLoading(false);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }).catch(function (err) {
-      console.error('Sanity Fetch Error:', err);
-      setLoading(false);
-    });
-  }, [currentPage]);
-
-  if (loading) {
-    return <div className="min-h-screen bg-[#e8e2d9]" />;
-  }
-
-  const totalPages = Math.ceil(data.total / RELEASES_PER_PAGE);
-
+export default function ReleaseListing({ releases = [], currentPage = 1, totalPages = 1 }) {
   return (
     <div className="bg-[#e8e2d9] min-h-screen">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-14">
 
-        {data.releases.length === 0 ? (
+        {releases.length === 0 ? (
           <p className="font-mono text-sm text-gray-500">No releases yet.</p>
         ) : (
-          data.releases.map(function (release) {
+          releases.map(function (release) {
             return (
               <ReleaseEntry key={release._id} release={release} />
             );

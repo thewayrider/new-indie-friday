@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router';
 import { client } from '../client';
 import SpotlightArticle from './SpotlightArticle';
 
@@ -33,6 +32,14 @@ const QUERY = `{
   }
 }`;
 
+export async function loader() {
+  const res = await client.fetch(QUERY);
+  return {
+    latest: res.latest || null,
+    older: res.older || [],
+  };
+}
+
 function formatDate(dateStr) {
   if (!dateStr) return '';
   return new Date(dateStr).toLocaleDateString('en-US', {
@@ -43,28 +50,7 @@ function formatDate(dateStr) {
 }
 
 export default function SpotlightListing() {
-  const [data, setData] = useState({ latest: null, older: [] });
-  const [loading, setLoading] = useState(true);
-
-  useEffect(function () {
-    client.fetch(QUERY).then(function (res) {
-      setData({
-        latest: res.latest || null,
-        older: res.older || [],
-      });
-      setLoading(false);
-    }).catch(function (err) {
-      console.error('Sanity Fetch Error:', err);
-      setLoading(false);
-    });
-  }, []);
-
-  if (loading) {
-    return <div className="min-h-screen bg-[#e8e2d9]" />;
-  }
-
-  const latest = data.latest;
-  const older = data.older;
+  const { latest, older } = useLoaderData();
 
   return (
     <div className="bg-[#e8e2d9] min-h-screen">

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import { PortableText } from '@portabletext/react';
+import { useLoaderData } from 'react-router';
 import { client } from '../client';
 
 const QUERY = `*[_type == "oldSessionsPage" && _id == "oldSessionsPage"][0]{
@@ -20,6 +20,11 @@ const QUERY = `*[_type == "oldSessionsPage" && _id == "oldSessionsPage"][0]{
     spotifyUrl
   }
 }`;
+
+export async function loader() {
+  const data = await client.fetch(QUERY);
+  return { data: data || null };
+}
 
 function getSpotifyEmbedUrl(spotifyUrl) {
   if (!spotifyUrl) return null;
@@ -55,22 +60,7 @@ const portableTextComponents = {
 };
 
 export default function OldSessions() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(function () {
-    client.fetch(QUERY).then(function (res) {
-      setData(res);
-      setLoading(false);
-    }).catch(function (err) {
-      console.error('Sanity Fetch Error:', err);
-      setLoading(false);
-    });
-  }, []);
-
-  if (loading) {
-    return <div className="min-h-screen bg-[#e8e2d9]" />;
-  }
+  const { data } = useLoaderData();
 
   if (!data) {
     return (

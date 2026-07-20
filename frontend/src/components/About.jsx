@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import { PortableText } from '@portabletext/react';
+import { useLoaderData } from 'react-router';
 import { client } from '../client';
 
 const QUERY = `*[_type == "aboutPage"][0]{
@@ -13,6 +13,11 @@ const QUERY = `*[_type == "aboutPage"][0]{
     }
   }
 }`;
+
+export async function loader() {
+  const data = await client.fetch(QUERY);
+  return { data: data || null };
+}
 
 const portableTextComponents = {
   marks: {
@@ -108,21 +113,7 @@ const portableTextComponents = {
 };
 
 export default function About() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(function () {
-    client.fetch(QUERY).then(function (res) {
-      setData(res);
-      setLoading(false);
-    }).catch(function () {
-      setLoading(false);
-    });
-  }, []);
-
-  if (loading) {
-    return <div className="min-h-screen bg-[#e8e2d9]" />;
-  }
+  const { data } = useLoaderData();
 
   if (!data) {
     return (

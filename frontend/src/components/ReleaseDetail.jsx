@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router';
 import { PortableText } from '@portabletext/react';
 import { client } from '../client';
 import LikeDislike from './LikeDislike';
@@ -24,6 +23,11 @@ const QUERY = `*[_type == "release" && slug.current == $slug][0]{
     }
   }
 }`;
+
+export async function loader({ params }) {
+  const release = await client.fetch(QUERY, { slug: params.slug });
+  return { release: release || null };
+}
 
 function getSpotifyEmbedUrl(spotifyUrl) {
   if (!spotifyUrl) return null;
@@ -81,27 +85,9 @@ const portableTextComponents = {
 };
 
 export default function ReleaseDetail() {
-  const params = useParams();
-  const slug = params.slug;
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { release } = useLoaderData();
 
-  useEffect(function () {
-    setLoading(true);
-    client.fetch(QUERY, { slug: slug }).then(function (res) {
-      setData(res);
-      setLoading(false);
-    }).catch(function (err) {
-      console.error('Sanity Fetch Error:', err);
-      setLoading(false);
-    });
-  }, [slug]);
-
-  if (loading) {
-    return <div className="min-h-screen bg-[#e8e2d9]" />;
-  }
-
-  if (!data) {
+  if (!release) {
     return (
       <div className="min-h-screen bg-[#e8e2d9] flex items-center justify-center">
         <p className="font-mono text-sm text-gray-500">Release not found.</p>
@@ -109,6 +95,7 @@ export default function ReleaseDetail() {
     );
   }
 
+  const data = release;
   const embedUrl = getSpotifyEmbedUrl(data.spotifyUrl);
 
   return (
