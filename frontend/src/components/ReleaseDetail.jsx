@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from 'react-router';
 import { PortableText } from '@portabletext/react';
 import { client } from '../client';
+import { buildMeta, SITE_URL } from '../seo';
 import LikeDislike from './LikeDislike';
 
 const QUERY = `*[_type == "release" && slug.current == $slug][0]{
@@ -12,6 +13,7 @@ const QUERY = `*[_type == "release" && slug.current == $slug][0]{
   spotifyUrl,
   releaseDate,
   "slug": slug.current,
+  "albumArtUrl": albumArt.asset->url,
   blurb[]{
     ...,
     markDefs[]{
@@ -83,6 +85,30 @@ const portableTextComponents = {
     },
   },
 };
+
+export function meta({ data, params }) {
+  const r = data && data.release;
+  if (!r) return buildMeta({ title: 'Release', path: `/new-releases/${params.slug}` });
+  const title = `${r.songTitle} by ${r.artistName}`;
+  const typeLabel = r.albumOrEpName ? `from '${r.albumOrEpName}'` : 'a new single';
+  const description = `${r.songTitle} by ${r.artistName} — ${typeLabel}${r.genre ? ', ' + r.genre : ''}. Curated by New Indie Friday.`;
+  return [
+    ...buildMeta({ title, description, path: `/new-releases/${params.slug}`, image: r.albumArtUrl, type: 'music.song' }),
+    {
+      'script:ld+json': {
+        '@context': 'https://schema.org',
+        '@type': 'MusicRecording',
+        name: r.songTitle,
+        byArtist: { '@type': 'MusicGroup', name: r.artistName },
+        ...(r.albumOrEpName ? { inAlbum: { '@type': 'MusicAlbum', name: r.albumOrEpName } } : {}),
+        ...(r.genre ? { genre: r.genre } : {}),
+        ...(r.releaseDate ? { datePublished: r.releaseDate } : {}),
+        ...(r.albumArtUrl ? { image: r.albumArtUrl } : {}),
+        url: SITE_URL + '/new-releases/' + params.slug,
+      },
+    },
+  ];
+}
 
 export default function ReleaseDetail() {
   const { release } = useLoaderData();

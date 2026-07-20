@@ -1,6 +1,17 @@
 import { PortableText } from '@portabletext/react';
 import { useLoaderData } from 'react-router';
 import { client } from '../client';
+import { buildMeta } from '../seo';
+
+export function meta({ data }) {
+  const title = (data && data.data && data.data.title) || 'About';
+  return buildMeta({
+    title,
+    description:
+      'Why New Indie Friday exists — independent music discovery beyond the streaming algorithms, curated weekly by Kim Rampling.',
+    path: '/about',
+  });
+}
 
 const QUERY = `*[_type == "aboutPage"][0]{
   title,

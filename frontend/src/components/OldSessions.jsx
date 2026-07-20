@@ -1,6 +1,16 @@
 import { PortableText } from '@portabletext/react';
 import { useLoaderData } from 'react-router';
 import { client } from '../client';
+import { buildMeta } from '../seo';
+
+export function meta({ data }) {
+  const title = (data && data.data && data.data.pageTitle) || 'Old Sessions';
+  return buildMeta({
+    title,
+    description: 'Archive playlists and older sessions from New Indie Friday and Streamusique.',
+    path: '/new-music-old-sessions',
+  });
+}
 
 const QUERY = `*[_type == "oldSessionsPage" && _id == "oldSessionsPage"][0]{
   pageTitle,

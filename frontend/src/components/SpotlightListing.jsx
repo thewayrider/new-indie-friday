@@ -1,5 +1,6 @@
 import { Link, useLoaderData } from 'react-router';
 import { client } from '../client';
+import { buildMeta } from '../seo';
 import SpotlightArticle from './SpotlightArticle';
 
 const QUERY = `{
@@ -47,6 +48,16 @@ function formatDate(dateStr) {
     day: 'numeric',
     year: 'numeric',
   });
+}
+
+export function meta({ data }) {
+  const latest = data && data.latest;
+  const title = latest ? `Spotlight: ${latest.artistName}` : 'Spotlight';
+  const description = latest
+    ? `This week's spotlight: ${latest.artistName}${latest.genre ? ' — ' + latest.genre : ''}${latest.location ? ', ' + latest.location : ''}.`
+    : 'Weekly spotlight on a new independent artist.';
+  const image = latest ? latest.headerImageUrl || latest.imageUrl : undefined;
+  return buildMeta({ title, description, path: '/spotlight', image, type: 'article' });
 }
 
 export default function SpotlightListing() {
