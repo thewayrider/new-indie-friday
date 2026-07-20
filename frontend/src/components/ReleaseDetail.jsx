@@ -138,44 +138,6 @@ export default function ReleaseDetail() {
         </div>
 
         <article>
-          {/* METADATA STRIP */}
-          <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 mb-6 pb-5 border-b border-black/10 font-mono uppercase tracking-widest">
-            <div>
-              <span className="text-[11px] text-black/40 mr-1">Song</span>
-              <span className="text-[13px] text-black font-black">{data.songTitle}</span>
-            </div>
-            <span className="text-black/20 hidden md:block">·</span>
-            <div>
-              <span className="text-[11px] text-black/40 mr-1">Artist</span>
-              <span className="text-[13px] text-black font-black">{data.artistName}</span>
-            </div>
-            <span className="text-black/20 hidden md:block">·</span>
-            <div>
-              <span className="text-[11px] text-black/40 mr-1">Type</span>
-              <span className="text-[13px] text-black font-black">
-                {data.albumOrEpName ? data.albumOrEpName : 'Single'}
-              </span>
-            </div>
-            {data.genre ? (
-              <>
-                <span className="text-black/20 hidden md:block">·</span>
-                <div>
-                  <span className="text-[11px] text-black/40 mr-1">Genre</span>
-                  <span className="text-[13px] text-black font-black">{data.genre}</span>
-                </div>
-              </>
-            ) : null}
-            {data.releaseDate ? (
-              <>
-                <span className="text-black/20 hidden md:block">·</span>
-                <div>
-                  <span className="text-[11px] text-black/40 mr-1">Released</span>
-                  <span className="text-[13px] text-black font-black">{formatDate(data.releaseDate)}</span>
-                </div>
-              </>
-            ) : null}
-          </div>
-
           {/* EMBED + BLURB */}
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
             {embedUrl ? (
@@ -197,6 +159,44 @@ export default function ReleaseDetail() {
               ) : null}
             </main>
           </div>
+          {/* SONG DETAILS (below the description) */}
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-2 mt-10 pt-6 border-t border-black/10 font-mono uppercase tracking-wide">
+            <div>
+              <span className="text-[13px] text-black/40 mr-1.5">Song</span>
+              <span className="text-[16px] text-black font-black">{data.songTitle}</span>
+            </div>
+            <span className="text-black/20 hidden md:block">·</span>
+            <div>
+              <span className="text-[13px] text-black/40 mr-1.5">Artist</span>
+              <span className="text-[16px] text-black font-black">{data.artistName}</span>
+            </div>
+            <span className="text-black/20 hidden md:block">·</span>
+            <div>
+              <span className="text-[13px] text-black/40 mr-1.5">Type</span>
+              <span className="text-[16px] text-black font-black">
+                {data.albumOrEpName ? data.albumOrEpName : 'Single'}
+              </span>
+            </div>
+            {data.genre ? (
+              <>
+                <span className="text-black/20 hidden md:block">·</span>
+                <div>
+                  <span className="text-[13px] text-black/40 mr-1.5">Genre</span>
+                  <span className="text-[16px] text-black font-black">{data.genre}</span>
+                </div>
+              </>
+            ) : null}
+            {data.releaseDate ? (
+              <>
+                <span className="text-black/20 hidden md:block">·</span>
+                <div>
+                  <span className="text-[13px] text-black/40 mr-1.5">Released</span>
+                  <span className="text-[16px] text-black font-black">{formatDate(data.releaseDate)}</span>
+                </div>
+              </>
+            ) : null}
+          </div>
+
           <LikeDislike slug={data.slug} />
         </article>
 

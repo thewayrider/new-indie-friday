@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "react-router dev",
+    "prebuild": "node scripts/generate-sitemap.mjs",
     "build": "react-router build",
     "lint": "eslint .",
     "preview": "vite preview",

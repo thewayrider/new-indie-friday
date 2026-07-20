@@ -16,6 +16,9 @@ dist-ssr
 build
 .react-router
 
+# Generated at build time (prebuild script)
+public/sitemap.xml
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
