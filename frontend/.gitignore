@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# React Router (framework mode) build output + generated types
+build
+.react-router
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
