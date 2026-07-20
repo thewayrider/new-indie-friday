@@ -1,6 +1,33 @@
 # NIF — SEO / SSG Migration Resume Doc
 
-*Pick-up point for the React Router v7 framework‑mode migration. Written July 11, 2026, to resume the week of Friday July 17. Companion to `SEO_AI_Search_Plan.md` (the full strategy + primer).*
+*Pick-up point for the React Router v7 framework‑mode migration. Written July 11, 2026. Companion to `SEO_AI_Search_Plan.md` (the full strategy + primer).*
+
+---
+
+## ✅ STATUS — July 20, 2026: MIGRATION COMPLETE & LIVE
+
+All six stages are done, merged to `main`, deployed to **production**, and verified on `www.kimrampling.com`:
+
+- The site is now **React Router v7 framework mode, `ssr:false` + prerender (static SSG)**. Every page ships crawlable HTML with per‑page title/description/canonical/Open Graph + JSON‑LD (`WebSite`, `MusicGroup`, `MusicRecording`).
+- `sitemap.xml` is auto‑generated at build (prebuild script `frontend/scripts/generate-sitemap.mjs`); `robots.txt` live. **Sitemaps submitted to Google Search Console and Bing on July 20.**
+- Like/dislike API (Redis, `frontend/api/likes/*`) still works; favicon + GSC verification file intact.
+- Branch `feature/rr7-framework-mode` is merged — safe to delete.
+
+Everything below the next section is historical migration context (still useful for how the site is structured).
+
+## ▶ NEXT TASK — Single/EP/Album "releaseType" (Task #14)
+
+**Problem:** the release metadata shows the `albumOrEpName` value (or "Single") under a "Type" label, but there's no field distinguishing Album vs EP vs Single, so it can't render the three correct forms.
+
+**Fix — own branch → Vercel preview → merge:**
+1. **Schema** `studio/schemaTypes/release.js`: add a `releaseType` string field with a radio list of options `single` / `ep` / `album`. Keep existing `albumOrEpName` for the name (used only for ep/album).
+2. **Add `releaseType` to the GROQ queries** in: `frontend/src/components/ReleaseListing.jsx` (`buildQuery`), `frontend/src/components/ReleaseDetail.jsx` (`QUERY`), and `frontend/src/routes/home.jsx` (home loader query).
+3. **Display logic** in all three places that show it — `ReleaseListing.jsx` (ReleaseEntry strip), `ReleaseDetail.jsx` (strip), and `frontend/src/components/Releases.jsx` (homepage card, currently hardcodes "From the album 'X'" / "A single"). Forms: Single → "Single"; EP → "From the EP 'X'"; Album → "From the album 'X'". Kim to confirm exact phrasing (or the "label = format word, e.g. `ALBUM  X`" style discussed).
+4. Update the ReleaseDetail `meta` export's `typeLabel` to use `releaseType`.
+5. **Backfill:** Kim sets `releaseType` on every existing release in Sanity Studio (localhost:3333) — manual dropdown per release.
+6. `npm --prefix frontend run build` to test prerender, push branch → preview → verify → merge.
+
+**How to work (established):** branch from `main`; run `npm run dev` from the NIF root (both servers; frontend **5173** — stay on 5173 for Sanity CORS — studio 3333); `npm --prefix frontend run build` to test the prerender locally; push branch → Vercel auto‑builds a preview → verify → merge to `main` (auto‑deploys production). Git is run from Kim's own terminal (the sandbox can't manage `.git` locks). Commit messages: one line at a time, mind the closing quote.
 
 ---
 
