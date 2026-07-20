@@ -8,6 +8,7 @@ const QUERY = `*[_type == "release" && slug.current == $slug][0]{
   _id,
   songTitle,
   artistName,
+  releaseType,
   albumOrEpName,
   genre,
   spotifyUrl,
@@ -50,6 +51,19 @@ function formatDate(dateStr) {
   });
 }
 
+// Format-word label: the small label is the format word, the bold value is
+// the EP/album name. A single has no name. Falls back to legacy behaviour for
+// records not yet given a releaseType in Studio.
+function getTypeDisplay(release) {
+  const type = release.releaseType;
+  if (type === 'album') return { word: 'Album', name: release.albumOrEpName || null };
+  if (type === 'ep') return { word: 'EP', name: release.albumOrEpName || null };
+  if (type === 'single') return { word: 'Single', name: null };
+  return release.albumOrEpName
+    ? { word: 'Type', name: release.albumOrEpName }
+    : { word: 'Single', name: null };
+}
+
 const portableTextComponents = {
   marks: {
     externalLink: function ExternalLinkMark(props) {
@@ -90,7 +104,16 @@ export function meta({ data, params }) {
   const r = data && data.release;
   if (!r) return buildMeta({ title: 'Release', path: `/new-releases/${params.slug}` });
   const title = `${r.songTitle} by ${r.artistName}`;
-  const typeLabel = r.albumOrEpName ? `from '${r.albumOrEpName}'` : 'a new single';
+  const typeLabel =
+    r.releaseType === 'album'
+      ? `from the album '${r.albumOrEpName}'`
+      : r.releaseType === 'ep'
+      ? `from the EP '${r.albumOrEpName}'`
+      : r.releaseType === 'single'
+      ? 'a new single'
+      : r.albumOrEpName
+      ? `from '${r.albumOrEpName}'`
+      : 'a new single';
   const description = `${r.songTitle} by ${r.artistName} — ${typeLabel}${r.genre ? ', ' + r.genre : ''}. Curated by New Indie Friday.`;
   return [
     ...buildMeta({ title, description, path: `/new-releases/${params.slug}`, image: r.albumArtUrl, type: 'music.song' }),
@@ -100,7 +123,9 @@ export function meta({ data, params }) {
         '@type': 'MusicRecording',
         name: r.songTitle,
         byArtist: { '@type': 'MusicGroup', name: r.artistName },
-        ...(r.albumOrEpName ? { inAlbum: { '@type': 'MusicAlbum', name: r.albumOrEpName } } : {}),
+        ...((r.releaseType === 'album' || r.releaseType === 'ep' || (!r.releaseType && r.albumOrEpName)) && r.albumOrEpName
+          ? { inAlbum: { '@type': 'MusicAlbum', name: r.albumOrEpName } }
+          : {}),
         ...(r.genre ? { genre: r.genre } : {}),
         ...(r.releaseDate ? { datePublished: r.releaseDate } : {}),
         ...(r.albumArtUrl ? { image: r.albumArtUrl } : {}),
@@ -123,6 +148,7 @@ export default function ReleaseDetail() {
 
   const data = release;
   const embedUrl = getSpotifyEmbedUrl(data.spotifyUrl);
+  const typeDisplay = getTypeDisplay(data);
 
   return (
     <div className="bg-[#e8e2d9] min-h-screen">
@@ -172,10 +198,14 @@ export default function ReleaseDetail() {
             </div>
             <span className="text-black/20 hidden md:block">·</span>
             <div>
-              <span className="text-[13px] text-black/40 mr-1.5">Type</span>
-              <span className="text-[16px] text-black font-black">
-                {data.albumOrEpName ? data.albumOrEpName : 'Single'}
-              </span>
+              {typeDisplay.name ? (
+                <>
+                  <span className="text-[13px] text-black/40 mr-1.5">{typeDisplay.word}</span>
+                  <span className="text-[16px] text-black font-black">{typeDisplay.name}</span>
+                </>
+              ) : (
+                <span className="text-[16px] text-black font-black">{typeDisplay.word}</span>
+              )}
             </div>
             {data.genre ? (
               <>

@@ -5,6 +5,7 @@ function ReleaseCard({ release }) {
   const {
     songTitle = 'Untitled',
     artistName = 'Unknown Artist',
+    releaseType = '',
     albumOrEpName = '',
     albumArtUrl = null,
     releaseDate = null,
@@ -12,6 +13,19 @@ function ReleaseCard({ release }) {
   } = release || {};
 
   const hasAlbum = albumOrEpName && albumOrEpName.trim();
+
+  // Format-word label (uppercased by CSS). Falls back to legacy wording for
+  // records not yet given a releaseType in Studio.
+  const typeLine =
+    releaseType === 'album'
+      ? "Album · " + albumOrEpName
+      : releaseType === 'ep'
+      ? "EP · " + albumOrEpName
+      : releaseType === 'single'
+      ? 'Single'
+      : hasAlbum
+      ? "Album · " + albumOrEpName
+      : 'Single';
 
   const releaseDateFormatted = releaseDate
     ? new Date(releaseDate).toLocaleDateString('en-US', {
@@ -58,7 +72,7 @@ function ReleaseCard({ release }) {
         </p>
         <div className="mt-1 min-h-[2.4em]">
           <p className="text-[10px] text-gray-400 font-mono uppercase tracking-widest leading-snug">
-            {hasAlbum ? 'From the album \'' + albumOrEpName + '\'' : 'A single'}
+            {typeLine}
           </p>
           {releaseDateFormatted && (
             <p className="text-[10px] text-gray-400 font-mono uppercase tracking-widest leading-snug">

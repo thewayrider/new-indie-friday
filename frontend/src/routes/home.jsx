@@ -37,6 +37,7 @@ export async function loader() {
       _id,
       songTitle,
       artistName,
+      releaseType,
       albumOrEpName,
       genre,
       spotifyUrl,

@@ -12,6 +12,7 @@ export function buildQuery(page) {
       _id,
       songTitle,
       artistName,
+      releaseType,
       albumOrEpName,
       genre,
       spotifyUrl,
@@ -49,6 +50,19 @@ function formatDate(dateStr) {
     day: 'numeric',
     year: 'numeric',
   });
+}
+
+// Format-word label: the small label is the format word, the bold value is
+// the EP/album name. A single has no name. Falls back to legacy behaviour for
+// records not yet given a releaseType in Studio.
+function getTypeDisplay(release) {
+  const type = release.releaseType;
+  if (type === 'album') return { word: 'Album', name: release.albumOrEpName || null };
+  if (type === 'ep') return { word: 'EP', name: release.albumOrEpName || null };
+  if (type === 'single') return { word: 'Single', name: null };
+  return release.albumOrEpName
+    ? { word: 'Type', name: release.albumOrEpName }
+    : { word: 'Single', name: null };
 }
 
 const portableTextComponents = {
@@ -89,6 +103,7 @@ const portableTextComponents = {
 
 function ReleaseEntry({ release }) {
   const embedUrl = getSpotifyEmbedUrl(release.spotifyUrl);
+  const typeDisplay = getTypeDisplay(release);
 
   return (
     <article
@@ -130,10 +145,14 @@ function ReleaseEntry({ release }) {
         </div>
         <span className="text-black/20 hidden md:block">·</span>
         <div>
-          <span className="text-[13px] text-black/40 mr-1.5">Type</span>
-          <span className="text-[16px] text-black font-black">
-            {release.albumOrEpName ? release.albumOrEpName : 'Single'}
-          </span>
+          {typeDisplay.name ? (
+            <>
+              <span className="text-[13px] text-black/40 mr-1.5">{typeDisplay.word}</span>
+              <span className="text-[16px] text-black font-black">{typeDisplay.name}</span>
+            </>
+          ) : (
+            <span className="text-[16px] text-black font-black">{typeDisplay.word}</span>
+          )}
         </div>
         {release.genre ? (
           <>

@@ -24,10 +24,34 @@ export default {
     },
 	
     {
+      name: 'releaseType',
+      title: 'Release Type',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Single', value: 'single' },
+          { title: 'EP', value: 'ep' },
+          { title: 'Album', value: 'album' },
+        ],
+        layout: 'radio',
+      },
+      description: 'Is this track a standalone single, or from an EP or album?',
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: 'albumOrEpName',
       title: 'Album / EP Name',
       type: 'string',
-      description: 'Leave blank if this track is a standalone single — the site will display "Single" automatically.',
+      description: 'The name of the EP or album this track is from. Not needed for singles.',
+      hidden: ({ parent }) => !parent || parent.releaseType === 'single',
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const type = context.parent && context.parent.releaseType;
+          if ((type === 'ep' || type === 'album') && !value) {
+            return 'Enter the name of the EP or album.';
+          }
+          return true;
+        }),
     },
     {
       name: 'slug',
