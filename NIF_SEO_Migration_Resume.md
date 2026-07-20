@@ -56,8 +56,13 @@ Go with **Option B** from the plan: migrate NIF's frontend from React Router **l
 ## State at pause (July 11)
 
 - **Done today, unrelated to migration:** favicon restored & live; like/dislike verified working end‑to‑end; Vercel Web Analytics added to `main` and live; root dev‑server launcher (`concurrently`) + `.gitignore` fix.
-- **Quick wins this session:** `frontend/public/robots.txt` created (ship to `main`); Google Search Console verification in progress (baseline data accruing over the away week).
-- **Migration itself:** NOT started. No branch created yet. Start at Stage 1.
+- **Quick wins — completed & shipped to `main`:**
+  - `frontend/public/robots.txt` (welcomes AI bots; sitemap line points to future `/sitemap.xml`).
+  - **Google Search Console** verified for `https://www.kimrampling.com` via HTML‑file method — `frontend/public/google26f21278f8ab3b52.html` (keep this file permanently). Now collecting baseline data.
+  - **Bing Webmaster Tools** set up by importing from GSC. IMPORTANT: signed in with the **Google account**, not the Microsoft one — use Google to log back in and avoid creating a duplicate.
+  - Note: `streamusique.com` (old Blogger site) already exists as a separate GSC property with indexing history — revisit for a possible redirect/consolidation play.
+- **Measurement baseline:** both GSC + Bing accruing data over the away week; use as before/after for the migration.
+- **Migration itself:** NOT started. No branch created yet. Start at Stage 1 (`git checkout -b feature/rr7-framework-mode`).
 
 ---
 
