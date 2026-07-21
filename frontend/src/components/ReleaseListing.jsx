@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { PortableText } from '@portabletext/react';
+import LikeDislike from './LikeDislike';
 
 export const RELEASES_PER_PAGE = 5;
 
@@ -183,6 +184,8 @@ function ReleaseEntry({ release }) {
           </>
         ) : null}
       </div>
+
+      <LikeDislike slug={release.slug} />
 
     </article>
   );
