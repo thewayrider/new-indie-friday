@@ -1,0 +1,17 @@
+# Normalize line endings. Store all text files as LF in the repo and check
+# them out as LF, so CRLF/LF differences never show up as spurious changes.
+* text=auto eol=lf
+
+# Treat common binary assets as binary so Git never touches their bytes.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.svg  text
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.tar.gz binary

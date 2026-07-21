@@ -1,0 +1,101 @@
+========================================================================
+NEW INDIE FRIDAY - CONTENT RESTORE INSTRUCTIONS
+How to bring the site's Sanity content back from a backup
+========================================================================
+
+
+WHAT THIS IS
+------------------------------------------------------------------------
+The weekly backups in the "backups" folder are full snapshots of the
+site's content - every release, spotlight write-up, page, and image -
+saved as a single .tar.gz file
+(for example: nif-production-2026-07-21.tar.gz).
+
+IMPORTANT: Your website's content lives on Sanity's servers (in the
+cloud), NOT on this computer. So losing or replacing your PC does not
+lose the content - you just re-download the project and carry on
+(see PART B).
+
+You only need to IMPORT a backup if the content itself is lost or
+damaged - e.g. documents were deleted, the dataset was wiped, or you
+are rebuilding into a fresh Sanity project.
+
+
+BEFORE YOU START (one-time)
+------------------------------------------------------------------------
+1. Make sure Node.js is installed.
+
+2. Open PowerShell in the project's "studio" folder:
+      cd C:\Users\kimra\Desktop\Projects\NewIndieFriday\studio
+
+3. Log in to Sanity if it asks you to:
+      npx sanity login
+   (Opens your browser - use the same account as the Studio.)
+
+
+PART A - RESTORE THE CONTENT FROM A BACKUP
+------------------------------------------------------------------------
+1. Choose the backup to restore (newest is usually best), e.g.:
+      ..\backups\nif-production-2026-07-21.tar.gz
+
+2. From the "studio" folder, run:
+
+      npx sanity dataset import ..\backups\nif-production-2026-07-21.tar.gz production --replace
+
+   - "production" is the dataset name.
+   - "--replace" overwrites existing documents with the ones from the
+     backup. If you are importing into a brand-new EMPTY dataset, you
+     can leave "--replace" off.
+
+3. Wait for it to finish (it reports documents + assets imported).
+
+4. Open the Studio to check the content is back:
+      - In the project ROOT folder, run:  npm run dev
+      - Go to http://localhost:3333
+
+5. Update the live site: publish any small edit in the Studio (or click
+   "Redeploy" on the latest deployment in Vercel). This rebuilds the
+   site so the restored content appears online.
+
+
+IF THE WHOLE SANITY PROJECT IS GONE
+------------------------------------------------------------------------
+1. Create a new project and dataset at https://www.sanity.io/manage
+   (name the dataset "production" to match the code).
+
+2. If the new project has a different Project ID, update it in the code:
+      - studio\sanity.config.js
+      - frontend\src\client.js
+      - frontend\react-router.config.js
+
+3. Then run the import from PART A, step 2, into the new dataset.
+
+
+PART B - RESTORE THE CODE / WEBSITE (if you lose this computer)
+------------------------------------------------------------------------
+1. Re-download the project from GitHub (the repo holds all the code).
+
+2. Install dependencies:
+      - In the project ROOT:  npm install
+      - Inside "studio":      npm install
+
+3. Deploy: push to the "main" branch - Vercel rebuilds automatically.
+   The content is still safe in Sanity, so the site returns as it was.
+
+
+QUICK REFERENCE - THE RESTORE COMMAND
+------------------------------------------------------------------------
+   cd studio
+   npx sanity dataset import ..\backups\<backup-file>.tar.gz production --replace
+
+
+KEEP A COPY OFF THIS COMPUTER
+------------------------------------------------------------------------
+The backups folder protects your content only if this computer
+survives. Every so often, copy a recent .tar.gz file to a cloud drive
+or external disk. Then even a hard-drive failure can't take both the
+site and its backups.
+
+========================================================================
+Project ID: oeemrqux      Dataset: production
+========================================================================
