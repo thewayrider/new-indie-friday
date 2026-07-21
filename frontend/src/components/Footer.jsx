@@ -24,7 +24,7 @@ const navClass = ({ isActive }) =>
     ? 'text-black font-black underline underline-offset-4 decoration-2'
     : 'hover:text-black transition text-gray-500 font-bold';
 
-export default function Footer({ weeklyPick }) {
+export default function Footer() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('idle');
 
