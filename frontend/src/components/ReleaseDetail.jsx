@@ -164,6 +164,14 @@ export default function ReleaseDetail() {
         </div>
 
         <article>
+          {/* TITLE */}
+          <h1 className="font-fraunces font-black text-4xl md:text-5xl tracking-tight text-black leading-[1.1]">
+            {data.songTitle}
+          </h1>
+          <p className="mt-2 mb-8 text-[12px] font-mono uppercase tracking-widest text-black/50">
+            {data.artistName}
+          </p>
+
           {/* EMBED + BLURB */}
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
             {embedUrl ? (

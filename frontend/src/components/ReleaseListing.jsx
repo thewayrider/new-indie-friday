@@ -110,6 +110,16 @@ function ReleaseEntry({ release }) {
       id={release.slug}
       className="py-10 border-b border-black/10 last:border-b-0"
     >
+      {/* TITLE */}
+      <Link to={'/new-releases/' + release.slug} className="group inline-block">
+        <h2 className="font-fraunces font-black text-3xl md:text-4xl tracking-tight text-black leading-[1.1] group-hover:underline underline-offset-4 decoration-2">
+          {release.songTitle}
+        </h2>
+      </Link>
+      <p className="mt-2 mb-8 text-[12px] font-mono uppercase tracking-widest text-black/50">
+        {release.artistName}
+      </p>
+
       {/* EMBED + BLURB */}
       <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
         {embedUrl ? (
