@@ -10,7 +10,6 @@ const QUERY = `{
     location,
     songReleaseDate,
     "imageUrl": image.asset->url,
-    "headerImageUrl": headerImage.asset->url,
     spotifyUrl,
     albumLinkUrl,
     blurb[]{
@@ -56,7 +55,7 @@ export function meta({ data }) {
   const description = latest
     ? `This week's spotlight: ${latest.artistName}${latest.genre ? ' — ' + latest.genre : ''}${latest.location ? ', ' + latest.location : ''}.`
     : 'Weekly spotlight on a new independent artist.';
-  const image = latest ? latest.headerImageUrl || latest.imageUrl : undefined;
+  const image = latest ? latest.imageUrl : undefined;
   return buildMeta({ title, description, path: '/spotlight', image, type: 'article' });
 }
 

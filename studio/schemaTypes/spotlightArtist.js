@@ -91,15 +91,6 @@ export default {
     },
 
     {
-      name: 'headerImage',
-      title: 'Spotlight Page Header Image',
-      type: 'image',
-      description: 'A small band/artist photo shown beside the headline on the Spotlight article page. Different from the main square cover image used on the homepage.',
-      options: {
-        hotspot: true,
-      },
-    },
-    {
       name: 'slug',
       title: 'Slug',
       type: 'slug',

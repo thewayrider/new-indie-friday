@@ -79,7 +79,6 @@ export default function SpotlightArticle(props) {
   const location = data.location;
   const songReleaseDate = data.songReleaseDate;
   const imageUrl = data.imageUrl;
-  const headerImageUrl = data.headerImageUrl;
   const spotifyUrl = data.spotifyUrl;
   const albumLinkUrl = data.albumLinkUrl;
   const blurb = data.blurb;
@@ -95,9 +94,9 @@ export default function SpotlightArticle(props) {
 
             <div className="flex items-center gap-4 flex-shrink-0">
               <div className="w-40 h-40 md:w-48 md:h-48 flex-shrink-0 overflow-hidden bg-gray-300">
-                {headerImageUrl ? (
+                {imageUrl ? (
                   <img
-                    src={headerImageUrl}
+                    src={imageUrl}
                     alt={artistName}
                     className="w-full h-full object-cover"
                   />

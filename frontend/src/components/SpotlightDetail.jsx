@@ -9,7 +9,6 @@ const QUERY = `*[_type == "spotlightArtist" && slug.current == $slug][0]{
   location,
   songReleaseDate,
   "imageUrl": image.asset->url,
-  "headerImageUrl": headerImage.asset->url,
   spotifyUrl,
   albumLinkUrl,
   blurb[]{
@@ -34,7 +33,7 @@ export function meta({ data, params }) {
   if (!d) return buildMeta({ title: 'Spotlight', path: `/spotlight/${params.slug}` });
   const title = `${d.artistName} — Spotlight`;
   const description = `Spotlight on ${d.artistName}${d.genre ? ', ' + d.genre : ''}${d.location ? ', from ' + d.location : ''}.`;
-  const image = d.headerImageUrl || d.imageUrl;
+  const image = d.imageUrl;
   return [
     ...buildMeta({ title, description, path: `/spotlight/${params.slug}`, image, type: 'article' }),
     {
