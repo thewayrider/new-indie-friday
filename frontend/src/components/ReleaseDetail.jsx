@@ -119,18 +119,19 @@ export function meta({ data, params }) {
     ...buildMeta({ title, description, path: `/new-releases/${params.slug}`, image: r.albumArtUrl, type: 'music.song' }),
     {
       'script:ld+json': {
-        '@context': 'https://schema.org',
-        '@type': 'MusicRecording',
-        name: r.songTitle,
-        byArtist: { '@type': 'MusicGroup', name: r.artistName },
-        ...((r.releaseType === 'album' || r.releaseType === 'ep' || (!r.releaseType && r.albumOrEpName)) && r.albumOrEpName
-          ? { inAlbum: { '@type': 'MusicAlbum', name: r.albumOrEpName } }
-          : {}),
-        ...(r.genre ? { genre: r.genre } : {}),
-        ...(r.releaseDate ? { datePublished: r.releaseDate } : {}),
-        ...(r.albumArtUrl ? { image: r.albumArtUrl } : {}),
-        url: SITE_URL + '/new-releases/' + params.slug,
-      },
+  '@context': 'https://schema.org',
+  '@type': 'MusicRecording',
+  name: r.songTitle,
+  byArtist: { '@type': 'MusicGroup', name: r.artistName },
+  ...(r.spotifyUrl ? { sameAs: r.spotifyUrl } : {}),
+  ...((r.releaseType === 'album' || r.releaseType === 'ep' || (!r.releaseType && r.albumOrEpName)) && r.albumOrEpName
+    ? { inAlbum: { '@type': 'MusicAlbum', name: r.albumOrEpName } }
+    : {}),
+  ...(r.genre ? { genre: r.genre } : {}),
+  ...(r.releaseDate ? { datePublished: r.releaseDate } : {}),
+  ...(r.albumArtUrl ? { image: r.albumArtUrl } : {}),
+  url: SITE_URL + '/new-releases/' + params.slug,
+},
     },
   ];
 }
