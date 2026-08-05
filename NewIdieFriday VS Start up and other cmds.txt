@@ -7,4 +7,4 @@ Open another terminal, which is the NIF (New Indie Friday) root (C:\Users\kimra\
 The run the separate cmds from there as follows: 
 
 npm --prefix studio run <script>      # studio only
-npm --prefix frontend run <script>    # frontend only
+npm run dev <script>    # frontend only

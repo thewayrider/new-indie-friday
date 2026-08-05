@@ -4,7 +4,7 @@ import { buildMeta } from '../seo';
 import SpotlightArticle from './SpotlightArticle';
 
 const QUERY = `{
-"latest": *[_type == "spotlightArtist"] | order(featuredDate desc)[0]{
+  "latest": *[_type == "spotlightArtist" && isCurrent == true][0]{
     artistName,
     genre,
     location,
@@ -23,7 +23,7 @@ const QUERY = `{
       }
     }
   },
-  "older": *[_type == "spotlightArtist"] | order(featuredDate desc)[1...50]{
+  "older": *[_type == "spotlightArtist" && isCurrent != true] | order(featuredDate desc)[0...50]{
     artistName,
     teaser,
     "imageUrl": image.asset->url,

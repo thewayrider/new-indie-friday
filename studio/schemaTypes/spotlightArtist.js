@@ -132,6 +132,25 @@ export default {
       type: 'boolean',
       description: 'Toggle ON for the artist that should appear in the homepage Hero. Should only be true for one entry at a time.',
       initialValue: false,
+      validation: (Rule) =>
+        Rule.custom(async (isCurrent, context) => {
+          if (!isCurrent) return true
+
+          const { document, getClient } = context
+          const client = getClient({ apiVersion: '2024-01-01' })
+          const id = document._id.replace(/^drafts\./, '')
+
+          const otherCurrentCount = await client.fetch(
+            `count(*[_type == "spotlightArtist" && isCurrent == true && !(_id in [$id, $draftId])])`,
+            { id, draftId: `drafts.${id}` }
+          )
+
+          if (otherCurrentCount > 0) {
+            return 'Another Spotlight Artist is already set as Currently Featured. Turn that one off first.'
+          }
+
+          return true
+        }),
     },
   ],
   preview: {
