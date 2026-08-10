@@ -109,8 +109,8 @@ export default function Footer() {
               <NavLink to="/" end className={navClass}>Home</NavLink>
               <NavLink to="/spotlight" className={navClass}>Spotlight</NavLink>
               <NavLink to="/new-releases" className={navClass}>New Releases</NavLink>
-              <NavLink to="/about" className={navClass}>About</NavLink>
               <NavLink to="/new-music-old-sessions" className={navClass}>Old Sessions</NavLink>
+              <NavLink to="/about" className={navClass}>About</NavLink>
             </nav>
 
             {/* Social + Copyright */}
