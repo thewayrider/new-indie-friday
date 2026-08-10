@@ -91,11 +91,11 @@ export default function Releases({ releases = [] }) {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
 
         <h2 className="text-2xl md:text-3xl font-fraunces font-black tracking-tight text-black mb-8">
-          This Week's Releases
+          New Releases
         </h2>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-10">
-          {releases.slice(0, 6).map(function (release, i) {
+          {releases.slice(0, 9).map(function (release, i) {
             return (
               <ReleaseCard key={release._id || i} release={release} />
             );

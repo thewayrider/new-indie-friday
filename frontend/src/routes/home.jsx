@@ -33,7 +33,7 @@ export async function loader() {
       "imageUrl": image.asset->url,
       "slug": slug.current
     },
-    "releases": *[_type == "release"] | order(orderRank asc)[0...6]{
+    "releases": *[_type == "release"] | order(orderRank asc)[0...9]{
       _id,
       songTitle,
       artistName,
