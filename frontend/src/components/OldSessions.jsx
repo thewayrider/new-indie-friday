@@ -117,7 +117,7 @@ export default function OldSessions() {
                 </p>
               ) : null}
               <a
-                href="https://archive.streamusique.com"
+                href={card.linkUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-black text-white text-[11px] font-black uppercase tracking-widest px-6 py-3 hover:bg-gray-800 transition-all border border-black"
