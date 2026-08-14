@@ -185,6 +185,7 @@ export default function Header() {
         <NavLink to="/new-releases" className={navClass}>New Releases</NavLink>
         <NavLink to="/new-music-old-sessions" className={navClass}>Old Sessions</NavLink>
         <NavLink to="/about" className={navClass}>About</NavLink>
+        <a href="https://archive.streamusique.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 pb-1 hover:text-black transition">Archive</a>
       </div>
 
       {/* RIGHT — Song Search + Subscribe + Social */}
@@ -289,6 +290,7 @@ export default function Header() {
             <NavLink to="/new-releases" onClick={closeMenu} className={mobileNavClass}>New Releases</NavLink>
             <NavLink to="/new-music-old-sessions" onClick={closeMenu} className={mobileNavClass}>Old Sessions</NavLink>
             <NavLink to="/about" onClick={closeMenu} className={mobileNavClass}>About</NavLink>
+            <a href="https://archive.streamusique.com" target="_blank" rel="noopener noreferrer" onClick={closeMenu} className="block font-mono font-bold uppercase tracking-widest py-3 border-b border-white/10 transition-colors text-lg text-white/60 hover:text-white">Archive</a>
 
             <div className="flex items-center gap-5 pt-4">
               <a href="https://www.threads.com/@kimrampling" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">
