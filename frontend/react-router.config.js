@@ -15,11 +15,18 @@ async function sanityQuery(query) {
 }
 
 export default {
-  // Keep app source in src/ (root.jsx, routes.js, routes/ live here)
   appDirectory: 'src',
 
   // No runtime server — we prerender to static HTML instead
   ssr: false,
+
+  future: {
+    v8_middleware: true,
+    v8_splitRouteModules: true,
+    v8_viteEnvironmentApi: true,
+    v8_passThroughRequests: true,
+    v8_trailingSlashAwareDataRequests: true,
+  },
 
   // Build-time: enumerate every page to prerender, pulling slugs from Sanity.
   async prerender() {

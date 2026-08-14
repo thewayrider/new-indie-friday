@@ -173,7 +173,7 @@ export default function Header() {
             New Indie Friday
           </NavLink>
           <span className="text-gray-800 text-[1px] md:text-[11px] font-mono tracking-[0.15em] md:tracking-[0.3em] mt-1.5 ml-[0.5ch]">
-            New Independent Music curated by Kim Rampling
+            New Independent Music from Streamusique.com
           </span>
         </div>
       </div>
