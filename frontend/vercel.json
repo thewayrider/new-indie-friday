@@ -2,6 +2,18 @@
   "framework": null,
   "buildCommand": "npm run build",
   "outputDirectory": "build/client",
+  "redirects": [
+    {
+      "source": "/:year(\\d{4})/:month(\\d{2})/:slug",
+      "destination": "https://archive.streamusique.com/:year/:month/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/p/:slug",
+      "destination": "https://archive.streamusique.com/p/:slug",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/__spa-fallback.html" }
   ]

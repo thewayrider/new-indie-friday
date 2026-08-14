@@ -5,7 +5,7 @@ import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
-const SITE_URL = 'https://www.kimrampling.com';
+const SITE_URL = 'https://streamusique.com';
 const PROJECT_ID = 'oeemrqux';
 const DATASET = 'production';
 const API_VERSION = '2024-01-01';
