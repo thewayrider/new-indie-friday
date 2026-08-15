@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "description": "New Indie Friday (NIF) root — launches the frontend and Sanity studio together.",
   "scripts": {
-    "dev": "concurrently -n frontend,studio -c blue,magenta \"npm --prefix frontend run dev\" \"npm --prefix studio run dev\"",
+    "dev": "concurrently -n frontend,studio,open -c blue,magenta,green \"npm --prefix frontend run dev\" \"npm --prefix studio run dev\" \"npm run open-browser\"",
+    "open-browser": "node -e \"setTimeout(() => { const { exec } = require('child_process'); exec('start http://localhost:5173/'); exec('start http://localhost:3333/'); }, 4000)\"",
     "install:all": "npm install && npm --prefix frontend install && npm --prefix studio install"
   },
   "devDependencies": {

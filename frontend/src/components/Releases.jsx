@@ -85,21 +85,67 @@ function ReleaseCard({ release }) {
   );
 }
 
-export default function Releases({ releases = [] }) {
+export default function Releases({ releases = [], homePage = null }) {
+  const spotifyUrl = homePage?.spotifyPlaylistUrl;
+  const curatorTitle = homePage?.curatorSelectionTitle || "Curator's Selections";
+
+  const getSpotifyEmbedUrl = (url) => {
+    if (!url) return null;
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.hostname === 'open.spotify.com') {
+        const path = parsedUrl.pathname; 
+        return `https://open.spotify.com/embed${path}?utm_source=generator`;
+      }
+      return url;
+    } catch(e) {
+      return url;
+    }
+  }
+
+  const embedUrl = getSpotifyEmbedUrl(spotifyUrl);
+
   return (
     <section className="bg-[#e8e2d9] w-full py-12 md:py-16 border-t border-black/10">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
+        
+        <div className="flex flex-col lg:flex-row-reverse justify-between gap-12 lg:gap-16">
+          {/* Main Grid */}
+          <div className="w-full lg:w-[68%]">
+            <h2 className="text-2xl md:text-3xl font-fraunces font-black tracking-tight text-black mb-8 text-center">
+              New Releases
+            </h2>
 
-        <h2 className="text-2xl md:text-3xl font-fraunces font-black tracking-tight text-black mb-8">
-          New Releases
-        </h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-10">
+              {releases.slice(0, 9).map(function (release, i) {
+                return (
+                  <ReleaseCard key={release._id || i} release={release} />
+                );
+              })}
+            </div>
+          </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-10">
-          {releases.slice(0, 9).map(function (release, i) {
-            return (
-              <ReleaseCard key={release._id || i} release={release} />
-            );
-          })}
+          {/* Sidebar */}
+          {embedUrl && (
+            <div className="w-full lg:w-[28%] shrink-0">
+              <h2 className="text-2xl md:text-3xl font-fraunces font-black tracking-tight text-black mb-8">
+                {curatorTitle}
+              </h2>
+              <div className="sticky top-8">
+                <iframe 
+                  style={{ borderRadius: '12px' }} 
+                  src={embedUrl}
+                  width="100%" 
+                  height="600" 
+                  frameBorder="0" 
+                  allowFullScreen="" 
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                  loading="lazy"
+                  className="shadow-xl"
+                ></iframe>
+              </div>
+            </div>
+          )}
         </div>
 
       </div>

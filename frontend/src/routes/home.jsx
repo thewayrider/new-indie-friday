@@ -44,6 +44,10 @@ export async function loader() {
       releaseDate,
       "slug": slug.current,
       "albumArtUrl": albumArt.asset->url
+    },
+    "homePage": *[_type == "homePage"][0]{
+      spotifyPlaylistUrl,
+      curatorSelectionTitle
     }
   }`;
 
@@ -51,15 +55,16 @@ export async function loader() {
   return {
     spotlightArtist: res.spotlightArtist || null,
     releases: res.releases || [],
+    homePage: res.homePage || null,
   };
 }
 
 export default function Home() {
-  const { spotlightArtist, releases } = useLoaderData();
+  const { spotlightArtist, releases, homePage } = useLoaderData();
   return (
     <>
       <Hero spotlightArtist={spotlightArtist} isLoading={false} />
-      <Releases releases={releases} />
+      <Releases releases={releases} homePage={homePage} />
     </>
   );
 }
