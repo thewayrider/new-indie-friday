@@ -76,6 +76,7 @@ export default function Header() {
 
   const handleHomeClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.dispatchEvent(new CustomEvent('reset-releases-tab'));
   };
 
   const handleSearchOpen = () => {

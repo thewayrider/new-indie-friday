@@ -44,6 +44,11 @@ export default function Footer() {
     } catch { setStatus('error'); }
   };
 
+  const handleHomeClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.dispatchEvent(new CustomEvent('reset-releases-tab'));
+  };
+
   return (
     <>
      <div className="w-full border-t-2 border-black/70" />
@@ -96,9 +101,13 @@ export default function Footer() {
 
             {/* Brand */}
             <div className="flex flex-col gap-2">
-              <h3 className="text-xl font-fraunces font-black tracking-tighter text-black">
+              <NavLink 
+                to="/" 
+                onClick={handleHomeClick}
+                className="text-xl font-fraunces font-black tracking-tighter text-black hover:opacity-80 transition"
+              >
                 New Indie Friday
-              </h3>
+              </NavLink>
               <p className="text-gray-500 text-[10px] font-mono uppercase tracking-widest max-w-[220px] leading-loose">
                 Independent music discoveries, curated weekly.
               </p>
@@ -106,7 +115,7 @@ export default function Footer() {
 
             {/* Nav */}
             <nav className="flex flex-wrap gap-x-8 gap-y-3 text-[11px] font-mono uppercase tracking-[0.2em]">
-              <NavLink to="/" end className={navClass}>Home</NavLink>
+              <NavLink to="/" end className={navClass} onClick={handleHomeClick}>Home</NavLink>
               <NavLink to="/spotlight" className={navClass}>Spotlight</NavLink>
               <NavLink to="/new-releases" className={navClass}>New Releases</NavLink>
               <NavLink to="/new-music-old-sessions" className={navClass}>Old Sessions</NavLink>
