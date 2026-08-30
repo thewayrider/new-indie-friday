@@ -12,6 +12,8 @@ module.exports = {
         // Replacing SaaS Mint with a more serious Signal White or Red
         accent: '#ffffff',
         investigation: '#e11d48', // A sharp, investigative red for small accents
+        cobalt: '#2563eb', // Electric cobalt accent
+        cobaltDark: '#1d4ed8',
       },
      fontFamily: {
         manrope: ['Manrope', 'sans-serif'],

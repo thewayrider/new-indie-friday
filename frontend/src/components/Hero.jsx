@@ -14,7 +14,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
   const spotlightLink = `/spotlight`;
 
   return (
-    <section className="w-full bg-[#e8e2d9] border-b-2 border-black/70">
+    <section className="w-full bg-[#e8e2d9] border-b-2 border-black/70 shadow-[0_2px_0_0_#2563eb]">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-14">
 
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
@@ -24,7 +24,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
             to={spotlightLink}
             className="group relative w-full md:w-[45%] flex-shrink-0 block"
           >
-            <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2 py-1">
+            <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2 py-1 border-l-2 border-cobalt">
               Featured New Release
             </span>
 
@@ -54,9 +54,12 @@ export default function Hero({ spotlightArtist, isLoading }) {
           <div className="flex-1 flex flex-col gap-5 md:gap-6">
 
             {/* Label, aligned to top of image */}
-            <span className="block text-sm md:text-base font-mono font-black uppercase tracking-[0.25em] text-black/70 pt-1">
-              New Release Artist
-            </span>
+            <div className="flex items-center gap-2 pt-1">
+              <span className="inline-block w-2 h-2 bg-cobalt" />
+              <span className="text-sm md:text-base font-mono font-black uppercase tracking-[0.25em] text-black/70">
+                New Release Artist
+              </span>
+            </div>
 
             <div>
               <h2 className="font-fraunces font-black tracking-tight leading-none text-black text-3xl md:text-5xl">
@@ -71,7 +74,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
             <div>
               <Link
                 to={spotlightLink}
-                className="inline-block bg-black text-white text-[11px] font-black uppercase tracking-widest px-8 py-4 hover:bg-gray-800 transition-all border border-black"
+                className="inline-block bg-black text-white text-[11px] font-black uppercase tracking-widest px-8 py-4 hover:bg-cobalt hover:border-cobalt transition-all border border-black shadow-[3px_3px_0px_0px_#2563eb]"
               >
                 Artist Spotlight
               </Link>

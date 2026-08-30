@@ -56,7 +56,7 @@ function ReleaseCard({ release }) {
         )}
 
         {/* Hover overlay */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors duration-200">
+        <div className="absolute inset-0 flex items-center justify-center bg-blue-950/0 group-hover:bg-blue-950/30 transition-colors duration-200">
           <span className="text-white text-[11px] font-mono font-black uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             Comments & Spotify Play Link →
           </span>
@@ -64,7 +64,7 @@ function ReleaseCard({ release }) {
       </div>
 
       <div className="pt-3">
-        <h3 className="text-sm font-bold text-black leading-snug truncate">
+        <h3 className="text-sm font-bold text-black group-hover:text-cobalt transition-colors leading-snug truncate">
           {songTitle}
         </h3>
         <p className="text-xs text-gray-500 mt-0.5 truncate">
@@ -121,7 +121,7 @@ export default function Releases({ releases = [], homePage = null }) {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Header and Tab Switcher */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-black/15">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-black/15 shadow-[0_2px_0_0_#2563eb]">
           <div>
             <span className="block text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.25em] text-black/60 mb-1">
               {activeTab === 'releases' ? 'Curated Weekly Selections' : 'Candidate Discovery Pool'}
@@ -133,7 +133,7 @@ export default function Releases({ releases = [], homePage = null }) {
 
           {embedUrl && (
             <div 
-              className="inline-flex p-1.5 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] gap-1.5 self-start md:self-auto"
+              className="inline-flex p-1.5 bg-white border-2 border-black shadow-[4px_4px_0px_0px_#2563eb] gap-1.5 self-start md:self-auto"
               role="tablist"
               aria-label="Release views"
             >
@@ -145,7 +145,7 @@ export default function Releases({ releases = [], homePage = null }) {
                 className={`px-4 py-2.5 text-xs font-mono font-black uppercase tracking-[0.15em] transition-all flex items-center gap-2 ${
                   activeTab === 'releases'
                     ? 'bg-black text-white shadow-none'
-                    : 'bg-transparent text-black hover:bg-black/5'
+                    : 'bg-transparent text-black hover:bg-black/5 hover:text-cobalt'
                 }`}
               >
                 <span>Weekly Picks</span>
@@ -153,7 +153,7 @@ export default function Releases({ releases = [], homePage = null }) {
                   <span 
                     className={`px-1.5 py-0.5 text-[10px] font-mono font-black leading-none ${
                       activeTab === 'releases' 
-                        ? 'bg-investigation text-white' 
+                        ? 'bg-cobalt text-white' 
                         : 'bg-black text-white'
                     }`}
                   >
@@ -170,16 +170,16 @@ export default function Releases({ releases = [], homePage = null }) {
                 className={`px-4 py-2.5 text-xs font-mono font-black uppercase tracking-[0.15em] transition-all flex items-center gap-2.5 ${
                   activeTab === 'curator'
                     ? 'bg-black text-white shadow-none'
-                    : 'bg-transparent text-black hover:bg-black/5'
+                    : 'bg-transparent text-black hover:bg-black/5 hover:text-cobalt'
                 }`}
               >
                 <span className="relative flex h-2.5 w-2.5">
                   {activeTab === 'curator' && (
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-investigation opacity-75"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cobalt opacity-75"></span>
                   )}
                   <span 
                     className={`relative inline-flex rounded-full h-2.5 w-2.5 ${
-                      activeTab === 'curator' ? 'bg-investigation' : 'bg-gray-400'
+                      activeTab === 'curator' ? 'bg-cobalt' : 'bg-gray-400'
                     }`} 
                   />
                 </span>
@@ -220,9 +220,9 @@ export default function Releases({ releases = [], homePage = null }) {
         {/* Tab 2: Live Curator's Candidate Pool (Spotify Embed) */}
         {activeTab === 'curator' && embedUrl && (
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white/60 border border-black/15 p-6 md:p-8 mb-8 backdrop-blur-sm">
+            <div className="bg-white/70 border-l-4 border-l-cobalt border border-black/15 p-6 md:p-8 mb-8 backdrop-blur-sm shadow-sm">
               <div className="flex items-center gap-2.5 mb-2">
-                <span className="inline-block w-2.5 h-2.5 rounded-full bg-investigation animate-pulse" />
+                <span className="inline-block w-2.5 h-2.5 rounded-full bg-cobalt animate-pulse" />
                 <span className="text-[11px] font-mono font-black uppercase tracking-[0.2em] text-black">
                   Live Listening Stream
                 </span>

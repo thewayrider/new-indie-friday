@@ -34,8 +34,8 @@ const CloseIcon = () => (
 
 const navClass = ({ isActive }) =>
   isActive
-    ? 'text-black border-b border-black pb-1 transition'
-    : 'text-gray-400 pb-1 hover:text-black transition';
+    ? 'text-black border-b-2 border-cobalt pb-1 transition font-bold'
+    : 'text-gray-500 pb-1 hover:text-cobalt transition';
 
 const mobileNavClass = ({ isActive }) =>
   `block font-mono font-bold uppercase tracking-widest py-3 border-b border-white/10 transition-colors text-lg ${
@@ -152,13 +152,13 @@ export default function Header() {
   }, [searchOpen]);
 
   return (
-    <nav className="sticky top-0 z-[200] bg-[#e8e2d9] isolate py-5 md:py-6 px-6 md:px-12 flex justify-between items-center border-b-2 border-black/70 relative">
+    <nav className="sticky top-0 z-[200] bg-[#e8e2d9] isolate py-5 md:py-6 px-6 md:px-12 flex justify-between items-center border-b-2 border-black/70 shadow-[0_2px_0_0_#2563eb] relative">
 
       {/* LEFT — Hamburger + Wordmark */}
       <div className="flex items-center gap-4">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="lg:hidden flex items-center justify-center w-10 h-10 border border-black/70 hover:border-black hover:bg-black hover:text-white transition"
+          className="lg:hidden flex items-center justify-center w-10 h-10 border border-black/70 hover:border-cobalt hover:bg-cobalt hover:text-white transition"
           aria-label="Toggle navigation menu"
           aria-expanded={menuOpen}
         >
@@ -169,7 +169,7 @@ export default function Header() {
           <NavLink
             to="/"
             onClick={handleHomeClick}
-            className="text-black text-4xl md:text-6xl font-fraunces font-black tracking-tighter uppercase leading-none"
+            className="text-black text-4xl md:text-6xl font-fraunces font-black tracking-tighter uppercase leading-none hover:text-black transition"
           >
             New Indie Friday
           </NavLink>
@@ -196,7 +196,7 @@ export default function Header() {
           {!searchOpen ? (
             <button
               onClick={handleSearchOpen}
-              className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 hover:text-black transition"
+              className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-gray-500 hover:text-cobalt transition"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>

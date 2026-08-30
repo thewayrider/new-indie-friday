@@ -21,14 +21,12 @@ const BlueskyIcon = () => (
 
 const navClass = ({ isActive }) =>
   isActive
-    ? 'text-black font-black underline underline-offset-4 decoration-2'
-    : 'hover:text-black transition text-gray-500 font-bold';
+    ? 'text-black font-black underline underline-offset-4 decoration-cobalt decoration-2'
+    : 'hover:text-cobalt transition text-gray-500 font-bold';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('idle');
-
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +49,7 @@ export default function Footer() {
 
   return (
     <>
-     <div className="w-full border-t-2 border-black/70" />
+     <div className="w-full border-t-2 border-black/70 shadow-[0_-2px_0_0_#2563eb]" />
 
       {/* MAIN FOOTER */}
       <footer className="bg-[#e8e2d9] text-black pt-14 pb-10 px-6 md:px-12 border-t border-black/20">
@@ -87,7 +85,7 @@ export default function Footer() {
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="bg-black text-white font-mono font-black px-8 py-4 text-[11px] uppercase tracking-widest hover:bg-gray-800 transition-all disabled:opacity-50"
+                className="bg-black text-white font-mono font-black px-8 py-4 text-[11px] uppercase tracking-widest hover:bg-cobalt transition-all disabled:opacity-50 shadow-[3px_3px_0px_0px_#2563eb]"
               >
                 {status === 'sending' ? 'Sending...' : 'Subscribe'}
               </button>
@@ -104,7 +102,7 @@ export default function Footer() {
               <NavLink 
                 to="/" 
                 onClick={handleHomeClick}
-                className="text-xl font-fraunces font-black tracking-tighter text-black hover:opacity-80 transition"
+                className="text-xl font-fraunces font-black tracking-tighter text-black hover:text-cobalt transition"
               >
                 New Indie Friday
               </NavLink>
@@ -126,15 +124,15 @@ export default function Footer() {
             <div className="flex flex-col items-start md:items-end gap-4">
               <div className="flex items-center gap-5">
                 <a href="https://www.threads.com/@kimrampling" target="_blank" rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-black transition-colors">
+                  className="text-gray-500 hover:text-cobalt transition-colors">
                   <ThreadsIcon />
                 </a>
                 <a href="https://x.com/kimrampling" target="_blank" rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-black transition-colors">
+                  className="text-gray-500 hover:text-cobalt transition-colors">
                   <XIcon />
                 </a>
                 <a href="https://bsky.app/profile/kimrampling.bsky.social" target="_blank" rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-black transition-colors">
+                  className="text-gray-500 hover:text-cobalt transition-colors">
                   <BlueskyIcon />
                 </a>
               </div>
