@@ -126,8 +126,16 @@ export default function Releases({ releases = [], homePage = null }) {
             <span className="block text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.25em] text-black/60 mb-1">
               {activeTab === 'releases' ? 'Curated Weekly Selections' : 'Candidate Discovery Pool'}
             </span>
-            <h2 className="text-2xl md:text-4xl font-fraunces font-black tracking-tight text-black">
-              {activeTab === 'releases' ? 'New Releases' : curatorTitle}
+            <h2 className="text-2xl md:text-4xl font-fraunces font-black tracking-tight text-black flex items-center gap-2.5">
+              <span>{activeTab === 'releases' ? 'New Releases' : curatorTitle}</span>
+              {activeTab === 'releases' && (
+                <img 
+                  src="/headphones.png" 
+                  alt="" 
+                  aria-hidden="true" 
+                  className="inline-block w-5 h-5 md:w-7 md:h-7 object-contain opacity-90 select-none"
+                />
+              )}
             </h2>
           </div>
 

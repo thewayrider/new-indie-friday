@@ -169,9 +169,15 @@ export default function Header() {
           <NavLink
             to="/"
             onClick={handleHomeClick}
-            className="text-black text-4xl md:text-6xl font-fraunces font-black tracking-tighter uppercase leading-none hover:text-black transition"
+            className="text-black text-4xl md:text-6xl font-fraunces font-black tracking-tighter uppercase leading-none hover:text-black transition inline-flex items-center"
           >
-            New Indie Friday
+            <span>New Indie Friday</span>
+            <img 
+              src="/headphones.png" 
+              alt="" 
+              aria-hidden="true" 
+              className="inline-block w-[0.58em] h-[0.58em] md:w-[0.62em] md:h-[0.62em] ml-2 md:ml-3 align-middle opacity-95 select-none object-contain"
+            />
           </NavLink>
           <span className="text-gray-800 text-[1px] md:text-[11px] font-mono tracking-[0.15em] md:tracking-[0.3em] mt-1.5 ml-[0.5ch]">
             New Independent Music from Streamusique.com

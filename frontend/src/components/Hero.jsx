@@ -54,9 +54,14 @@ export default function Hero({ spotlightArtist, isLoading }) {
           <div className="flex-1 flex flex-col gap-5 md:gap-6">
 
             {/* Label, aligned to top of image */}
-            <div className="flex items-center gap-2 pt-1">
-              <span className="inline-block w-2 h-2 bg-cobalt" />
-              <span className="text-sm md:text-base font-mono font-black uppercase tracking-[0.25em] text-black/70">
+            <div className="flex items-center gap-2.5 pt-1">
+              <img 
+                src="/headphones.png" 
+                alt="" 
+                aria-hidden="true" 
+                className="w-4 h-4 md:w-5 md:h-5 object-contain opacity-90 select-none"
+              />
+              <span className="text-base md:text-lg font-mono font-black uppercase tracking-[0.25em] text-black/80">
                 New Release Artist
               </span>
             </div>

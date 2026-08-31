@@ -59,8 +59,14 @@ export default function Footer() {
           <h2 className="text-3xl md:text-4xl font-fraunces font-black mb-4 tracking-tighter leading-tight text-black">
             New Music Every Friday
           </h2>
-          <p className="text-gray-600 text-sm md:text-base font-mono mb-10 max-w-xl mx-auto leading-relaxed">
-            Curated New Song Releases by Kim Rampling
+          <p className="text-gray-600 text-sm md:text-base font-mono mb-10 max-w-xl mx-auto leading-relaxed flex items-center justify-center gap-2">
+            <span>Curated New Song Releases by Kim Rampling</span>
+            <img 
+              src="/headphones.png" 
+              alt="" 
+              aria-hidden="true" 
+              className="inline-block w-4 h-4 object-contain opacity-75 select-none"
+            />
           </p>
 
           {status === 'success' ? (
@@ -102,9 +108,15 @@ export default function Footer() {
               <NavLink 
                 to="/" 
                 onClick={handleHomeClick}
-                className="text-xl font-fraunces font-black tracking-tighter text-black hover:text-cobalt transition"
+                className="text-xl font-fraunces font-black tracking-tighter text-black hover:text-cobalt transition inline-flex items-center gap-1.5"
               >
-                New Indie Friday
+                <span>New Indie Friday</span>
+                <img 
+                  src="/headphones.png" 
+                  alt="" 
+                  aria-hidden="true" 
+                  className="inline-block w-4 h-4 object-contain opacity-80 select-none"
+                />
               </NavLink>
               <p className="text-gray-500 text-[10px] font-mono uppercase tracking-widest max-w-[220px] leading-loose">
                 Independent music discoveries, curated weekly.
