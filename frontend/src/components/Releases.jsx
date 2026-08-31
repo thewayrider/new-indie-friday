@@ -121,7 +121,7 @@ export default function Releases({ releases = [], homePage = null }) {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Header and Tab Switcher */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-black/15 shadow-[0_2px_0_0_#2563eb]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-black/15">
           <div>
             <span className="block text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.25em] text-black/60 mb-1">
               {activeTab === 'releases' ? 'Curated Weekly Selections' : 'Candidate Discovery Pool'}

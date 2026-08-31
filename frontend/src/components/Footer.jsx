@@ -49,7 +49,7 @@ export default function Footer() {
 
   return (
     <>
-     <div className="w-full border-t-2 border-black/70 shadow-[0_-2px_0_0_#2563eb]" />
+     <div className="w-full border-t-2 border-black/70" />
 
       {/* MAIN FOOTER */}
       <footer className="bg-[#e8e2d9] text-black pt-14 pb-10 px-6 md:px-12 border-t border-black/20">

@@ -192,6 +192,12 @@ function ReleaseEntry({ release }) {
 }
 
 export default function ReleaseListing({ releases = [], currentPage = 1, totalPages = 1 }) {
+  const getPageUrl = (page) => {
+    return page === 1 ? '/new-releases' : `/new-releases/page/${page}`;
+  };
+
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
   return (
     <div className="bg-[#e8e2d9] min-h-screen">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-14">
@@ -207,32 +213,79 @@ export default function ReleaseListing({ releases = [], currentPage = 1, totalPa
         )}
 
         {totalPages > 1 ? (
-          <div className="flex items-center justify-between pt-10 border-t border-black/10 mt-4">
-            {currentPage > 1 ? (
-              <Link
-                to={currentPage === 2 ? '/new-releases' : '/new-releases/page/' + (currentPage - 1)}
-                className="text-[11px] font-mono font-black uppercase tracking-widest text-black underline underline-offset-2 hover:text-gray-600 transition"
-              >
-                ← Newer Posts
-              </Link>
-            ) : (
-              <span />
-            )}
+          <div className="pt-10 mt-8 border-t border-black/20">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+              
+              {/* Page index context */}
+              <span className="text-[11px] font-mono font-black uppercase tracking-[0.2em] text-black/60">
+                Page {currentPage} of {totalPages}
+              </span>
 
-            <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">
-              Page {currentPage} of {totalPages}
-            </span>
+              {/* Numbered tracklist navigation */}
+              <nav aria-label="Pagination navigation" className="flex items-center gap-2">
+                {/* Prev Button */}
+                {currentPage > 1 ? (
+                  <Link
+                    to={getPageUrl(currentPage - 1)}
+                    className="inline-flex items-center justify-center px-3.5 py-2 bg-white border-2 border-black text-xs font-mono font-black uppercase tracking-wider text-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-black hover:text-white hover:border-black hover:shadow-[3px_3px_0px_0px_#2563eb] transition-all"
+                    aria-label="Previous page"
+                  >
+                    ← Prev
+                  </Link>
+                ) : (
+                  <span 
+                    aria-disabled="true"
+                    className="inline-flex items-center justify-center px-3.5 py-2 bg-black/5 border-2 border-black/20 text-xs font-mono font-bold uppercase tracking-wider text-black/30 cursor-not-allowed"
+                  >
+                    ← Prev
+                  </span>
+                )}
 
-            {currentPage < totalPages ? (
-              <Link
-                to={'/new-releases/page/' + (currentPage + 1)}
-                className="text-[11px] font-mono font-black uppercase tracking-widest text-black underline underline-offset-2 hover:text-gray-600 transition"
-              >
-                Older Posts →
-              </Link>
-            ) : (
-              <span />
-            )}
+                {/* Page Number Buttons */}
+                <div className="flex items-center gap-1.5">
+                  {pages.map((pageNum) => {
+                    const isCurrent = pageNum === currentPage;
+                    return isCurrent ? (
+                      <span
+                        key={pageNum}
+                        aria-current="page"
+                        className="inline-flex items-center justify-center min-w-[38px] h-[38px] px-2.5 bg-black border-2 border-black text-xs font-mono font-black text-white shadow-[3px_3px_0px_0px_#2563eb]"
+                      >
+                        {pageNum}
+                      </span>
+                    ) : (
+                      <Link
+                        key={pageNum}
+                        to={getPageUrl(pageNum)}
+                        className="inline-flex items-center justify-center min-w-[38px] h-[38px] px-2.5 bg-white border-2 border-black text-xs font-mono font-black text-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-black hover:text-white hover:border-black hover:shadow-[3px_3px_0px_0px_#2563eb] transition-all"
+                        aria-label={`Go to page ${pageNum}`}
+                      >
+                        {pageNum}
+                      </Link>
+                    );
+                  })}
+                </div>
+
+                {/* Next Button */}
+                {currentPage < totalPages ? (
+                  <Link
+                    to={getPageUrl(currentPage + 1)}
+                    className="inline-flex items-center justify-center px-3.5 py-2 bg-white border-2 border-black text-xs font-mono font-black uppercase tracking-wider text-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-black hover:text-white hover:border-black hover:shadow-[3px_3px_0px_0px_#2563eb] transition-all"
+                    aria-label="Next page"
+                  >
+                    Next →
+                  </Link>
+                ) : (
+                  <span 
+                    aria-disabled="true"
+                    className="inline-flex items-center justify-center px-3.5 py-2 bg-black/5 border-2 border-black/20 text-xs font-mono font-bold uppercase tracking-wider text-black/30 cursor-not-allowed"
+                  >
+                    Next →
+                  </span>
+                )}
+              </nav>
+
+            </div>
           </div>
         ) : null}
 

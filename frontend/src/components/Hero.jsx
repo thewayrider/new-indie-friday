@@ -14,7 +14,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
   const spotlightLink = `/spotlight`;
 
   return (
-    <section className="w-full bg-[#e8e2d9] border-b-2 border-black/70 shadow-[0_2px_0_0_#2563eb]">
+    <section className="w-full bg-[#e8e2d9] border-b-2 border-black/70">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-14">
 
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
