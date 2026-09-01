@@ -8,6 +8,9 @@ const QUERY = `*[_type == "resourceArticle" && slug.current == $slug][0]{
   title,
   "imageUrl": coverImage.asset->url,
   publishedAt,
+  author,
+  originalSourceName,
+  originalSourceUrl,
   content[]{
     ...,
     markDefs[]{
@@ -67,7 +70,7 @@ export default function ResourceDetail() {
     );
   }
 
-  const { title, imageUrl, publishedAt, content } = data;
+  const { title, imageUrl, publishedAt, content, author, originalSourceName, originalSourceUrl } = data;
   const formattedDate = formatDate(publishedAt);
 
   return (
@@ -86,7 +89,7 @@ export default function ResourceDetail() {
           
           {formattedDate && (
             <span className="block text-xs font-mono text-gray-500 uppercase tracking-widest">
-              Published on {formattedDate}
+              {author ? `By ${author} • ` : ''}Published on {formattedDate}
             </span>
           )}
         </div>
@@ -114,6 +117,23 @@ export default function ResourceDetail() {
             <p className="italic text-gray-500">No content available.</p>
           )}
         </main>
+
+        {/* External Article CTA */}
+        {originalSourceUrl && (
+          <div className="mt-14 pt-10 border-t border-black/10 flex flex-col items-center">
+            <h3 className="font-fraunces font-black text-2xl text-black mb-6 text-center">
+              Enjoying this preview?
+            </h3>
+            <a
+              href={originalSourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-black text-white text-[11px] font-black uppercase tracking-widest px-8 py-4 hover:bg-cobalt transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_#2563eb]"
+            >
+              Continue Reading on {originalSourceName || 'Original Source'} →
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -26,6 +26,24 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'author',
+      title: 'Author',
+      type: 'string',
+      description: 'Original author of the article (optional)',
+    },
+    {
+      name: 'originalSourceName',
+      title: 'Original Source Name',
+      type: 'string',
+      description: 'e.g., Daily Maverick (optional)',
+    },
+    {
+      name: 'originalSourceUrl',
+      title: 'Original Source URL',
+      type: 'url',
+      description: 'Link to the full article (optional)',
+    },
+    {
       name: 'teaser',
       title: 'Teaser',
       type: 'text',

@@ -8,7 +8,8 @@ const QUERY = `{
     teaser,
     "slug": slug.current,
     "imageUrl": coverImage.asset->url,
-    publishedAt
+    publishedAt,
+    author
   }
 }`;
 
@@ -74,7 +75,7 @@ export default function ResourcesListing() {
 
                   <div className="flex-1 w-full">
                     <span className="block text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-2">
-                      {formatDate(item.publishedAt)}
+                      {formatDate(item.publishedAt)}{item.author ? ` • By ${item.author}` : ''}
                     </span>
                     <h3 className="font-fraunces font-black text-2xl text-black group-hover:text-cobalt transition-colors leading-tight mb-2 line-clamp-2">
                       {item.title}
