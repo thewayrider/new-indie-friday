@@ -4,6 +4,8 @@ export default [
   index('routes/home.jsx'),
   route('spotlight', 'components/SpotlightListing.jsx'),
   route('spotlight/:slug', 'components/SpotlightDetail.jsx'),
+  route('resources', 'components/ResourcesListing.jsx'),
+  route('resources/:slug', 'components/ResourceDetail.jsx'),
   route('new-releases', 'routes/new-releases.jsx'),
   route('new-releases/page/:page', 'routes/new-releases-page.jsx'),
   route('new-releases/:slug', 'components/ReleaseDetail.jsx'),

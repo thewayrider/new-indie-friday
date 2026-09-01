@@ -30,9 +30,10 @@ export default {
 
   // Build-time: enumerate every page to prerender, pulling slugs from Sanity.
   async prerender() {
-    const [releaseSlugs, spotlightSlugs, releaseCount] = await Promise.all([
+    const [releaseSlugs, spotlightSlugs, resourceSlugs, releaseCount] = await Promise.all([
       sanityQuery('*[_type == "release" && defined(slug.current)].slug.current'),
       sanityQuery('*[_type == "spotlightArtist" && defined(slug.current)].slug.current'),
+      sanityQuery('*[_type == "resourceArticle" && defined(slug.current)].slug.current'),
       sanityQuery('count(*[_type == "release"])'),
     ]);
 
@@ -45,12 +46,14 @@ export default {
     return [
       '/',
       '/spotlight',
+      '/resources',
       '/new-releases',
       '/about',
       '/new-music-old-sessions',
       ...pagePaths,
-      ...(releaseSlugs || []).map((s) => `/new-releases/${s}`),
-      ...(spotlightSlugs || []).map((s) => `/spotlight/${s}`),
+      ...(releaseSlugs?.length > 0 ? releaseSlugs.map((s) => `/new-releases/${s}`) : ['/new-releases/empty-placeholder']),
+      ...(spotlightSlugs?.length > 0 ? spotlightSlugs.map((s) => `/spotlight/${s}`) : ['/spotlight/empty-placeholder']),
+      ...(resourceSlugs?.length > 0 ? resourceSlugs.map((s) => `/resources/${s}`) : ['/resources/empty-placeholder']),
     ];
   },
 };

@@ -1,0 +1,120 @@
+import { useLoaderData, Link } from 'react-router';
+import { PortableText } from '@portabletext/react';
+import { client } from '../client';
+import { buildMeta, SITE_URL } from '../seo';
+import { portableTextComponents } from './SpotlightArticle';
+
+const QUERY = `*[_type == "resourceArticle" && slug.current == $slug][0]{
+  title,
+  "imageUrl": coverImage.asset->url,
+  publishedAt,
+  content[]{
+    ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        "slug": reference->slug.current,
+        "refType": reference->_type
+      }
+    }
+  }
+}`;
+
+export async function loader({ params }) {
+  const data = await client.fetch(QUERY, { slug: params.slug });
+  return { data: data || null };
+}
+
+export function meta({ data, params }) {
+  const d = data && data.data;
+  if (!d) return buildMeta({ title: 'Resource', path: `/resources/${params.slug}` });
+  
+  const title = `${d.title} — Resources`;
+  const description = `Read ${d.title} on New Indie Friday.`;
+  const image = d.imageUrl;
+  
+  return [
+    ...buildMeta({ title, description, path: `/resources/${params.slug}`, image, type: 'article' }),
+    {
+      'script:ld+json': {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: d.title,
+        datePublished: d.publishedAt,
+        url: SITE_URL + '/resources/' + params.slug,
+      },
+    },
+  ];
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return null;
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
+
+export default function ResourceDetail() {
+  const { data } = useLoaderData();
+
+  if (!data) {
+    return (
+      <div className="min-h-screen bg-[#e8e2d9] flex items-center justify-center">
+        <p className="font-mono text-sm text-gray-500">Resource not found.</p>
+      </div>
+    );
+  }
+
+  const { title, imageUrl, publishedAt, content } = data;
+  const formattedDate = formatDate(publishedAt);
+
+  return (
+    <div className="bg-[#e8e2d9] min-h-screen pb-20">
+      
+      {/* Header section with title and back link */}
+      <div className="w-full border-b-2 border-black/70">
+        <div className="max-w-4xl mx-auto px-6 md:px-12 py-10">
+          <Link to="/resources" className="inline-block font-mono text-[10px] uppercase tracking-widest text-gray-500 hover:text-black mb-8 transition-colors">
+            ← Back to Resources
+          </Link>
+          
+          <h1 className="font-fraunces font-black text-black text-4xl md:text-6xl tracking-tight leading-none mb-6">
+            {title}
+          </h1>
+          
+          {formattedDate && (
+            <span className="block text-xs font-mono text-gray-500 uppercase tracking-widest">
+              Published on {formattedDate}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-4xl mx-auto px-6 md:px-12 mt-10">
+        
+        {/* Cover Image */}
+        {imageUrl && (
+          <div className="w-full mb-10 overflow-hidden border border-black/10">
+            <img
+              src={imageUrl}
+              alt={title}
+              className="w-full h-auto object-cover max-h-[500px]"
+            />
+          </div>
+        )}
+
+        {/* Portable Text Content */}
+        <main className="text-gray-800 text-base md:text-lg font-mono leading-relaxed prose prose-stone max-w-none">
+          {content ? (
+            <PortableText value={content} components={portableTextComponents} />
+          ) : (
+            <p className="italic text-gray-500">No content available.</p>
+          )}
+        </main>
+      </div>
+    </div>
+  );
+}

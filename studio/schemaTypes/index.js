@@ -3,6 +3,7 @@ import oldSessionsPage from './oldSessionsPage'
 import release from './release'
 import spotlightArtist from './spotlightArtist'
 import homePage from './homePage'
+import resourceArticle from './resourceArticle'
 
 
 export const schemaTypes = [
@@ -11,4 +12,5 @@ export const schemaTypes = [
   aboutPage,
   oldSessionsPage,
   homePage,
+  resourceArticle,
 ]
