@@ -1,4 +1,4 @@
-# New Indie Friday — https://www.kimrampling.com
+# New Indie Friday — https://streamusique.com
 # Independent music discovery, curated weekly.
 
 # Default: everything is crawlable
@@ -25,4 +25,4 @@ User-agent: Google-Extended
 Allow: /
 
 # Sitemap (generated during the SSG migration; harmless until then)
-Sitemap: https://www.kimrampling.com/sitemap.xml
+Sitemap: https://streamusique.com/sitemap.xml

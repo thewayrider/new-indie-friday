@@ -2,7 +2,7 @@
 // Produces title, description, Open Graph, Twitter, and canonical tags
 // consistently across routes. Individual routes can append JSON-LD.
 
-export const SITE_URL = 'https://www.kimrampling.com';
+export const SITE_URL = 'https://streamusique.com';
 export const SITE_NAME = 'New Indie Friday';
 export const DEFAULT_DESCRIPTION =
   'New independent music — indie, alt and surf rock with an Australian and New Zealand focus — curated weekly by Kim Rampling.';

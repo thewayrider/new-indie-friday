@@ -27,12 +27,15 @@ function urlEntry(path, lastmod) {
 }
 
 async function main() {
-  const [releases, spotlights, releaseCount] = await Promise.all([
+  const [releases, spotlights, resources, releaseCount] = await Promise.all([
     sanityQuery(
       '*[_type == "release" && defined(slug.current)]{"slug": slug.current, _updatedAt} | order(orderRank asc)'
     ),
     sanityQuery(
       '*[_type == "spotlightArtist" && defined(slug.current)]{"slug": slug.current, _updatedAt} | order(featuredDate desc)'
+    ),
+    sanityQuery(
+      '*[_type == "resourceArticle" && defined(slug.current)]{"slug": slug.current, _updatedAt} | order(publishedAt desc)'
     ),
     sanityQuery('count(*[_type == "release"])'),
   ]);
@@ -42,6 +45,7 @@ async function main() {
   const entries = [
     urlEntry('/'),
     urlEntry('/spotlight'),
+    urlEntry('/resources'),
     urlEntry('/new-releases'),
     urlEntry('/about'),
     urlEntry('/new-music-old-sessions'),
@@ -55,6 +59,9 @@ async function main() {
   }
   for (const s of spotlights || []) {
     entries.push(urlEntry(`/spotlight/${s.slug}`, s._updatedAt));
+  }
+  for (const res of resources || []) {
+    entries.push(urlEntry(`/resources/${res.slug}`, res._updatedAt));
   }
 
   const xml =
