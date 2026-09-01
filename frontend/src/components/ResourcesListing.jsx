@@ -1,6 +1,8 @@
 import { Link, useLoaderData } from 'react-router';
+import { PortableText } from '@portabletext/react';
 import { client } from '../client';
 import { buildMeta } from '../seo';
+import { portableTextComponents } from './SpotlightArticle';
 
 const QUERY = `{
   "resources": *[_type == "resourceArticle"] | order(publishedAt desc)[0...50]{
@@ -10,7 +12,19 @@ const QUERY = `{
     "imageUrl": coverImage.asset->url,
     externalCoverImageUrl,
     publishedAt,
-    author
+    author,
+    originalSourceUrl,
+    originalSourceName,
+    content[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "slug": reference->slug.current,
+          "refType": reference->_type
+        }
+      }
+    }
   }
 }`;
 
@@ -52,40 +66,53 @@ export default function ResourcesListing() {
         </p>
 
         {resources.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="flex flex-col gap-20">
             {resources.map(function (item, i) {
+              const displayImageUrl = item.externalCoverImageUrl || item.imageUrl;
               return (
-                <Link
-                  key={item.slug || i}
-                  to={'/resources/' + item.slug}
-                  className="group flex flex-col items-start gap-4"
-                >
-                  <div className="w-full aspect-[4/3] flex-shrink-0 overflow-hidden bg-black/5 border border-black/10">
-                    {(item.externalCoverImageUrl || item.imageUrl) ? (
-                      <img
-                        src={item.externalCoverImageUrl || item.imageUrl}
-                        alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 group-hover:opacity-90"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gray-300 flex items-center justify-center">
-                        <span className="font-mono text-xs text-gray-500 uppercase">No Image</span>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="flex-1 w-full">
-                    <span className="block text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-2">
+                <article key={item.slug || i} className="flex flex-col items-start gap-6 border-b border-black/10 pb-20 last:border-0 last:pb-0">
+                  <div className="w-full">
+                    <h2 className="font-fraunces font-black text-3xl md:text-5xl text-black leading-tight mb-4">
+                      <Link to={'/resources/' + item.slug} className="hover:text-cobalt transition-colors">
+                        {item.title}
+                      </Link>
+                    </h2>
+                    <span className="block text-[11px] font-mono text-gray-500 uppercase tracking-widest">
                       {formatDate(item.publishedAt)}{item.author ? ` • By ${item.author}` : ''}
                     </span>
-                    <h3 className="font-fraunces font-black text-2xl text-black group-hover:text-cobalt transition-colors leading-tight mb-2 line-clamp-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm font-mono leading-relaxed line-clamp-3">
-                      {item.teaser}
-                    </p>
                   </div>
-                </Link>
+
+                  {displayImageUrl && (
+                    <div className="w-full my-4">
+                      <img
+                        src={displayImageUrl}
+                        alt={item.title}
+                        className="w-full h-auto object-contain object-left max-h-[700px]"
+                      />
+                    </div>
+                  )}
+
+                  <div className="text-gray-800 text-sm md:text-base font-mono leading-relaxed prose prose-stone max-w-none w-full">
+                    {item.content ? (
+                      <PortableText value={item.content} components={portableTextComponents} />
+                    ) : (
+                      <p>{item.teaser}</p>
+                    )}
+                  </div>
+                  
+                  {item.originalSourceUrl && (
+                    <div className="mt-6">
+                      <a
+                        href={item.originalSourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block bg-black text-white text-[11px] font-black uppercase tracking-widest px-8 py-4 hover:bg-cobalt transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_#2563eb]"
+                      >
+                        read the full article here →
+                      </a>
+                    </div>
+                  )}
+                </article>
               );
             })}
           </div>
