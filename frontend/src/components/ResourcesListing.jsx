@@ -8,6 +8,7 @@ const QUERY = `{
     teaser,
     "slug": slug.current,
     "imageUrl": coverImage.asset->url,
+    externalCoverImageUrl,
     publishedAt,
     author
   }
@@ -60,9 +61,9 @@ export default function ResourcesListing() {
                   className="group flex flex-col items-start gap-4"
                 >
                   <div className="w-full aspect-[4/3] flex-shrink-0 overflow-hidden bg-black/5 border border-black/10">
-                    {item.imageUrl ? (
+                    {(item.externalCoverImageUrl || item.imageUrl) ? (
                       <img
-                        src={item.imageUrl}
+                        src={item.externalCoverImageUrl || item.imageUrl}
                         alt={item.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 group-hover:opacity-90"
                       />

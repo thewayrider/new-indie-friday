@@ -44,6 +44,12 @@ export default {
       description: 'Link to the full article (optional)',
     },
     {
+      name: 'externalCoverImageUrl',
+      title: 'External Cover Image URL',
+      type: 'url',
+      description: 'Optional. Paste a link to the original image here to avoid downloading and hosting it yourself.',
+    },
+    {
       name: 'teaser',
       title: 'Teaser',
       type: 'text',

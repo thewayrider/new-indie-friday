@@ -7,6 +7,7 @@ import { portableTextComponents } from './SpotlightArticle';
 const QUERY = `*[_type == "resourceArticle" && slug.current == $slug][0]{
   title,
   "imageUrl": coverImage.asset->url,
+  externalCoverImageUrl,
   publishedAt,
   author,
   originalSourceName,
@@ -34,7 +35,7 @@ export function meta({ data, params }) {
   
   const title = `${d.title} — Resources`;
   const description = `Read ${d.title} on New Indie Friday.`;
-  const image = d.imageUrl;
+  const image = d.externalCoverImageUrl || d.imageUrl;
   
   return [
     ...buildMeta({ title, description, path: `/resources/${params.slug}`, image, type: 'article' }),
@@ -70,8 +71,9 @@ export default function ResourceDetail() {
     );
   }
 
-  const { title, imageUrl, publishedAt, content, author, originalSourceName, originalSourceUrl } = data;
+  const { title, imageUrl, externalCoverImageUrl, publishedAt, content, author, originalSourceName, originalSourceUrl } = data;
   const formattedDate = formatDate(publishedAt);
+  const displayImageUrl = externalCoverImageUrl || imageUrl;
 
   return (
     <div className="bg-[#e8e2d9] min-h-screen pb-20">
@@ -99,10 +101,10 @@ export default function ResourceDetail() {
       <div className="max-w-4xl mx-auto px-6 md:px-12 mt-10">
         
         {/* Cover Image */}
-        {imageUrl && (
+        {displayImageUrl && (
           <div className="w-full mb-10 overflow-hidden border border-black/10">
             <img
-              src={imageUrl}
+              src={displayImageUrl}
               alt={title}
               className="w-full h-auto object-cover max-h-[500px]"
             />
