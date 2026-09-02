@@ -20,6 +20,20 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Article', value: 'article' },
+          { title: 'Resource', value: 'resource' }
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'article',
+      description: 'Select whether this is a one-off article or a dedicated resource.',
+    },
+    {
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
