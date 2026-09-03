@@ -44,6 +44,10 @@ export function Layout({ children }) {
         <meta name="theme-color" content="#e8e2d9" />
         <Meta />
         <Links />
+        <script
+          src="https://app.rybbit.io/api/script.js?siteId=e22eedcebabd"
+          defer
+        ></script>
       </head>
       <body>
         {children}
