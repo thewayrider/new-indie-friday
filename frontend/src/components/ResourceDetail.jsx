@@ -112,7 +112,7 @@ export default function ResourceDetail() {
         )}
 
         {/* Portable Text Content */}
-        <main className="text-gray-800 text-base md:text-lg font-mono leading-relaxed prose prose-stone max-w-none">
+        <main className="text-gray-700 text-sm md:text-base font-mono leading-relaxed max-w-none">
           {content ? (
             <PortableText value={content} components={portableTextComponents} />
           ) : (

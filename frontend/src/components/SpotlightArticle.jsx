@@ -17,6 +17,19 @@ export const portableTextComponents = {
         </a>
       );
     },
+    link: function LinkMark(props) {
+      const url = props.value && props.value.href;
+      return (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-2 hover:text-black transition-colors"
+        >
+          {props.children}
+        </a>
+      );
+    },
     internalLink: function InternalLinkMark(props) {
       const refType = props.value && props.value.refType;
       const refSlug = props.value && props.value.slug;
@@ -31,21 +44,80 @@ export const portableTextComponents = {
       );
     },
   },
+  list: {
+    bullet: function BulletList(props) {
+      return (
+        <ul className="list-disc list-outside ml-5 mb-4 space-y-1">
+          {props.children}
+        </ul>
+      );
+    },
+    number: function NumberList(props) {
+      return (
+        <ol className="list-decimal list-outside ml-5 mb-4 space-y-1">
+          {props.children}
+        </ol>
+      );
+    },
+  },
+  listItem: {
+    bullet: function BulletItem(props) {
+      return <li className="leading-relaxed">{props.children}</li>;
+    },
+    number: function NumberItem(props) {
+      return <li className="leading-relaxed">{props.children}</li>;
+    },
+  },
   types: {
     image: function ImageType(props) {
       if (!props.value || !props.value.asset) return null;
       return (
-        <img
-          src={props.value.asset.url}
-          alt={props.value.alt || ''}
-          className="float-left w-full sm:w-[45%] mr-6 mb-4 object-cover"
-        />
+        <figure className="my-6">
+          <img
+            src={props.value.asset.url}
+            alt={props.value.alt || ''}
+            className="w-full md:w-2/3 object-cover"
+          />
+          {props.value.caption ? (
+            <figcaption className="text-[11px] font-mono text-gray-500 uppercase tracking-widest mt-2">
+              {props.value.caption}
+            </figcaption>
+          ) : null}
+        </figure>
       );
     },
   },
   block: {
     normal: function NormalBlock(props) {
       return <p className="mb-4 leading-relaxed">{props.children}</p>;
+    },
+    h2: function H2Block(props) {
+      return (
+        <h2 className="font-fraunces font-black text-2xl text-black tracking-tight mt-10 mb-4">
+          {props.children}
+        </h2>
+      );
+    },
+    h3: function H3Block(props) {
+      return (
+        <h3 className="font-fraunces font-black text-xl text-black tracking-tight mt-8 mb-3">
+          {props.children}
+        </h3>
+      );
+    },
+    h4: function H4Block(props) {
+      return (
+        <h4 className="font-fraunces font-bold text-lg text-black tracking-tight mt-6 mb-2">
+          {props.children}
+        </h4>
+      );
+    },
+    blockquote: function BlockquoteBlock(props) {
+      return (
+        <blockquote className="border-l-4 border-black pl-4 py-1 my-6 italic text-gray-600">
+          {props.children}
+        </blockquote>
+      );
     },
   },
 };

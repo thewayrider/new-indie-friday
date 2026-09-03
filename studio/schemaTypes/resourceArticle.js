@@ -26,7 +26,8 @@ export default {
       options: {
         list: [
           { title: 'Article', value: 'article' },
-          { title: 'Resource', value: 'resource' }
+          { title: 'Resource', value: 'resource' },
+          { title: 'Long Form Article', value: 'longFormArticle' }
         ],
         layout: 'radio',
       },
@@ -69,7 +70,7 @@ export default {
       type: 'text',
       rows: 3,
       description: 'Shown on the listing page',
-      validation: (Rule) => Rule.required().max(300),
+      validation: (Rule) => Rule.max(300),
     },
     {
       name: 'coverImage',
@@ -89,7 +90,7 @@ export default {
           marks: {
             annotations: [
               {
-                name: 'externalLink',
+                name: 'link',
                 title: 'External link',
                 type: 'object',
                 fields: [
@@ -102,6 +103,19 @@ export default {
                   },
                 ],
               },
+              {
+                name: 'internalLink',
+                title: 'Internal reference',
+                type: 'object',
+                fields: [
+                  {
+                    name: 'reference',
+                    title: 'Linked document',
+                    type: 'reference',
+                    to: [{ type: 'release' }, { type: 'spotlightArtist' }],
+                  },
+                ],
+              },
             ],
           },
         },
@@ -110,7 +124,6 @@ export default {
           options: { hotspot: true }
         }
       ],
-      validation: (Rule) => Rule.required(),
     },
   ],
   preview: {

@@ -93,11 +93,7 @@ export default function ResourcesListing() {
         </div>
 
         <div className="text-gray-800 text-sm md:text-base font-mono leading-relaxed prose prose-stone max-w-none w-full">
-        {item.content ? (
-          <PortableText value={item.content} components={portableTextComponents} />
-        ) : (
-          <p>{item.teaser}</p>
-        )}
+        {item.teaser && <p className="mb-4">{item.teaser}</p>}
       </div>
       
       <div className="mt-2">
@@ -106,14 +102,14 @@ export default function ResourcesListing() {
             href={item.originalSourceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-black text-white text-[11px] font-black uppercase tracking-widest px-6 py-3 hover:bg-cobalt transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_#2563eb]"
+            className="inline-block bg-black text-white text-[11px] font-black uppercase tracking-widest px-6 py-3 border border-black hover:bg-cobalt hover:border-cobalt transition-all shadow-[3px_3px_0px_0px_#2563eb]"
           >
             read the full article here →
           </a>
         ) : (
           <Link 
             to={'/resources/' + item.slug} 
-            className="inline-block border-2 border-black text-black text-[11px] font-black uppercase tracking-widest px-6 py-3 hover:bg-black hover:text-white transition-colors"
+            className="inline-block bg-black text-white text-[11px] font-black uppercase tracking-widest px-6 py-3 border border-black hover:bg-cobalt hover:border-cobalt transition-all shadow-[3px_3px_0px_0px_#2563eb]"
           >
             Read More →
           </Link>
