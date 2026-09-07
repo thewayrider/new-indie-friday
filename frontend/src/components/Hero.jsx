@@ -15,14 +15,15 @@ export default function Hero({ spotlightArtist, isLoading }) {
 
   return (
     <section className="w-full bg-[#e8e2d9] border-b-2 border-black/70">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-14">
-
-        <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
-
-          {/* LEFT — Artist image, links to Spotlight post */}
+      <div className="w-full px-6 md:px-12 py-10 md:py-14 flex flex-col lg:flex-row gap-8 lg:gap-0">
+        
+        {/* LEFT SIDE (Spotlight Feature) */}
+        <div className="flex-1 flex flex-col md:flex-row gap-8 md:gap-12 items-start lg:pr-12 lg:pl-6">
+          
+          {/* Artist image, links to Spotlight post */}
           <Link
             to={spotlightLink}
-            className="group relative w-full md:w-[45%] flex-shrink-0 block"
+            className="group relative w-full md:w-[45%] lg:w-[40%] flex-shrink-0 block"
           >
             <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2 py-1 border-l-2 border-cobalt">
               Featured New Release
@@ -50,9 +51,9 @@ export default function Hero({ spotlightArtist, isLoading }) {
             </div>
           </Link>
 
-          {/* RIGHT — Text content */}
+          {/* Text content */}
           <div className="flex-1 flex flex-col gap-5 md:gap-6">
-
+            
             {/* Label, aligned to top of image */}
             <div className="flex items-center gap-2.5 pt-1">
               <img 
@@ -87,6 +88,43 @@ export default function Hero({ spotlightArtist, isLoading }) {
 
           </div>
         </div>
+
+        {/* DIVIDER */}
+        <div className="hidden lg:block w-[2px] bg-black/70 my-8"></div>
+        <div className="lg:hidden h-[2px] w-full bg-black/70 my-2"></div>
+
+        {/* RIGHT SIDE (Doobie Brothers) */}
+        <div className="lg:w-[320px] xl:w-[400px] flex-shrink-0 lg:pl-12 flex flex-col justify-center gap-8">
+          <p className="font-fraunces text-base lg:text-lg italic leading-relaxed text-black/90">
+            "Don't you feel it growing, day by day<br/>
+            People getting ready for the news<br/>
+            Some are happy, some are sad<br/>
+            Oh, we got to let the music play"
+          </p>
+          
+          <div className="flex items-center gap-5">
+            <img 
+              src="/doobie-brothers-toulouse-street.png" 
+              alt="Doobie Brothers - Toulouse Street" 
+              className="w-16 h-16 md:w-20 md:h-20 object-cover border-2 border-black/70 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+            />
+            <div className="text-[10px] md:text-xs font-mono font-bold uppercase tracking-widest text-black">
+              <a 
+                href="https://open.spotify.com/track/7Ar4G7Ci11gpt6sfH9Cgz5?si=6232a0844d0f4d10" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-cobalt underline decoration-2 underline-offset-4 transition-colors leading-tight inline-block mb-1"
+              >
+                Listen to the Music
+              </a>
+              <br/>
+              <span className="text-black/60 text-[9px] md:text-[10px]">
+                - The Doobie Brothers
+              </span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   );
