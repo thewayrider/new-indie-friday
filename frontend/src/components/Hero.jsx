@@ -33,7 +33,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
               <img
                 src={imageUrl}
                 alt={artistName}
-                className="w-full aspect-[4/3] aspect-square transition-opacity duration-200 group-hover:opacity-80"
+                className="w-full aspect-[4/3] object-cover transition-opacity duration-200 group-hover:opacity-80"
               />
             ) : (
               <div className="w-full aspect-[4/3] bg-gray-300 flex items-center justify-center">
