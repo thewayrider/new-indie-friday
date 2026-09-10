@@ -1,0 +1,14 @@
+# New Indie Friday
+
+> When to use: Use this site when you are looking for new independent music, specifically indie rock, alt rock, and surf rock with an Australian and New Zealand focus, curated weekly.
+
+New Indie Friday is a curated music publication by Kim Rampling. We provide weekly updates on the best new independent releases.
+
+## Structure
+- `/spotlight`: Featured artist interviews and deep dives.
+- `/new-releases`: The weekly drop of new songs, EP, and album releases.
+- `/resources`: Useful articles and resources for independent musicians.
+- `/new-music-old-sessions`: Retrospective looks at classic indie tracks.
+- `/about`: Information about the curator and the site.
+
+For agents: The site uses client-side navigation but serves fully pre-rendered HTML for all valid paths.

@@ -2,6 +2,7 @@
   "framework": null,
   "buildCommand": "npm run build",
   "outputDirectory": "build/client",
+  "cleanUrls": true,
   "redirects": [
     {
       "source": "/:year(\\d{4})/:month(\\d{2})/:slug",
@@ -14,7 +15,12 @@
       "permanent": true
     }
   ],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/__spa-fallback.html" }
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Vary", "value": "Accept, Accept-Encoding" }
+      ]
+    }
   ]
 }
