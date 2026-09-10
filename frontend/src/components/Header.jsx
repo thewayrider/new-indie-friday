@@ -191,9 +191,9 @@ export default function Header() {
       <div className="hidden lg:flex items-center space-x-10 text-[11px] font-bold uppercase tracking-[0.2em]">
         <NavLink to="/" end className={navClass} onClick={handleHomeClick}>Home</NavLink>
         <NavLink to="/spotlight" className={navClass}>Spotlight</NavLink>
-        <NavLink to="/resources" className={navClass}>Resources</NavLink>
         <NavLink to="/new-releases" className={navClass}>New Releases</NavLink>
         <NavLink to="/new-music-old-sessions" className={navClass}>Old Sessions</NavLink>
+        <NavLink to="/resources" className={navClass}>Resources</NavLink>
         <NavLink to="/about" className={navClass}>About</NavLink>
       </div>
 
@@ -296,9 +296,9 @@ export default function Header() {
           <div className="px-6 py-8 space-y-6">
             <NavLink to="/" end onClick={() => { handleHomeClick(); closeMenu(); }} className={mobileNavClass}>Home</NavLink>
             <NavLink to="/spotlight" onClick={closeMenu} className={mobileNavClass}>Spotlight</NavLink>
-            <NavLink to="/resources" onClick={closeMenu} className={mobileNavClass}>Resources</NavLink>
             <NavLink to="/new-releases" onClick={closeMenu} className={mobileNavClass}>New Releases</NavLink>
             <NavLink to="/new-music-old-sessions" onClick={closeMenu} className={mobileNavClass}>Old Sessions</NavLink>
+            <NavLink to="/resources" onClick={closeMenu} className={mobileNavClass}>Resources</NavLink>
             <NavLink to="/about" onClick={closeMenu} className={mobileNavClass}>About</NavLink>
 
             <div className="flex items-center gap-5 pt-4">

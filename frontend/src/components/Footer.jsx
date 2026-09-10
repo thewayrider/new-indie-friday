@@ -127,9 +127,9 @@ export default function Footer() {
             <nav className="flex flex-wrap gap-x-8 gap-y-3 text-[11px] font-mono uppercase tracking-[0.2em]">
               <NavLink to="/" end className={navClass} onClick={handleHomeClick}>Home</NavLink>
               <NavLink to="/spotlight" className={navClass}>Spotlight</NavLink>
-              <NavLink to="/resources" className={navClass}>Resources</NavLink>
               <NavLink to="/new-releases" className={navClass}>New Releases</NavLink>
               <NavLink to="/new-music-old-sessions" className={navClass}>Old Sessions</NavLink>
+              <NavLink to="/resources" className={navClass}>Resources</NavLink>
               <NavLink to="/about" className={navClass}>About</NavLink>
             </nav>
 
