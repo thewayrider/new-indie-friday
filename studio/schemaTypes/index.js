@@ -4,7 +4,8 @@ import release from './release'
 import spotlightArtist from './spotlightArtist'
 import homePage from './homePage'
 import resourceArticle from './resourceArticle'
-
+import subscriber from './subscriber'
+import newsletterSettings from './newsletterSettings'
 
 export const schemaTypes = [
   release,
@@ -13,4 +14,6 @@ export const schemaTypes = [
   oldSessionsPage,
   homePage,
   resourceArticle,
+  subscriber,
+  newsletterSettings,
 ]
