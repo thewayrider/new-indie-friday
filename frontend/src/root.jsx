@@ -84,7 +84,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#e8e2d9] text-black font-manrope">
       <Header />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
       <Footer />
       <Analytics />
     </div>
