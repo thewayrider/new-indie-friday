@@ -337,15 +337,15 @@ export default function Header() {
             ✕
           </button>
           <p className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-black mb-2">
-            Stay in the loop
+            Never Miss a Beat
           </p>
           <p className="font-fraunces text-black text-lg leading-tight mb-5 font-bold">
-            New discoveries every Friday.
+            New Indie Music Discoveries
           </p>
 
           {status === 'success' ? (
             <p className="font-mono text-black text-sm font-bold text-center py-2 border-2 border-black">
-              YOU'RE IN. SEE YOU FRIDAY.
+              YOU'RE IN. LISTEN TO THE MUSIC!
             </p>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-2">

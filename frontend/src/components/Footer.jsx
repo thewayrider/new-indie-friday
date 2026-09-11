@@ -61,7 +61,7 @@ export default function Footer() {
         {/* Newsletter CTA */}
         <div className="max-w-4xl mx-auto text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-fraunces font-black mb-4 tracking-tighter leading-tight text-black">
-            New Music Every Friday
+            Never Miss a Beat
           </h2>
           <p className="text-gray-600 text-sm md:text-base font-mono mb-10 max-w-xl mx-auto leading-relaxed flex items-center justify-center gap-2">
             <span>Curated New Song Releases by Kim Rampling</span>
@@ -76,7 +76,7 @@ export default function Footer() {
           {status === 'success' ? (
             <div className="max-w-md mx-auto py-6 bg-black/5 border border-black/20">
               <p className="text-black text-sm font-mono font-black tracking-widest uppercase">
-                You're in. See you Friday.
+                You're in. Listen to the music!
               </p>
             </div>
           ) : (
