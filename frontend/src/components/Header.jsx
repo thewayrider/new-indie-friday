@@ -68,7 +68,11 @@ export default function Header() {
         body: JSON.stringify({ email }),
       });
       if (res.ok) { setStatus('success'); setEmail(''); }
-      else { setStatus('error'); }
+      else { 
+        const errorData = await res.json().catch(() => ({}));
+        console.error('Subscription failed:', errorData);
+        setStatus('error'); 
+      }
     } catch { setStatus('error'); }
   };
 
@@ -358,8 +362,11 @@ export default function Header() {
                 disabled={status === 'sending'}
                 className="bg-black text-white text-[11px] font-black uppercase tracking-widest px-4 py-4 hover:bg-gray-800 transition-colors disabled:opacity-50"
               >
-                {status === 'sending' ? 'SUBSCRIBING...' : 'SUBSCRIBE'}
+                {status === 'sending' ? 'SUBSCRIBING...' : status === 'error' ? 'ERROR - TRY AGAIN' : 'SUBSCRIBE'}
               </button>
+              {status === 'error' && (
+                <p className="text-red-500 text-[10px] font-mono mt-1 font-bold">Failed to subscribe. Please try again.</p>
+              )}
             </form>
           )}
         </div>
