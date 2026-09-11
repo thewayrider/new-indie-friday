@@ -51,7 +51,7 @@ export default async function handler(req, res) {
         <div style="background-color: #fff; padding: 30px; border: 2px solid #000; margin: 30px 0;">
           <h3 style="font-size: 28px; margin: 0 0 10px 0; color: #000;">${release.songTitle}</h3>
           <p style="font-size: 16px; color: #555; margin: 0 0 20px 0; letter-spacing: 1px;">by <strong style="color: #000;">${release.artistName}</strong></p>
-          <a href="${releaseUrl}" style="display: inline-block; background-color: #000; color: #fff; padding: 15px 30px; text-decoration: none; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; border: 1px solid #000;">Listen & Read More</a>
+          <a href="${releaseUrl}" style="display: inline-block; background-color: #000; color: #fff; padding: 15px 30px; text-decoration: none; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; border: 1px solid #000;">Listen to the Music</a>
         </div>
         <p style="font-size: 12px; color: #888; margin-top: 30px;">
           You received this email because you subscribed to New Indie Friday.<br>
