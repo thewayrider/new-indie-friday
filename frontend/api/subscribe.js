@@ -57,12 +57,17 @@ export default async function handler(req, res) {
     // 4. Send the Welcome Email via Resend
     const fromEmail = process.env.RESEND_FROM_EMAIL || 'kim@streamusique.com'; 
 
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: `New Indie Friday <${fromEmail}>`,
       to: [email],
       subject: subject,
       text: body,
     });
+
+    if (error) {
+      console.error('Resend API Error:', error);
+      throw new Error(`Resend failed: ${error.message}`);
+    }
 
     return res.status(200).json({ success: true });
 

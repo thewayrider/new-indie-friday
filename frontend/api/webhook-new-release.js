@@ -65,13 +65,18 @@ export default async function handler(req, res) {
     
     // Resend allows sending to an array of up to 50 Bcc emails in one call
     // For larger lists, you'd chunk this array.
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: `New Indie Friday <${fromEmail}>`,
       to: [`${fromEmail}`], // Send to self
       bcc: emails,          // Bcc all subscribers to protect privacy
       subject: `New Release: ${release.songTitle} by ${release.artistName}`,
       html: htmlBody,
     });
+
+    if (error) {
+      console.error('Resend Webhook API Error:', error);
+      return res.status(500).json({ error: 'Failed to send emails via Resend', details: error.message });
+    }
 
     return res.status(200).json({ success: true, count: emails.length });
   } catch (error) {
