@@ -85,6 +85,19 @@ export default async function handler(req, res) {
       throw new Error(`Resend failed: ${error.message}`);
     }
 
+    // 5. Send a notification email to yourself
+    try {
+      await resend.emails.send({
+        from: `New Indie Friday <${fromEmail}>`,
+        to: ['subscribe@kimrampling.com'], // Send it to your active email
+        subject: 'New Subscriber on New Indie Friday!',
+        text: `Great news! You have a new subscriber: ${email}\n\nThis signup has been added to Sanity.`,
+      });
+    } catch (adminEmailError) {
+      console.error('Failed to send admin notification email:', adminEmailError);
+      // We do not throw an error here because the subscriber successfully signed up
+    }
+
     return res.status(200).json({ success: true });
 
   } catch (error) {
