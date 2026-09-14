@@ -26,6 +26,7 @@ const navClass = ({ isActive }) =>
 
 export default function Footer() {
   const [email, setEmail] = useState('');
+  const [website, setWebsite] = useState(''); // honeypot
   const [status, setStatus] = useState('idle');
 
   const handleSubmit = async (e) => {
@@ -35,7 +36,7 @@ export default function Footer() {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, website }),
       });
       if (res.ok) { setStatus('success'); setEmail(''); }
       else { 
@@ -84,6 +85,16 @@ export default function Footer() {
               onSubmit={handleSubmit}
               className="flex flex-col md:flex-row max-w-md mx-auto border-2 border-black overflow-hidden"
             >
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                style={{ position: 'absolute', left: '-9999px' }}
+                aria-hidden="true"
+              />
               <input
                 type="email"
                 required

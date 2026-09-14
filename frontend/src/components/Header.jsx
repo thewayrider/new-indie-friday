@@ -46,6 +46,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [email, setEmail] = useState('');
+  const [website, setWebsite] = useState(''); // honeypot
   const [status, setStatus] = useState('idle');
 
   const [searchOpen, setSearchOpen] = useState(false);
@@ -65,7 +66,7 @@ export default function Header() {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, website }),
       });
       if (res.ok) { setStatus('success'); setEmail(''); }
       else { 
@@ -349,6 +350,16 @@ export default function Header() {
             </p>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                style={{ position: 'absolute', left: '-9999px' }}
+                aria-hidden="true"
+              />
               <input
                 type="email"
                 required

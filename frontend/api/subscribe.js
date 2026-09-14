@@ -21,10 +21,26 @@ export default async function handler(req, res) {
 
   let step = 'init';
   try {
-    const { email } = req.body;
+    const { email, website } = req.body;
     
+    // 1. Honeypot check: If the hidden 'website' field is filled, it's a bot.
+    if (website) {
+      console.log('Bot blocked by honeypot:', email);
+      return res.status(200).json({ success: true, message: 'Subscribed' });
+    }
+
     if (!email || !email.includes('@')) {
       return res.status(400).json({ error: 'Valid email is required' });
+    }
+
+    // 2. Gmail dot-trick check: If a gmail address has more than 2 dots in the prefix, it's very likely a bot.
+    if (email.toLowerCase().endsWith('@gmail.com')) {
+      const localPart = email.split('@')[0];
+      const dotCount = (localPart.match(/\./g) || []).length;
+      if (dotCount > 2) {
+        console.log('Bot blocked by dot-trick filter:', email);
+        return res.status(200).json({ success: true, message: 'Subscribed' });
+      }
     }
 
     step = 'checking-existing';
