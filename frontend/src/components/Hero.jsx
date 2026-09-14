@@ -95,14 +95,14 @@ export default function Hero({ spotlightArtist, isLoading }) {
 
         {/* RIGHT SIDE (Doobie Brothers) */}
         <div className="lg:w-[320px] xl:w-[400px] flex-shrink-0 lg:pl-12 flex flex-col justify-center gap-8">
-          <p className="font-fraunces text-base lg:text-lg italic leading-relaxed text-black/90">
+          <p className="font-fraunces text-base lg:text-lg italic leading-relaxed text-black/90 text-center">
             "Don't you feel it growing, day by day<br/>
             People getting ready for the news<br/>
             Some are happy, some are sad<br/>
             Oh, we got to let the music play"
           </p>
           
-          <div className="flex items-center gap-5">
+          <div className="flex items-center justify-center gap-5">
             <img 
               src="/doobie-brothers-toulouse-street.png" 
               alt="Doobie Brothers - Toulouse Street" 
