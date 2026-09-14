@@ -12,6 +12,10 @@ const QUERY = `*[_type == "release" && slug.current == $slug][0]{
   albumOrEpName,
   genre,
   spotifyUrl,
+  socialLinks[]{
+    platform,
+    url
+  },
   releaseDate,
   "slug": slug.current,
   "albumArtUrl": albumArt.asset->url,
@@ -29,7 +33,21 @@ const QUERY = `*[_type == "release" && slug.current == $slug][0]{
 
 export async function loader({ params }) {
   const release = await client.fetch(QUERY, { slug: params.slug });
-  return { release: release || null };
+  if (!release) return { release: null, odesliData: null };
+  
+  let odesliData = null;
+  if (release.spotifyUrl) {
+    try {
+      const res = await fetch(`https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(release.spotifyUrl)}`);
+      if (res.ok) {
+        odesliData = await res.json();
+      }
+    } catch (e) {
+      console.error('Failed to fetch Odesli links:', e);
+    }
+  }
+
+  return { release, odesliData: odesliData || null };
 }
 
 function getSpotifyEmbedUrl(spotifyUrl) {
@@ -137,7 +155,7 @@ export function meta({ data, params }) {
 }
 
 export default function ReleaseDetail() {
-  const { release } = useLoaderData();
+  const { release, odesliData } = useLoaderData();
 
   if (!release) {
     return (
@@ -237,6 +255,81 @@ export default function ReleaseDetail() {
           </div>
 
           <LikeDislike slug={data.slug} />
+
+          {/* DYNAMIC LINKS SECTION */}
+          <div className="mt-12 pt-8 border-t border-black/10 flex flex-col md:flex-row gap-12">
+            
+            {/* STREAMING LINKS */}
+            {odesliData && (
+              <div className="flex-1">
+                <h3 className="text-xs font-mono font-black uppercase tracking-widest text-black/40 mb-4">
+                  Listen on
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {['spotify', 'appleMusic', 'youtube', 'youtubeMusic', 'deezer', 'tidal', 'amazonMusic', 'soundcloud', 'pandora'].map(platformId => {
+                    const linkData = odesliData.linksByPlatform[platformId];
+                    if (!linkData) return null;
+                    const labels = {
+                      spotify: 'Spotify',
+                      appleMusic: 'Apple Music',
+                      youtube: 'YouTube',
+                      youtubeMusic: 'YT Music',
+                      deezer: 'Deezer',
+                      tidal: 'Tidal',
+                      amazonMusic: 'Amazon',
+                      soundcloud: 'SoundCloud',
+                      pandora: 'Pandora'
+                    };
+                    return (
+                      <a
+                        key={platformId}
+                        href={linkData.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[11px] font-mono font-bold uppercase tracking-widest px-4 py-2 bg-white border border-black/20 hover:border-cobalt hover:bg-cobalt hover:text-white transition-colors shadow-sm"
+                      >
+                        {labels[platformId] || platformId}
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* SOCIAL LINKS */}
+            {data.socialLinks && data.socialLinks.length > 0 && (
+              <div className="flex-1">
+                <h3 className="text-xs font-mono font-black uppercase tracking-widest text-black/40 mb-4">
+                  Follow & Connect
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {data.socialLinks.map((social, index) => {
+                    const labels = {
+                      website: 'Website',
+                      x: 'X (Twitter)',
+                      instagram: 'Instagram',
+                      facebook: 'Facebook',
+                      wikipedia: 'Wikipedia',
+                      youtube: 'YouTube',
+                      tiktok: 'TikTok',
+                    };
+                    return (
+                      <a
+                        key={index}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[11px] font-mono font-bold uppercase tracking-widest px-4 py-2 bg-black text-white border border-black hover:bg-gray-800 transition-colors shadow-sm"
+                      >
+                        {labels[social.platform] || social.platform}
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+          </div>
         </article>
 
       </div>

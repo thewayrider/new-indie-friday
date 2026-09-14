@@ -6,6 +6,7 @@ import homePage from './homePage'
 import resourceArticle from './resourceArticle'
 import subscriber from './subscriber'
 import newsletterSettings from './newsletterSettings'
+import socialLink from './socialLink'
 
 export const schemaTypes = [
   release,
@@ -16,4 +17,5 @@ export const schemaTypes = [
   resourceArticle,
   subscriber,
   newsletterSettings,
+  socialLink,
 ]

@@ -135,6 +135,13 @@ export default {
       description: 'Used to order releases on the homepage (most recent first)',
       validation: (Rule) => Rule.required(),
     },
+    {
+      name: 'socialLinks',
+      title: 'Social Media & Websites',
+      type: 'array',
+      of: [{ type: 'socialLink' }],
+      description: 'Add links to the artist\'s social media or website.',
+    },
 	
 	{
       name: 'orderRank',
