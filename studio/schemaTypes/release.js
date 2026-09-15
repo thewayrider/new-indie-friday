@@ -153,8 +153,17 @@ export default {
   preview: {
     select: {
       title: 'songTitle',
-      subtitle: 'artistName',
+      artistName: 'artistName',
+      releaseDate: 'releaseDate',
       media: 'albumArt',
+    },
+    prepare(selection) {
+      const { title, artistName, releaseDate, media } = selection;
+      return {
+        title: title,
+        subtitle: `${artistName} ${releaseDate ? `(${releaseDate})` : ''}`,
+        media: media,
+      };
     },
   },
 }

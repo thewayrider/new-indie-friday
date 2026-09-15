@@ -120,6 +120,8 @@ const portableTextComponents = {
 
 export function meta({ data, params }) {
   const r = data && data.release;
+  const odesliData = data && data.odesliData;
+
   if (!r) return buildMeta({ title: 'Release', path: `/new-releases/${params.slug}` });
   const title = `${r.songTitle} by ${r.artistName}`;
   const typeLabel =
@@ -133,23 +135,45 @@ export function meta({ data, params }) {
       ? `from '${r.albumOrEpName}'`
       : 'a new single';
   const description = `${r.songTitle} by ${r.artistName} — ${typeLabel}${r.genre ? ', ' + r.genre : ''}. Curated by New Indie Friday.`;
+
+  // Aggregate all streaming links for the track's sameAs property
+  const trackSameAs = [];
+  if (r.spotifyUrl) trackSameAs.push(r.spotifyUrl);
+  if (odesliData && odesliData.linksByPlatform) {
+    Object.values(odesliData.linksByPlatform).forEach(link => {
+      if (link.url && !trackSameAs.includes(link.url)) trackSameAs.push(link.url);
+    });
+  }
+
+  // Aggregate all social links for the artist's sameAs property
+  const artistSameAs = [];
+  if (r.socialLinks) {
+    r.socialLinks.forEach(social => {
+      if (social.url) artistSameAs.push(social.url);
+    });
+  }
+
   return [
     ...buildMeta({ title, description, path: `/new-releases/${params.slug}`, image: r.albumArtUrl, type: 'music.song' }),
     {
       'script:ld+json': {
-  '@context': 'https://schema.org',
-  '@type': 'MusicRecording',
-  name: r.songTitle,
-  byArtist: { '@type': 'MusicGroup', name: r.artistName },
-  ...(r.spotifyUrl ? { sameAs: r.spotifyUrl } : {}),
-  ...((r.releaseType === 'album' || r.releaseType === 'ep' || (!r.releaseType && r.albumOrEpName)) && r.albumOrEpName
-    ? { inAlbum: { '@type': 'MusicAlbum', name: r.albumOrEpName } }
-    : {}),
-  ...(r.genre ? { genre: r.genre } : {}),
-  ...(r.releaseDate ? { datePublished: r.releaseDate } : {}),
-  ...(r.albumArtUrl ? { image: r.albumArtUrl } : {}),
-  url: SITE_URL + '/new-releases/' + params.slug,
-},
+        '@context': 'https://schema.org',
+        '@type': 'MusicRecording',
+        name: r.songTitle,
+        byArtist: { 
+          '@type': 'MusicGroup', 
+          name: r.artistName,
+          ...(artistSameAs.length > 0 ? { sameAs: artistSameAs } : {})
+        },
+        ...(trackSameAs.length > 0 ? { sameAs: trackSameAs } : {}),
+        ...((r.releaseType === 'album' || r.releaseType === 'ep' || (!r.releaseType && r.albumOrEpName)) && r.albumOrEpName
+          ? { inAlbum: { '@type': 'MusicAlbum', name: r.albumOrEpName } }
+          : {}),
+        ...(r.genre ? { genre: r.genre } : {}),
+        ...(r.releaseDate ? { datePublished: r.releaseDate } : {}),
+        ...(r.albumArtUrl ? { image: r.albumArtUrl } : {}),
+        url: SITE_URL + '/new-releases/' + params.slug,
+      },
     },
   ];
 }
