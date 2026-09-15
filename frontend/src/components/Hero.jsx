@@ -7,6 +7,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
   const {
     artistName = 'Stella Donnelly',
     teaser = 'Phasellus fermentum malesuada phasellus netus dictum aenean placerat egestas amet.',
+    featuredDate = null,
     imageUrl = null,
     slug = 'stella-donnelly',
   } = spotlightArtist || {};
@@ -18,7 +19,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
       <div className="w-full px-6 md:px-12 py-10 md:py-14 flex flex-col lg:flex-row gap-8 lg:gap-0">
         
         {/* LEFT SIDE (Spotlight Feature) */}
-        <div className="flex-1 flex flex-col md:flex-row gap-8 md:gap-12 items-start lg:pr-12 lg:pl-6">
+        <div className="flex-1 flex flex-col md:flex-row gap-8 md:gap-12 items-stretch lg:pr-12 lg:pl-6">
           
           {/* Artist image, links to Spotlight post */}
           <Link
@@ -85,6 +86,16 @@ export default function Hero({ spotlightArtist, isLoading }) {
                 Artist Spotlight
               </Link>
             </div>
+
+            {featuredDate && (
+              <p className="text-gray-600 text-sm md:text-base font-mono leading-relaxed max-w-lg mt-auto pb-1">
+                {new Date(featuredDate).toLocaleDateString('en-US', {
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric'
+                })}
+              </p>
+            )}
 
           </div>
         </div>

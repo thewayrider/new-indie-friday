@@ -30,6 +30,7 @@ export async function loader() {
     "spotlightArtist": *[_type == "spotlightArtist" && isCurrent == true] | order(featuredDate desc)[0]{
       artistName,
       teaser,
+      featuredDate,
       "imageUrl": image.asset->url,
       "slug": slug.current
     },
