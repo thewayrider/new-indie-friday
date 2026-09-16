@@ -5,7 +5,7 @@ import { buildMeta } from '../seo';
 import { portableTextComponents } from './SpotlightArticle';
 
 const QUERY = `{
-  "resources": *[_type == "resourceArticle"] | order(publishedAt desc)[0...50]{
+  "resources": *[_type == "resourceArticle"] | order(orderRank)[0...50]{
     title,
     teaser,
     "slug": slug.current,

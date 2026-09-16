@@ -125,6 +125,12 @@ export default {
         }
       ],
     },
+    {
+      name: 'orderRank',
+      title: 'Order Rank',
+      type: 'string',
+      hidden: true,
+    },
   ],
   preview: {
     select: {

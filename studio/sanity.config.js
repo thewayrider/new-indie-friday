@@ -39,9 +39,31 @@ export default defineConfig({
               context,
             }),
 
+            // Orderable: Resources (Left Column)
+            orderableDocumentListDeskItem({
+              type: 'resourceArticle',
+              title: 'Resources (Left Column)',
+              id: 'orderable-resources',
+              filter: `_type == $type && category == "resource"`,
+              params: { type: 'resourceArticle' },
+              S,
+              context,
+            }),
+
+            // Orderable: Articles (Right Column)
+            orderableDocumentListDeskItem({
+              type: 'resourceArticle',
+              title: 'Articles (Right Column)',
+              id: 'orderable-articles',
+              filter: `_type == $type && category != "resource"`,
+              params: { type: 'resourceArticle' },
+              S,
+              context,
+            }),
+
             // All other document types (excluding singletons and orderable types)
             ...S.documentTypeListItems().filter(
-              (listItem) => !['oldSessionsPage', 'release'].includes(listItem.getId())
+              (listItem) => !['oldSessionsPage', 'release', 'resourceArticle'].includes(listItem.getId())
             ),
           ]),
     }),
