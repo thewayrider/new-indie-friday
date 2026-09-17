@@ -2,6 +2,7 @@ import { PortableText } from '@portabletext/react';
 import { useLoaderData } from 'react-router';
 import { client } from '../client';
 import { buildMeta } from '../seo';
+import sessionsImg from '../assets/old-sessions-new-releases.webp';
 
 export function meta({ data }) {
   const title = (data && data.data && data.data.pageTitle) || 'Old Sessions';
@@ -97,7 +98,13 @@ export default function OldSessions() {
         {/* INTRO */}
         {data.intro ? (
           <div className="text-gray-700 text-sm md:text-base font-mono leading-relaxed max-w-3xl mb-12">
+            <img
+              src={sessionsImg}
+              alt="Old Sessions New Releases"
+              className="float-right w-40 md:w-56 ml-6 mb-4 object-cover"
+            />
             <PortableText value={data.intro} components={portableTextComponents} />
+            <div className="clear-both" />
           </div>
         ) : null}
 
