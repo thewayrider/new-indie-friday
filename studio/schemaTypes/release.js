@@ -136,6 +136,43 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'discoverySource',
+      title: 'Discovery Source / Tastemaker',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Acid Stag', value: 'Acid Stag' },
+          { title: 'AIR Charts', value: 'AIR Charts' },
+          { title: 'allmusic.com (https://www.allmusic.com)', value: 'allmusic.com' },
+          { title: 'AMRAP Indie', value: 'AMRAP Indie' },
+          { title: 'Bandcamp Indie', value: 'Bandcamp Indie' },
+          { title: 'chosic.com (https://www.chosic.com)', value: 'chosic.com' },
+          { title: 'Futuremag Music', value: 'Futuremag Music' },
+          { title: 'Happy Mag', value: 'Happy Mag' },
+          { title: 'ListenBrainz / MusicBrainz', value: 'MusicBrainz' },
+          { title: 'Rolling Stone AU', value: 'Rolling Stone AU' },
+          { title: 'Roots Online NZ', value: 'Roots Online NZ' },
+          { title: 'Spotify New Music Friday', value: 'Spotify' },
+          { title: 'Triple J', value: 'Triple J' },
+          { title: 'Triple J Unearthed', value: 'Triple J Unearthed' },
+          { title: 'Artist / Direct Submission', value: 'Direct Submission' },
+          { title: 'Other / Manual Search', value: 'Other' },
+        ],
+      },
+      description: 'Which website, chart, or publication discovered this track? Quick links: https://www.chosic.com | https://www.allmusic.com',
+    },
+    {
+      name: 'discoveryUrl',
+      title: 'Discovery Source URL',
+      type: 'url',
+      description: 'Direct link to the article, review, or chart page. If left blank, it will automatically link to the source homepage.',
+      validation: (Rule) =>
+        Rule.uri({
+          scheme: ['http', 'https'],
+          allowRelative: false,
+        }),
+    },
+    {
       name: 'socialLinks',
       title: 'Social Media & Websites',
       type: 'array',

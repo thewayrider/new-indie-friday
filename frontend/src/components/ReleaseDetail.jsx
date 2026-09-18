@@ -12,6 +12,8 @@ const QUERY = `*[_type == "release" && slug.current == $slug][0]{
   albumOrEpName,
   genre,
   spotifyUrl,
+  discoverySource,
+  discoveryUrl,
   socialLinks[]{
     platform,
     url
@@ -80,6 +82,41 @@ function getTypeDisplay(release) {
   return release.albumOrEpName
     ? { word: 'Type', name: release.albumOrEpName }
     : { word: 'Single', name: null };
+}
+
+const SOURCE_DEFAULT_URLS = {
+  'Acid Stag': 'https://acidstag.com',
+  'AIR Charts': 'https://air.org.au',
+  'allmusic.com': 'https://www.allmusic.com',
+  'AllMusic': 'https://www.allmusic.com',
+  'AMRAP Indie': 'https://amrap.org.au',
+  'Bandcamp Indie': 'https://bandcamp.com',
+  'chosic.com': 'https://www.chosic.com',
+  'Chosic': 'https://www.chosic.com',
+  'Futuremag Music': 'https://www.futuremagmusic.net',
+  'Happy Mag': 'https://happymag.tv',
+  'ListenBrainz / MusicBrainz': 'https://musicbrainz.org',
+  'MusicBrainz': 'https://musicbrainz.org',
+  'Rolling Stone AU': 'https://au.rollingstone.com',
+  'Roots Online NZ': 'https://rootsmusic.co.nz',
+  'Spotify': 'https://open.spotify.com',
+  'Spotify New Music Friday': 'https://open.spotify.com',
+  'Triple J': 'https://www.abc.net.au/triplej',
+  'Triple J Unearthed': 'https://www.abc.net.au/triplejunearthed',
+};
+
+function getSourceDisplay(source, customUrl) {
+  if (!source) return null;
+  const url = customUrl || SOURCE_DEFAULT_URLS[source] || null;
+  const labels = {
+    'chosic.com': 'chosic.com',
+    'allmusic.com': 'allmusic.com',
+    'MusicBrainz': 'ListenBrainz / MusicBrainz',
+    'Spotify': 'Spotify New Music Friday',
+    'Direct Submission': 'Direct Submission',
+  };
+  const label = labels[source] || source;
+  return { label, url };
 }
 
 const portableTextComponents = {
@@ -192,6 +229,7 @@ export default function ReleaseDetail() {
   const data = release;
   const embedUrl = getSpotifyEmbedUrl(data.spotifyUrl);
   const typeDisplay = getTypeDisplay(data);
+  const sourceDisplay = getSourceDisplay(data.discoverySource, data.discoveryUrl);
 
   return (
     <div className="bg-[#e8e2d9] min-h-screen">
@@ -273,6 +311,26 @@ export default function ReleaseDetail() {
                 <div>
                   <span className="text-[13px] text-black/40 mr-1.5">Released</span>
                   <span className="text-[16px] text-black font-black">{formatDate(data.releaseDate)}</span>
+                </div>
+              </>
+            ) : null}
+            {sourceDisplay ? (
+              <>
+                <span className="text-black/20 hidden md:block">·</span>
+                <div>
+                  <span className="text-[13px] text-black/40 mr-1.5">Discovered via</span>
+                  {sourceDisplay.url ? (
+                    <a
+                      href={sourceDisplay.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[16px] text-black font-black underline underline-offset-2 hover:text-black/60 transition-colors inline-flex items-center gap-1"
+                    >
+                      {sourceDisplay.label} <span className="text-[12px] opacity-70">↗</span>
+                    </a>
+                  ) : (
+                    <span className="text-[16px] text-black font-black">{sourceDisplay.label}</span>
+                  )}
                 </div>
               </>
             ) : null}

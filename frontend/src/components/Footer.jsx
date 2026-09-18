@@ -24,6 +24,19 @@ const navClass = ({ isActive }) =>
     ? 'text-black font-black underline underline-offset-4 decoration-cobalt decoration-2'
     : 'hover:text-cobalt transition text-gray-500 font-bold';
 
+const TASTEMAKERS = [
+  { name: 'Acid Stag', url: 'https://acidstag.com' },
+  { name: 'Futuremag Music', url: 'https://www.futuremagmusic.net' },
+  { name: 'Triple J Unearthed', url: 'https://www.abc.net.au/triplejunearthed' },
+  { name: 'Bandcamp Indie', url: 'https://bandcamp.com' },
+  { name: 'Happy Mag', url: 'https://happymag.tv' },
+  { name: 'AMRAP Charts', url: 'https://amrap.org.au' },
+  { name: 'chosic.com', url: 'https://www.chosic.com' },
+  { name: 'allmusic.com', url: 'https://www.allmusic.com' },
+  { name: 'Roots Online NZ', url: 'https://rootsmusic.co.nz' },
+  { name: 'AIR Charts', url: 'https://air.org.au' },
+];
+
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [website, setWebsite] = useState(''); // honeypot
@@ -57,92 +70,130 @@ export default function Footer() {
      <div className="w-full border-t-2 border-black/70" />
 
       {/* MAIN FOOTER */}
-      <footer className="bg-[#e8e2d9] text-black pt-14 pb-10 px-6 md:px-12 border-t border-black/20">
+      <footer className="bg-[#e8e2d9] text-black pt-12 pb-8 px-6 md:px-12 border-t border-black/20">
 
-        {/* Newsletter CTA */}
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-fraunces font-black mb-4 tracking-tighter leading-tight text-black">
-            Never Miss a Beat
-          </h2>
-          <p className="text-gray-600 text-sm md:text-base font-mono mb-10 max-w-xl mx-auto leading-relaxed flex items-center justify-center gap-2">
-            <span>Curated New Song Releases by Kim Rampling</span>
-            <img 
-              src="/headphones.png" 
-              alt="" 
-              aria-hidden="true" 
-              className="inline-block w-4 h-4 object-contain opacity-75 select-none"
-            />
-          </p>
+        {/* UPPER FOOTER: DISCOVERY RADAR (LEFT) + NEWSLETTER (RIGHT) */}
+        <div className="max-w-7xl mx-auto mb-12 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          
+          {/* LEFT: THE DISCOVERY RADAR (7 cols) */}
+          <div className="lg:col-span-7 flex flex-col">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
+              <h2 className="text-[11px] font-mono font-black uppercase tracking-[0.25em] text-black/60">
+                The Discovery Radar
+              </h2>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-fraunces font-black tracking-tight text-black mb-3 leading-tight">
+              Championing Independent Curators
+            </h3>
+            <p className="text-gray-600 text-xs md:text-[13px] font-mono leading-relaxed mb-5 max-w-xl">
+              New Indie Friday actively monitors, credits, and links back to the independent publications, community charts, and discovery engines keeping new music alive:
+            </p>
+            
+            <div className="flex flex-wrap gap-2">
+              {TASTEMAKERS.map((site) => (
+                <a
+                  key={site.name}
+                  href={site.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-black/20 hover:border-black hover:bg-black hover:text-white transition-all text-[11px] font-mono font-bold uppercase tracking-wider shadow-sm group"
+                >
+                  <span>{site.name}</span>
+                  <span className="text-[10px] text-black/40 group-hover:text-white transition-colors">↗</span>
+                </a>
+              ))}
+            </div>
+          </div>
 
-          {status === 'success' ? (
-            <div className="max-w-md mx-auto py-6 bg-black/5 border border-black/20">
-              <p className="text-black text-sm font-mono font-black tracking-widest uppercase">
-                You're in. Listen to the music!
+          {/* RIGHT: NEWSLETTER SUBSCRIBE (5 cols) */}
+          <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-black/15 pt-8 lg:pt-0 lg:pl-12 flex flex-col justify-between">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-fraunces font-black mb-2 tracking-tight leading-tight text-black">
+                Never Miss a Beat
+              </h2>
+              <p className="text-gray-600 text-xs md:text-sm font-mono mb-5 leading-relaxed flex items-center gap-2">
+                <span>Curated New Song Releases by Kim Rampling</span>
+                <img 
+                  src="/headphones.png" 
+                  alt="" 
+                  aria-hidden="true" 
+                  className="inline-block w-3.5 h-3.5 object-contain opacity-75 select-none"
+                />
               </p>
             </div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col md:flex-row max-w-md mx-auto border-2 border-black overflow-hidden"
-            >
-              <input
-                type="text"
-                name="website"
-                tabIndex={-1}
-                autoComplete="off"
-                value={website}
-                onChange={(e) => setWebsite(e.target.value)}
-                style={{ position: 'absolute', left: '-9999px' }}
-                aria-hidden="true"
-              />
-              <input
-                type="email"
-                required
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-white flex-grow p-4 outline-none text-[11px] tracking-[0.1em] placeholder:text-gray-400 font-mono text-black"
-              />
-              <button
-                type="submit"
-                disabled={status === 'sending'}
-                className="bg-black text-white font-mono font-black px-8 py-4 text-[11px] uppercase tracking-widest hover:bg-cobalt transition-all disabled:opacity-50 shadow-[3px_3px_0px_0px_#2563eb]"
+
+            {status === 'success' ? (
+              <div className="py-4 px-6 bg-black/5 border border-black/20">
+                <p className="text-black text-xs font-mono font-black tracking-widest uppercase">
+                  You're in. Listen to the music!
+                </p>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row border-2 border-black overflow-hidden shadow-sm"
               >
-                {status === 'sending' ? 'Sending...' : status === 'error' ? 'Error - Try Again' : 'Subscribe'}
-              </button>
-            </form>
-          )}
-          {status === 'error' && (
-            <p className="text-red-500 text-xs font-mono mt-3 font-bold text-center">Failed to subscribe. Check console for details.</p>
-          )}
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  style={{ position: 'absolute', left: '-9999px' }}
+                  aria-hidden="true"
+                />
+                <input
+                  type="email"
+                  required
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-white flex-grow p-3 md:p-3.5 outline-none text-[11px] tracking-[0.1em] placeholder:text-gray-400 font-mono text-black min-w-0"
+                />
+                <button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="bg-black text-white font-mono font-black px-6 py-3.5 text-[11px] uppercase tracking-widest hover:bg-cobalt transition-all disabled:opacity-50 shadow-[3px_3px_0px_0px_#2563eb] whitespace-nowrap"
+                >
+                  {status === 'sending' ? 'Sending...' : status === 'error' ? 'Error' : 'Subscribe'}
+                </button>
+              </form>
+            )}
+            {status === 'error' && (
+              <p className="text-red-500 text-[11px] font-mono mt-2 font-bold">Failed to subscribe. Check console for details.</p>
+            )}
+          </div>
+
         </div>
 
-        {/* Bottom bar */}
-        <div className="max-w-7xl mx-auto border-t border-black/10 pt-10">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
+        {/* BOTTOM BAR */}
+        <div className="max-w-7xl mx-auto border-t border-black/15 pt-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
 
             {/* Brand */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1">
               <NavLink 
                 to="/" 
                 onClick={handleHomeClick}
-                className="text-xl font-fraunces font-black tracking-tighter text-black hover:text-cobalt transition inline-flex items-center gap-1.5"
+                className="text-lg font-fraunces font-black tracking-tighter text-black hover:text-cobalt transition inline-flex items-center gap-1.5"
               >
                 <span>New Indie Friday</span>
                 <img 
                   src="/headphones.png" 
                   alt="" 
                   aria-hidden="true" 
-                  className="inline-block w-4 h-4 object-contain opacity-80 select-none"
+                  className="inline-block w-3.5 h-3.5 object-contain opacity-80 select-none"
                 />
               </NavLink>
-              <p className="text-gray-500 text-[10px] font-mono uppercase tracking-widest max-w-[220px] leading-loose">
+              <p className="text-gray-500 text-[10px] font-mono uppercase tracking-widest">
                 Independent music discoveries, curated weekly.
               </p>
             </div>
 
             {/* Nav */}
-            <nav className="flex flex-wrap gap-x-8 gap-y-3 text-[11px] font-mono uppercase tracking-[0.2em]">
+            <nav className="flex flex-wrap gap-x-6 gap-y-2 text-[11px] font-mono uppercase tracking-[0.2em]">
               <NavLink to="/" end className={navClass} onClick={handleHomeClick}>Home</NavLink>
               <NavLink to="/spotlight" className={navClass}>Spotlight</NavLink>
               <NavLink to="/new-releases" className={navClass}>New Releases</NavLink>
@@ -152,8 +203,8 @@ export default function Footer() {
             </nav>
 
             {/* Social + Copyright */}
-            <div className="flex flex-col items-start md:items-end gap-4">
-              <div className="flex items-center gap-5">
+            <div className="flex flex-col items-start md:items-end gap-2">
+              <div className="flex items-center gap-4">
                 <a href="https://www.threads.com/@kimrampling" target="_blank" rel="noopener noreferrer"
                   className="text-gray-500 hover:text-cobalt transition-colors">
                   <ThreadsIcon />
