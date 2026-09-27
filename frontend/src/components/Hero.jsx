@@ -15,7 +15,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
   const spotlightLink = `/spotlight`;
 
   return (
-    <section className="w-full bg-[#e8e2d9] border-b-2 border-black/70">
+    <section className="w-full bg-[#e8e2d9]">
       <div className="w-full px-6 md:px-12 py-10 md:py-14 flex flex-col lg:flex-row gap-8 lg:gap-0">
         
         {/* LEFT SIDE (Spotlight Feature) */}
@@ -100,20 +100,18 @@ export default function Hero({ spotlightArtist, isLoading }) {
           </div>
         </div>
 
-        {/* DIVIDER */}
-        <div className="hidden lg:block w-[2px] bg-black/70 my-8"></div>
-        <div className="lg:hidden h-[2px] w-full bg-black/70 my-2"></div>
+        {/* SEPARATOR (Replaced with Whitespace) */}
 
         {/* RIGHT SIDE (Doobie Brothers) */}
-        <div className="lg:w-[320px] xl:w-[400px] flex-shrink-0 lg:pl-12 flex flex-col justify-center gap-8">
-          <p className="font-fraunces text-base lg:text-lg italic leading-relaxed text-black/90 text-center">
+        <div className="lg:w-[320px] xl:w-[400px] flex-shrink-0 lg:-ml-4 xl:-ml-12 flex flex-col justify-start pt-8 lg:pt-10 gap-6">
+          <p className="font-fraunces text-base lg:text-lg italic leading-relaxed text-black/90 text-left">
             "Don't you feel it growing, day by day<br/>
             People getting ready for the news<br/>
             Some are happy, some are sad<br/>
             Oh, we got to let the music play"
           </p>
           
-          <div className="flex items-center justify-center gap-5">
+          <div className="flex items-center justify-start gap-5">
             <img 
               src="/doobie-brothers-toulouse-street.png" 
               alt="Doobie Brothers - Toulouse Street" 

@@ -157,7 +157,7 @@ export default function Header() {
   }, [searchOpen]);
 
   return (
-    <nav className="sticky top-0 z-[200] bg-[#e8e2d9] isolate py-5 md:py-6 px-6 md:px-12 flex justify-between items-center border-b-2 border-black/70 relative">
+    <nav className="sticky top-0 z-[200] bg-[#e8e2d9] isolate py-5 md:py-6 px-6 md:px-12 flex justify-between items-center relative shadow-sm">
 
       {/* LEFT — Hamburger + Wordmark */}
       <div className="flex items-center gap-4">
