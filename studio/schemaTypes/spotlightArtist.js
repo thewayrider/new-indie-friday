@@ -141,7 +141,7 @@ export default {
           const id = document._id.replace(/^drafts\./, '')
 
           const otherCurrentCount = await client.fetch(
-            `count(*[_type == "spotlightArtist" && isCurrent == true && !(_id in [$id, $draftId])])`,
+            `count(*[_type == "spotlightArtist" && isCurrent == true && !(_id in [$id, $draftId]) && (_id in path("drafts.**") || !defined(*[_id == "drafts." + ^._id][0]))])`,
             { id, draftId: `drafts.${id}` }
           )
 
