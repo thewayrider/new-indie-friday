@@ -101,7 +101,7 @@ export default function OldSessions() {
             <img
               src={sessionsImg}
               alt="Old Sessions New Releases"
-              className="float-right w-40 md:w-56 ml-6 mb-4 object-cover"
+              className="float-right w-[230px] h-[230px] ml-6 mb-4 object-cover"
             />
             <PortableText value={data.intro} components={portableTextComponents} />
             <div className="clear-both" />
