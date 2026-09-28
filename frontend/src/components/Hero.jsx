@@ -115,7 +115,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
             <img 
               src="/doobie-brothers-toulouse-street.png" 
               alt="Doobie Brothers - Toulouse Street" 
-              className="w-16 h-16 md:w-20 md:h-20 object-cover border-2 border-black/70 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+              className="w-[95px] h-[95px] object-cover border-2 border-black/70 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
             />
             <div className="text-[10px] md:text-xs font-mono font-bold uppercase tracking-widest text-black">
               <a 
