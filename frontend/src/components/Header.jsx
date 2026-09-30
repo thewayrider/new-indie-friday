@@ -132,7 +132,9 @@ export default function Header() {
       ).then(function (results) {
         setSearchResults(results || []);
         setSearching(false);
-      }).catch(function () {
+      }).catch(function (err) {
+        console.error("Search error:", err);
+        setSearchResults([{ _id: 'error', songTitle: 'Error: ' + err.message, artistName: '' }]);
         setSearching(false);
       });
     }, 300);
