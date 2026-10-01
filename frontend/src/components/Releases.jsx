@@ -102,10 +102,7 @@ function ReleaseCard({ release, extra }) {
            </div>
         </div>
         
-        {/* Regional Tag */}
-        <div className="absolute bottom-2 right-2 bg-white text-black text-[9px] font-mono font-bold px-2 py-1 border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-          {extra?.region || '📍 Unknown'}
-        </div>
+
       </Link>
 
       <div className="pt-4 flex-grow flex flex-col">
