@@ -16,6 +16,8 @@ export default {
           { title: 'Wikipedia', value: 'wikipedia' },
           { title: 'YouTube', value: 'youtube' },
           { title: 'TikTok', value: 'tiktok' },
+          { title: 'Bandcamp', value: 'bandcamp' },
+          { title: 'Linktree', value: 'linktree' },
         ],
       },
       validation: (Rule) => Rule.required(),
@@ -41,6 +43,8 @@ export default {
         wikipedia: 'Wikipedia',
         youtube: 'YouTube',
         tiktok: 'TikTok',
+        bandcamp: 'Bandcamp',
+        linktree: 'Linktree',
       }
       return {
         title: title ? titles[title] : 'Social Link',
