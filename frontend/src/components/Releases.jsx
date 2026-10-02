@@ -93,12 +93,11 @@ function ReleaseCard({ release, extra }) {
           </div>
         )}
         
-        {/* Play Button Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-           <div className="w-16 h-16 bg-cobalt rounded-full flex items-center justify-center border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-white text-white hover:text-black transition-colors">
-             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 ml-1" viewBox="0 0 20 20" fill="currentColor">
-               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-             </svg>
+        {/* View Release Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300">
+           <div className="bg-black/70 px-5 py-2.5 flex items-center justify-center gap-2.5 text-white transform scale-95 group-hover:scale-100 transition-transform duration-300">
+             <img src="/headphones.png" alt="Headphones" aria-hidden="true" className="w-4 h-4 object-contain select-none invert" />
+             <span className="font-bold uppercase tracking-[0.2em] text-[11px]">View Release</span>
            </div>
         </div>
         

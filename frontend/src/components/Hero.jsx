@@ -27,7 +27,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
             className="group relative w-full md:w-[45%] lg:w-[40%] flex-shrink-0 block"
           >
             <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2 py-1 border-l-2 border-cobalt">
-              Featured New Release
+              Featured Artist
             </span>
 
             {imageUrl ? (
