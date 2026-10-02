@@ -25,7 +25,6 @@ const navClass = ({ isActive }) =>
     : 'hover:text-cobalt transition text-gray-500 font-bold';
 
 const TASTEMAKERS = [
-  { name: 'Acid Stag', url: 'https://acidstag.com' },
   { name: 'Futuremag Music', url: 'https://www.futuremagmusic.net' },
   { name: 'Triple J Unearthed', url: 'https://www.abc.net.au/triplejunearthed' },
   { name: 'Bandcamp Indie', url: 'https://bandcamp.com' },
