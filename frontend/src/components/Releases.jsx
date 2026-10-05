@@ -13,22 +13,22 @@ function ExplainerModal({ isOpen, onClose }) {
           <div className="flex gap-4">
             <div className="w-10 h-10 shrink-0 bg-cobalt text-white flex items-center justify-center font-bold rounded-full border-2 border-black">1</div>
             <div>
-              <h4 className="font-bold text-lg">Discovery (160+ Tracks)</h4>
-              <p className="text-sm text-gray-700">Autonomous AI agents and human scouts monitor regional tastemakers, blogs, and charts across AU/NZ and worldwide to cast a wide new releases net.</p>
+              <h4 className="font-bold text-lg">Discovery</h4>
+              <p className="text-sm text-gray-700">Autonomous AI agents and Streamusique monitor regional tastemakers, blogs, and charts across AU/NZ and worldwide to cast a wide new releases net.</p>
             </div>
           </div>
           <div className="flex gap-4">
             <div className="w-10 h-10 shrink-0 bg-yellow-400 text-black flex items-center justify-center font-bold rounded-full border-2 border-black">2</div>
             <div>
-              <h4 className="font-bold text-lg">The Audition Pool (~33 Tracks)</h4>
-              <p className="text-sm text-gray-700">The shortlist. These are the tracks that stood out from the raw feed and are brought in for deep listening sessions.</p>
+              <h4 className="font-bold text-lg">The Audition Pool</h4>
+              <p className="text-sm text-gray-700">The shortlist. These are the tracks that stood out from the raw feed and are brought in for extended listening.</p>
             </div>
           </div>
           <div className="flex gap-4">
             <div className="w-10 h-10 shrink-0 bg-orange-500 text-white flex items-center justify-center font-bold rounded-full border-2 border-black">3</div>
             <div>
-              <h4 className="font-bold text-lg">The Curated Cut (6 Tracks)</h4>
-              <p className="text-sm text-gray-700">The brutal final filter. Only the absolute best tracks make it to the front page every Friday.</p>
+              <h4 className="font-bold text-lg">The Curated Cut</h4>
+              <p className="text-sm text-gray-700">The final filter. The curated tracks make it to the front of the 'Audition Pool' section on the front page.</p>
             </div>
           </div>
           <div className="flex gap-4">
@@ -161,59 +161,80 @@ export default function Releases({ releases = [], homePage = null }) {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
-        {/* Top Curation Metric Bar */}
-        <div className="mb-10 w-full bg-white/60 backdrop-blur-md text-black p-4 md:p-6 rounded-lg shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:flex md:items-center md:justify-between border-2 border-black">
-          <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-4 md:mb-0">
-            <div className="text-sm font-mono font-black text-black uppercase tracking-widest">Curation Funnel:</div>
-            <div className="flex flex-wrap items-center gap-2 md:gap-3 text-sm md:text-base text-gray-800">
-              <span className="flex items-center gap-1"><span className="text-lg">📡</span> 160+ Scouted</span>
+        {/* Integrated Section Header & Curation Process */}
+        <div className="flex flex-col gap-5 mb-8 pb-4 border-b-2 border-black">
+          
+          {/* Slim Editorial Process Bar */}
+          <div className="relative flex flex-col md:flex-row items-center justify-center gap-3 text-xs md:text-sm font-mono text-gray-800 pb-4 border-b border-black/10">
+            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 text-center px-4 md:px-32">
+              <span className="font-black text-black uppercase tracking-wider flex items-center gap-1.5">
+                <svg className="w-3.5 h-3.5 text-cobalt shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M9 18V5l12-2v13" />
+                  <circle cx="6" cy="18" r="3" fill="currentColor" />
+                  <circle cx="18" cy="16" r="3" fill="currentColor" />
+                </svg>
+                New Music Discovery:
+              </span>
+              <span className="flex items-center gap-1.5 font-bold text-gray-900">
+                <svg className="w-3.5 h-3.5 text-cobalt shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                  <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+                </svg>
+                Weekly Song Pool
+              </span>
               <span className="text-black font-black">➔</span>
-              <span className="flex items-center gap-1"><span className="text-lg">🎧</span> 33 Audition Pool</span>
+              <span className="font-bold text-gray-900">Selected Tracks</span>
               <span className="text-black font-black">➔</span>
-              <span className="flex items-center gap-1.5 text-black font-bold bg-white px-2 py-0.5 rounded border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                <img src="/headphones.png" alt="" aria-hidden="true" className="w-5 h-5 object-contain select-none" />
-                6 The Curated Releases
+              <span className="flex items-center gap-1.5 font-bold text-gray-900">
+                <svg className="w-3.5 h-3.5 text-cobalt shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                  <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+                </svg>
+                New Release
               </span>
             </div>
-          </div>
-          <button 
-            onClick={() => setIsModalOpen(true)}
-            className="shrink-0 bg-black text-white text-xs font-bold uppercase tracking-wider px-4 py-2 hover:bg-cobalt transition-colors border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)] hover:shadow-none hover:translate-y-[3px] hover:translate-x-[3px]"
-          >
-            How it works →
-          </button>
-        </div>
 
-        {/* Dual-View Switcher Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pb-4 border-b-2 border-black">
-          <div>
-            <span className="block text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.25em] text-black/60 mb-1">
-              Curated Weekly Selections
-            </span>
-            <h2 className="text-2xl md:text-4xl font-fraunces font-black tracking-tight text-black flex items-center gap-2.5">
-              <span>New Releases</span>
-              <img 
-                src="/headphones.png" 
-                alt="" 
-                aria-hidden="true" 
-                className="inline-block w-5 h-5 md:w-7 md:h-7 object-contain opacity-90 select-none"
-              />
-            </h2>
+            <div className="md:absolute md:right-0 md:w-[300px] flex justify-center">
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="shrink-0 bg-transparent text-black text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 hover:bg-white hover:text-black transition-all border-2 border-black rounded shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-y-[1px] hover:translate-x-[1px]"
+              >
+                How it works →
+              </button>
+            </div>
           </div>
-          
-          <div className="flex bg-white border-2 border-black p-1 rounded-full shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-            <button 
-              onClick={() => setActiveTab('curated')}
-              className={`px-6 py-2 rounded-full text-sm font-bold transition-colors ${activeTab === 'curated' ? 'bg-black text-white' : 'bg-transparent text-black hover:bg-gray-200'}`}
-            >
-              The Curated Cut
-            </button>
-            <button 
-              onClick={() => setActiveTab('pool')}
-              className={`px-6 py-2 rounded-full text-sm font-bold transition-colors ${activeTab === 'pool' ? 'bg-black text-white' : 'bg-transparent text-black hover:bg-gray-200'}`}
-            >
-              The Audition Pool
-            </button>
+
+          {/* Main Title & Tabs Row */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <span className="block text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.25em] text-black/60 mb-1">
+                Curated Weekly Selections
+              </span>
+              <h2 className="text-2xl md:text-4xl font-fraunces font-black tracking-tight text-black flex items-center gap-2.5">
+                <span>New Releases</span>
+                <img 
+                  src="/headphones.png" 
+                  alt="" 
+                  aria-hidden="true" 
+                  className="inline-block w-5 h-5 md:w-7 md:h-7 object-contain opacity-90 select-none"
+                />
+              </h2>
+            </div>
+            
+            <div className="w-full sm:w-[300px] flex bg-white border-2 border-black p-1 rounded-full shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+              <button 
+                onClick={() => setActiveTab('curated')}
+                className={`flex-1 py-1.5 px-3 text-center rounded-full text-xs md:text-[13px] font-bold transition-colors ${activeTab === 'curated' ? 'bg-neutral-800 text-white' : 'bg-transparent text-gray-700 hover:text-black hover:bg-gray-100'}`}
+              >
+                New Releases
+              </button>
+              <button 
+                onClick={() => setActiveTab('pool')}
+                className={`flex-1 py-1.5 px-3 text-center rounded-full text-xs md:text-[13px] font-bold transition-colors ${activeTab === 'pool' ? 'bg-neutral-800 text-white' : 'bg-transparent text-gray-700 hover:text-black hover:bg-gray-100'}`}
+              >
+                Weekly Song Pool
+              </button>
+            </div>
           </div>
         </div>
 
