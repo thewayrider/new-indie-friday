@@ -123,11 +123,26 @@ function ReleaseCard({ release, extra }) {
   );
 }
 
+function getSpotifyEmbedUrl(spotifyUrl) {
+  if (!spotifyUrl) return null;
+  try {
+    const url = new URL(spotifyUrl);
+    return 'https://open.spotify.com/embed' + url.pathname;
+  } catch (e) {
+    return null;
+  }
+}
+
 export default function Releases({ releases = [], homePage = null }) {
   const [activeTab, setActiveTab] = useState('curated'); // 'curated' | 'pool'
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   const curatedReleases = releases.slice(0, 6);
+
+  const defaultSpotifyUrl = "https://open.spotify.com/embed/playlist/07mpfeaseGbIdKBvQPwwEd?utm_source=generator&si=e3ceb2d91ba4442d";
+  const embedUrl = homePage?.spotifyPlaylistUrl 
+    ? getSpotifyEmbedUrl(homePage.spotifyPlaylistUrl) || defaultSpotifyUrl
+    : defaultSpotifyUrl;
 
   // Generate JSON-LD for SEO
   const jsonLd = {
@@ -263,7 +278,7 @@ export default function Releases({ releases = [], homePage = null }) {
             <iframe 
               data-testid="embed-iframe" 
               style={{ borderRadius: '12px' }} 
-              src="https://open.spotify.com/embed/playlist/07mpfeaseGbIdKBvQPwwEd?utm_source=generator&si=e3ceb2d91ba4442d" 
+              src={embedUrl} 
               width="100%" 
               height="950" 
               frameBorder="0" 
