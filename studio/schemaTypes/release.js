@@ -155,6 +155,7 @@ export default {
           { title: 'Spotify New Music Friday', value: 'Spotify' },
           { title: 'Triple J', value: 'Triple J' },
           { title: 'Triple J Unearthed', value: 'Triple J Unearthed' },
+          { title: 'YouTube', value: 'YouTube' },
           { title: 'Artist / Direct Submission', value: 'Direct Submission' },
           { title: 'Other / Manual Search', value: 'Other' },
         ],
