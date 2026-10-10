@@ -401,7 +401,7 @@ export default function ReleaseDetail() {
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[11px] font-mono font-bold uppercase tracking-widest px-4 py-2 bg-black text-white border border-black hover:bg-gray-800 transition-colors shadow-sm"
+                        className="text-[11px] font-mono font-bold uppercase tracking-widest px-4 py-2 bg-black text-white border border-black hover:bg-cobalt hover:border-cobalt transition-all shadow-[3px_3px_0px_0px_#2563eb]"
                       >
                         {labels[social.platform] || social.platform}
                       </a>
