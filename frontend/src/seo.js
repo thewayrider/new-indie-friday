@@ -4,6 +4,7 @@
 
 export const SITE_URL = 'https://www.streamusique.com';
 export const SITE_NAME = 'New Indie Friday';
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/headphones.png`;
 export const DEFAULT_DESCRIPTION =
   'New independent music — indie, alt and surf rock with an Australian and New Zealand focus — curated weekly by Kim Rampling.';
 
@@ -11,7 +12,7 @@ export function buildMeta({
   title,
   description = DEFAULT_DESCRIPTION,
   path = '/',
-  image,
+  image = DEFAULT_OG_IMAGE,
   type = 'website',
 }) {
   const url = SITE_URL + path;
@@ -41,4 +42,47 @@ export function buildMeta({
   }
 
   return tags;
+}
+
+export function getOrganizationJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}/#website`,
+        name: SITE_NAME,
+        alternateName: 'Streamusique',
+        url: SITE_URL,
+        description: DEFAULT_DESCRIPTION,
+        publisher: {
+          '@id': `${SITE_URL}/#organization`,
+        },
+      },
+      {
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#organization`,
+        name: SITE_NAME,
+        alternateName: 'Streamusique',
+        url: SITE_URL,
+        logo: `${SITE_URL}/headphones.png`,
+        founder: {
+          '@type': 'Person',
+          name: 'Kim Rampling',
+        },
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            contactType: 'editorial',
+            email: 'kim@streamusique.com',
+            url: `${SITE_URL}/about`,
+          },
+        ],
+        address: {
+          '@type': 'PostalAddress',
+          addressCountry: 'AU',
+        },
+      },
+    ],
+  };
 }

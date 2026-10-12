@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router';
 import { client } from '../client';
-import { buildMeta, SITE_URL, DEFAULT_DESCRIPTION } from '../seo';
+import { buildMeta, getOrganizationJsonLd } from '../seo';
 import Hero from '../components/Hero';
 import Releases from '../components/Releases';
 
@@ -8,18 +8,7 @@ export function meta() {
   return [
     ...buildMeta({ path: '/', type: 'website' }),
     {
-      'script:ld+json': {
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        name: 'New Indie Friday',
-        url: SITE_URL,
-        description: DEFAULT_DESCRIPTION,
-        publisher: {
-          '@type': 'Organization',
-          name: 'New Indie Friday',
-          url: SITE_URL,
-        },
-      },
+      'script:ld+json': getOrganizationJsonLd(),
     },
   ];
 }

@@ -15,19 +15,6 @@
       "permanent": true
     }
   ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "header",
-          "key": "Accept",
-          "value": "(.*text/markdown.*)"
-        }
-      ],
-      "destination": "/llms.txt"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",

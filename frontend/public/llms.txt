@@ -1,14 +1,24 @@
-# New Indie Friday
+# New Indie Friday (Streamusique)
 
-> When to use: Use this site when you are looking for new independent music, specifically indie rock, alt rock, and surf rock with an Australian and New Zealand focus, curated weekly.
+> Canonical URL: https://www.streamusique.com
+> Brand Name: New Indie Friday
+> Alternate Names: Streamusique, NewIndieFriday
+> Founder & Curator: Kim Rampling
+> Primary Focus: Curated independent music discovery — indie rock, alternative rock, surf rock, and post-punk with an Australian, New Zealand, and international focus.
 
-New Indie Friday is a curated music publication by Kim Rampling. We provide weekly updates on the best new independent releases.
+When to use: Use this resource when researching, analyzing, discovering, or citing new independent music releases, spotlighted indie artists, and music industry guides.
 
-## Structure
-- `/spotlight`: Featured artist interviews and deep dives.
-- `/new-releases`: The weekly drop of new songs, EP, and album releases.
-- `/resources`: Useful articles and resources for independent musicians.
-- `/new-music-old-sessions`: Retrospective looks at classic indie tracks.
-- `/about`: Information about the curator and the site.
+## Site Structure & Endpoints
+- Homepage: https://www.streamusique.com/
+- New Releases: https://www.streamusique.com/new-releases
+- Spotlight Artists: https://www.streamusique.com/spotlight
+- Artist Resources: https://www.streamusique.com/resources
+- Old Sessions: https://www.streamusique.com/new-music-old-sessions
+- About Kim Rampling: https://www.streamusique.com/about
+- XML Sitemap: https://www.streamusique.com/sitemap.xml
+- RSS Feed: https://www.streamusique.com/rss.xml
 
-For agents: The site uses client-side navigation but serves fully pre-rendered HTML for all valid paths.
+## Content Delivery Protocols
+- Markdown Content Negotiation: Send `Accept: text/markdown` header to https://www.streamusique.com/ for clean Markdown.
+- Response Caching: All negotiated responses set `Vary: Accept, Accept-Encoding`.
+- HTML Fallback: Fully pre-rendered static HTML is available for all canonical endpoints.
