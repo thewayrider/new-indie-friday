@@ -7,10 +7,10 @@
   - *Note*: Git sync is ONLY for codebase changes. Sanity content updates do not require Git; they pull directly from the cloud.
 
 ## Ecosystem Overview
-- **`live-music-search-agent`**:
-  - 10 discovery crawlers looking for new music releases.
+- **`music-search-master`**:
+  - 10+ discovery crawlers and radars looking for new music releases.
   - Automatically diffs and emails results.
-  - Generates local dashboard: `view_dashboard.bat` -> `dashboard.html`.
+  - Generates local dashboard: `dashboard.html` / Fleet Command Center.
   - Pushes telemetry to GitHub Gist: `https://gist.github.com/thewayrider/9d9f324ab82907243f576f71ca001523`.
   - Secrets stored exclusively in `configs/secrets.json` (gitignored).
 - **`NewIndieFriday`**:

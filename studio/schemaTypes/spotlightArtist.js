@@ -120,6 +120,51 @@ export default {
         Rule.uri({ scheme: ['http', 'https'] }),
     },
     {
+      name: 'subsequentReleases',
+      title: 'Subsequent / Follow-up Releases',
+      type: 'array',
+      description: 'New singles, EPs, or albums released by this artist after their spotlight feature.',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'title',
+              title: 'Song / Release Title',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'releaseDate',
+              title: 'Release Date',
+              type: 'date',
+              description: 'Date the track/album dropped (used to display "Out This Week" on the homepage).',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'spotifyUrl',
+              title: 'Spotify URL',
+              type: 'url',
+              validation: (Rule) =>
+                Rule.required().uri({ scheme: ['http', 'https'] }),
+            },
+            {
+              name: 'note',
+              title: 'Short Editorial Note (optional)',
+              type: 'string',
+              description: 'E.g. "Follow-up single to July feature" or "Lead single from upcoming LP".',
+            },
+          ],
+          preview: {
+            select: {
+              title: 'title',
+              subtitle: 'releaseDate',
+            },
+          },
+        },
+      ],
+    },
+    {
       name: 'featuredDate',
       title: 'Featured Date',
       type: 'date',

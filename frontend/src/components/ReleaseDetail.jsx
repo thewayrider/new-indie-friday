@@ -394,6 +394,10 @@ export default function ReleaseDetail() {
                       wikipedia: 'Wikipedia',
                       youtube: 'YouTube',
                       tiktok: 'TikTok',
+                      bandcamp: 'Bandcamp',
+                      linktree: 'Linktree',
+                      soundcloud: 'SoundCloud',
+                      deezer: 'Deezer',
                     };
                     return (
                       <a

@@ -34,6 +34,11 @@ export async function loader() {
       "imageUrl": image.asset->url,
       "slug": slug.current
     },
+    "alumniArtists": *[_type == "spotlightArtist" && defined(subsequentReleases) && count(subsequentReleases) > 0]{
+      artistName,
+      "slug": slug.current,
+      subsequentReleases
+    },
     "releases": *[_type == "release"] | order(orderRank asc)[0...12]{
       _id,
       songTitle,
@@ -53,15 +58,37 @@ export async function loader() {
   }`;
 
   const res = await client.fetch(query);
+
+  // Flatten all subsequent releases, sort by release date descending, filter to recent (last 30 days) & max 3
+  const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
+  const now = new Date();
+
+  const alumniReleases = (res.alumniArtists || [])
+    .flatMap((artist) =>
+      (artist.subsequentReleases || []).map((rel) => ({
+        ...rel,
+        artistName: artist.artistName,
+        artistSlug: artist.slug,
+      }))
+    )
+    .filter((rel) => {
+      if (!rel.releaseDate) return true;
+      const releaseTime = new Date(rel.releaseDate).getTime();
+      return now.getTime() - releaseTime <= THIRTY_DAYS_MS;
+    })
+    .sort((a, b) => new Date(b.releaseDate || 0) - new Date(a.releaseDate || 0))
+    .slice(0, 3);
+
   return {
     spotlightArtist: res.spotlightArtist || null,
     releases: res.releases || [],
     homePage: res.homePage || null,
+    alumniReleases,
   };
 }
 
 export default function Home() {
-  const { spotlightArtist, releases, homePage } = useLoaderData();
+  const { spotlightArtist, releases, homePage, alumniReleases } = useLoaderData();
   return (
     <>
       <div className="sr-only">
@@ -71,7 +98,7 @@ export default function Home() {
         </p>
       </div>
       <Hero spotlightArtist={spotlightArtist} isLoading={false} />
-      <Releases releases={releases} homePage={homePage} />
+      <Releases releases={releases} homePage={homePage} alumniReleases={alumniReleases} />
     </>
   );
 }

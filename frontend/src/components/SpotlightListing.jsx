@@ -12,6 +12,12 @@ const QUERY = `{
     "imageUrl": image.asset->url,
     spotifyUrl,
     albumLinkUrl,
+    subsequentReleases[]{
+      title,
+      releaseDate,
+      spotifyUrl,
+      note
+    },
     blurb[]{
       ...,
       markDefs[]{

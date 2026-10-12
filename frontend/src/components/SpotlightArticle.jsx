@@ -154,6 +154,7 @@ export default function SpotlightArticle(props) {
   const spotifyUrl = data.spotifyUrl;
   const albumLinkUrl = data.albumLinkUrl;
   const blurb = data.blurb;
+  const subsequentReleases = data.subsequentReleases || [];
 
   const embedUrl = getSpotifyEmbedUrl(spotifyUrl);
   const releaseDateFormatted = formatReleaseDate(songReleaseDate);
@@ -238,6 +239,56 @@ export default function SpotlightArticle(props) {
                 </div>
               ) : null}
             </div>
+
+            {subsequentReleases.length > 0 ? (
+              <div id="subsequent-releases" className="border-t-2 border-black pt-5 space-y-3 scroll-mt-24">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-cobalt inline-block animate-pulse"></span>
+                  <h4 className="text-[11px] font-mono font-black uppercase tracking-[0.2em] text-black">
+                    Subsequent Releases
+                  </h4>
+                </div>
+                <div className="space-y-2.5">
+                  {subsequentReleases.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-white/80 border-2 border-black p-3 rounded shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] space-y-1"
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <span className="font-bold text-xs text-black leading-snug">
+                          {item.title}
+                        </span>
+                        {item.releaseDate ? (
+                          <span className="text-[10px] font-mono text-gray-500 shrink-0">
+                            {new Date(item.releaseDate).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                            })}
+                          </span>
+                        ) : null}
+                      </div>
+                      {item.note ? (
+                        <p className="text-[10px] text-gray-600 font-mono italic leading-snug">
+                          {item.note}
+                        </p>
+                      ) : null}
+                      {item.spotifyUrl ? (
+                        <div className="pt-1">
+                          <a
+                            href={item.spotifyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-black underline underline-offset-2 hover:text-cobalt transition"
+                          >
+                            Listen on Spotify ↗
+                          </a>
+                        </div>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </aside>
 
           <main className="flex-1 text-gray-700 text-sm md:text-base font-mono leading-relaxed max-w-2xl">

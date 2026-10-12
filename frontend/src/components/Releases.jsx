@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MOCK_AUDITION_POOL, MOCK_EXTRAS } from './mockData';
 
@@ -133,9 +133,22 @@ function getSpotifyEmbedUrl(spotifyUrl) {
   }
 }
 
-export default function Releases({ releases = [], homePage = null }) {
+export default function Releases({ releases = [], homePage = null, alumniReleases = [] }) {
   const [activeTab, setActiveTab] = useState('curated'); // 'curated' | 'pool'
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAlumniOpen, setIsAlumniOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsAlumniOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
   
   const curatedReleases = releases.slice(0, 6);
 
@@ -220,7 +233,7 @@ export default function Releases({ releases = [], homePage = null }) {
           </div>
 
           {/* Main Title & Tabs Row */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 relative">
             <div>
               <span className="block text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.25em] text-black/60 mb-1">
                 Curated Weekly Selections
@@ -235,6 +248,66 @@ export default function Releases({ releases = [], homePage = null }) {
                 />
               </h2>
             </div>
+
+            {/* Spotlight Alumni: Out This Week Dropdown (Option A: only appears when >= 1 recent release) */}
+            {alumniReleases && alumniReleases.length > 0 && (
+              <div ref={dropdownRef} className="relative self-start md:self-end">
+                <button
+                  type="button"
+                  onClick={() => setIsAlumniOpen((prev) => !prev)}
+                  className="flex items-center gap-2 bg-white text-black font-mono font-bold text-xs md:text-sm px-4 py-2 border-2 border-black rounded shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-y-[1px] hover:translate-x-[1px] transition-all cursor-pointer"
+                  aria-expanded={isAlumniOpen}
+                >
+                  <span className="w-2 h-2 rounded-full bg-cobalt inline-block animate-pulse"></span>
+                  <span>'Spotlight Artists' - new this week</span>
+                  <span className="text-[10px] font-black">{isAlumniOpen ? '▲' : '▼'}</span>
+                </button>
+
+                {isAlumniOpen && (
+                  <div className="absolute left-0 md:left-1/2 md:-translate-x-1/2 mt-2 w-80 sm:w-96 bg-[#f7f4ee] border-2 border-black rounded-lg shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] z-40 p-3 space-y-2.5">
+                    <div className="pb-2 border-b border-black/10 flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-black/60">
+                      <span>Follow-up releases from Spotlight Artists</span>
+                      <span>Max 3</span>
+                    </div>
+
+                    {alumniReleases.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="p-2.5 bg-white border border-black/20 rounded hover:border-black transition-colors flex items-center justify-between gap-3 group"
+                      >
+                        <Link
+                          to={`/spotlight/${item.artistSlug}#subsequent-releases`}
+                          onClick={() => setIsAlumniOpen(false)}
+                          className="flex-1 min-w-0"
+                        >
+                          <p className="font-bold text-xs text-black group-hover:text-cobalt transition-colors truncate">
+                            {item.artistName}
+                          </p>
+                          <p className="text-[11px] text-gray-700 truncate">
+                            "{item.title}"
+                          </p>
+                          <span className="text-[9px] font-mono text-gray-400">
+                            {item.releaseDate && new Date(item.releaseDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                          </span>
+                        </Link>
+
+                        {item.spotifyUrl && (
+                          <a
+                            href={item.spotifyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="shrink-0 p-1.5 text-xs font-mono font-bold bg-neutral-900 text-white rounded hover:bg-cobalt transition"
+                            title="Listen on Spotify"
+                          >
+                            ♫ Listen
+                          </a>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
             
             <div className="w-full sm:w-[300px] flex bg-white border-2 border-black p-1 rounded-full shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
               <button 

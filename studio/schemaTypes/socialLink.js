@@ -18,6 +18,8 @@ export default {
           { title: 'TikTok', value: 'tiktok' },
           { title: 'Bandcamp', value: 'bandcamp' },
           { title: 'Linktree', value: 'linktree' },
+          { title: 'SoundCloud', value: 'soundcloud' },
+          { title: 'Deezer', value: 'deezer' },
         ],
       },
       validation: (Rule) => Rule.required(),
@@ -45,6 +47,8 @@ export default {
         tiktok: 'TikTok',
         bandcamp: 'Bandcamp',
         linktree: 'Linktree',
+        soundcloud: 'SoundCloud',
+        deezer: 'Deezer',
       }
       return {
         title: title ? titles[title] : 'Social Link',
