@@ -111,13 +111,15 @@ export default function Hero({ spotlightArtist, isLoading }) {
             Oh, we got to let the music play"
           </p>
           
-          <div className="flex items-center justify-start gap-5">
-            <img 
-              src="/doobie-brothers-toulouse-street.png" 
-              alt="Doobie Brothers - Toulouse Street" 
-              className="w-[95px] h-[95px] object-cover border-2 border-black/70 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
-            />
-            <div className="text-[10px] md:text-xs font-mono font-bold uppercase tracking-widest text-black">
+          <div className="group/album relative flex items-center justify-start gap-5 mt-2">
+            <div className="relative w-[100px] h-[100px] flex-shrink-0">
+              <img 
+                src="/doobie-brothers-toulouse-street.png" 
+                alt="Doobie Brothers - Toulouse Street" 
+                className="w-[100px] h-[100px] object-cover border-2 border-black/70 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 ease-out origin-top-left group-hover/album:scale-[1.8] group-hover/album:z-30 group-hover/album:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] relative"
+              />
+            </div>
+            <div className="text-[10px] md:text-xs font-mono font-bold uppercase tracking-widest text-black transition-all duration-300 ease-out origin-left group-hover/album:translate-x-[88px] group-hover/album:translate-y-[18px] group-hover/album:scale-110 relative z-20">
               <a 
                 href="https://open.spotify.com/track/7Ar4G7Ci11gpt6sfH9Cgz5?si=6232a0844d0f4d10" 
                 target="_blank" 
