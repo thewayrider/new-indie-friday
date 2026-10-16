@@ -6,7 +6,7 @@
     <description>New independent music — indie, alt and surf rock with an Australian and New Zealand focus — curated weekly by Kim Rampling.</description>
     <atom:link href="https://www.streamusique.com/rss.xml" rel="self" type="application/rss+xml" />
     <language>en-us</language>
-    <lastBuildDate>Fri, 16 Oct 2026 09:27:48 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 11:51:47 GMT</lastBuildDate>
     
     <item>
       <title><![CDATA[Cut Up - The Dead Bolts]]></title>
@@ -104,6 +104,32 @@ As his Spotify profile says “InDuna is presented as an independent/self-taught
 And Africa you hear straight off with those banking vocals, so much so suddenly you're back in Jo'burg.
 
 Check out 'Are You in Love' and 'Say What You Want'.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[New Age Trojan Horse - Blondshell]]></title>
+      <link>https://www.streamusique.com/new-releases/blondshell-new-age-trojan-horse</link>
+      <guid>https://www.streamusique.com/new-releases/blondshell-new-age-trojan-horse</guid>
+      <pubDate>Fri, 16 Oct 2026 10:46:36 GMT</pubDate>
+      <description><![CDATA[<img src="https://cdn.sanity.io/images/oeemrqux/production/f3ed7afedf8c33a4239b7c740399cf7083768d33-399x501.jpg" alt="Artwork" style="max-width:300px"/><br/><br/>This artist was featured here om May 18, 2026 with 'Heart Has To Work So Hard'. That song, and this one are on her album 'Violins' released on 25 September 2026.
+
+Now for some reason Spotify decides to feature on my 'Release Radar' today, Friday 16 Ocotober, with said Spotify blurb bing 'the latest music from artists you follow'.
+
+Yea, right.
+
+There are two reasons why I am including it as a 'new release' today:
+
+it's a great song from Blondshel! Yes, the music, and one that I missed when the album came out. Sure, it's much more 'pop' than the earlier feature. So take a listen.
+
+this is also a great representation of how Spotify tries to 'game' new song release drops. This song is pushed as a new release, when it fact it's a song that is already a month old, from an album, from which the first song was released over six months ago in May.
+
+Sure, I get that this is a marketing strategy that draws out a full album release over a six month period. Dropping songs every once in while to build interest, something in music that has been done since like forever.
+
+Only what happened to the words 'from her upcoming new album' or ‘on her new album’? 
+
+Why pretend in a feed that this is a 'single' new release? I mean, seeing as you follow, really like the artist, so some how you wouldn't notice?
+
+Anyway, and the recommendation algorithm rolls on.
+]]></description>
     </item>
     <item>
       <title><![CDATA[Gold - Harley]]></title>
@@ -410,20 +436,6 @@ I have only just discovered this group, and have featured them on my artist Spot
 Blush is one to watch out for, and really looking forward to more of their music.
 
 ]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Coal Dust - Rum Jungle]]></title>
-      <link>https://www.streamusique.com/new-releases/rum-jungle-coal-dust</link>
-      <guid>https://www.streamusique.com/new-releases/rum-jungle-coal-dust</guid>
-      <pubDate>Mon, 22 Jun 2026 12:28:09 GMT</pubDate>
-      <description><![CDATA[<img src="https://cdn.sanity.io/images/oeemrqux/production/5092aa4c666a3d023d29356f260c3d40c008002e-580x584.png" alt="Artwork" style="max-width:300px"/><br/><br/>From their new album “Marginalia”, frankly a good, very typical Australian Indie song.
-
-
-"Rum Jungle is an Australian indie/alt-rock four-piece from Newcastle, New South Wales. They built their following on the local Newcastle scene before breaking through nationally." <via Wikipedia>
-
-
-
-Also check out ‘Lowlife’, which for various complicated new site reasons, was my original pick from that album.]]></description>
     </item>
   </channel>
 </rss>

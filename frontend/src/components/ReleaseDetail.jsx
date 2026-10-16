@@ -103,6 +103,7 @@ const SOURCE_DEFAULT_URLS = {
   'Spotify New Music Friday': 'https://open.spotify.com',
   'Triple J': 'https://www.abc.net.au/triplej',
   'Triple J Unearthed': 'https://www.abc.net.au/triplejunearthed',
+  'YouTube': 'https://www.youtube.com',
 };
 
 function getSourceDisplay(source, customUrl) {
@@ -397,6 +398,9 @@ export default function ReleaseDetail() {
                       bandcamp: 'Bandcamp',
                       linktree: 'Linktree',
                       soundcloud: 'SoundCloud',
+                      spotify: 'Spotify',
+                      appleMusic: 'Apple Music',
+                      applemusic: 'Apple Music',
                       deezer: 'Deezer',
                     };
                     return (

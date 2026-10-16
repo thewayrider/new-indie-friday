@@ -19,6 +19,8 @@ export default {
           { title: 'Bandcamp', value: 'bandcamp' },
           { title: 'Linktree', value: 'linktree' },
           { title: 'SoundCloud', value: 'soundcloud' },
+          { title: 'Spotify', value: 'spotify' },
+          { title: 'Apple Music', value: 'appleMusic' },
           { title: 'Deezer', value: 'deezer' },
         ],
       },
@@ -48,6 +50,9 @@ export default {
         bandcamp: 'Bandcamp',
         linktree: 'Linktree',
         soundcloud: 'SoundCloud',
+        spotify: 'Spotify',
+        appleMusic: 'Apple Music',
+        applemusic: 'Apple Music',
         deezer: 'Deezer',
       }
       return {
