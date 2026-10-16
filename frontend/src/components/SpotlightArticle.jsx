@@ -177,13 +177,20 @@ export default function SpotlightArticle(props) {
               </div>
 
               <span className="inline-block bg-black text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2 py-1 flex-shrink-0">
-                Spotlight Artist
+                {data.featureCategory || 'Spotlight Artist'}
               </span>
             </div>
 
-            <h1 className="flex-1 min-w-0 text-center font-fraunces font-black text-black text-5xl md:text-7xl tracking-tight leading-none">
-              {artistName}
-            </h1>
+            <div className="flex-1 min-w-0 text-center">
+              <h1 className="font-fraunces font-black text-black text-5xl md:text-7xl tracking-tight leading-none">
+                {artistName}
+              </h1>
+              {data.albumSubtitle && (
+                <p className="mt-2 font-mono text-sm md:text-base font-semibold text-black/75">
+                  {data.albumSubtitle}
+                </p>
+              )}
+            </div>
 
           </div>
         </div>

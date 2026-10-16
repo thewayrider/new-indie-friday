@@ -4,11 +4,31 @@ export default {
   type: 'document',
   fields: [
     {
+      name: 'featureCategory',
+      title: 'Feature Designation',
+      type: 'string',
+      description: 'Choose whether this spotlight is featuring an artist or an album. Controls the Hero image badge and header text.',
+      options: {
+        list: [
+          { title: 'Featured Artist', value: 'Featured Artist' },
+          { title: 'Featured Album', value: 'Featured Album' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'Featured Artist',
+    },
+    {
       name: 'artistName',
       title: 'Artist Name',
       type: 'string',
       description: 'Shown as the main heading, both on the homepage and the Spotlight detail page.',
       validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'albumSubtitle',
+      title: 'Album Info / Subtitle (optional)',
+      type: 'string',
+      description: 'Optional — e.g. "(Album Name) released (date)". Shown beneath the artist name on the Hero section.',
     },
     {
       name: 'genre',

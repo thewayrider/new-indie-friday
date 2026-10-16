@@ -18,6 +18,9 @@ export async function loader() {
   const query = `{
     "spotlightArtist": *[_type == "spotlightArtist" && isCurrent == true] | order(featuredDate desc)[0]{
       artistName,
+      featureCategory,
+      albumSubtitle,
+      albumLinkUrl,
       teaser,
       featuredDate,
       "imageUrl": image.asset->url,

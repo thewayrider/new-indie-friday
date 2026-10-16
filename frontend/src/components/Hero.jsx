@@ -10,8 +10,13 @@ export default function Hero({ spotlightArtist, isLoading }) {
     featuredDate = null,
     imageUrl = null,
     slug = 'stella-donnelly',
+    featureCategory = 'Featured Artist',
+    albumSubtitle = null,
+    albumLinkUrl = null,
   } = spotlightArtist || {};
 
+  const designation = featureCategory || 'Featured Artist';
+  const buttonLabel = designation.toLowerCase().includes('album') ? 'Album Spotlight' : 'Artist Spotlight';
   const spotlightLink = `/spotlight`;
 
   return (
@@ -27,7 +32,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
             className="group relative w-full md:w-[45%] lg:w-[40%] flex-shrink-0 block"
           >
             <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2 py-1 border-l-2 border-cobalt">
-              Featured Artist
+              {designation}
             </span>
 
             {imageUrl ? (
@@ -64,7 +69,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
                 className="w-4 h-4 md:w-5 md:h-5 object-contain opacity-90 select-none"
               />
               <span className="text-base md:text-lg font-mono font-black uppercase tracking-[0.25em] text-black/80">
-                New Release Artist
+                {designation}
               </span>
             </div>
 
@@ -72,6 +77,24 @@ export default function Hero({ spotlightArtist, isLoading }) {
               <h2 className="font-fraunces font-black tracking-tight leading-none text-black text-3xl md:text-5xl">
                 {artistName}
               </h2>
+              {albumSubtitle && (
+                <div className="mt-2.5">
+                  {albumLinkUrl ? (
+                    <a
+                      href={albumLinkUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block font-mono text-sm md:text-base font-semibold text-black/80 hover:text-cobalt hover:underline underline-offset-4 transition-colors"
+                    >
+                      {albumSubtitle} ↗
+                    </a>
+                  ) : (
+                    <p className="font-mono text-sm md:text-base font-semibold text-black/80 tracking-tight">
+                      {albumSubtitle}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
 
             <p className="text-gray-600 text-sm md:text-base font-mono leading-relaxed max-w-lg">
@@ -83,7 +106,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
                 to={spotlightLink}
                 className="inline-block bg-black text-white text-[11px] font-black uppercase tracking-widest px-8 py-4 hover:bg-cobalt hover:border-cobalt transition-all border border-black shadow-[3px_3px_0px_0px_#2563eb]"
               >
-                Artist Spotlight
+                {buttonLabel}
               </Link>
             </div>
 

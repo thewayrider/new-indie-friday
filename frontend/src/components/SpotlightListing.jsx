@@ -6,6 +6,8 @@ import SpotlightArticle from './SpotlightArticle';
 const QUERY = `{
   "latest": *[_type == "spotlightArtist" && isCurrent == true][0]{
     artistName,
+    featureCategory,
+    albumSubtitle,
     genre,
     location,
     songReleaseDate,

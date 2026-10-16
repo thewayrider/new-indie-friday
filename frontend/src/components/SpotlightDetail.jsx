@@ -5,6 +5,8 @@ import SpotlightArticle from './SpotlightArticle';
 
 const QUERY = `*[_type == "spotlightArtist" && slug.current == $slug][0]{
   artistName,
+  featureCategory,
+  albumSubtitle,
   genre,
   location,
   songReleaseDate,
