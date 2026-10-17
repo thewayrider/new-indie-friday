@@ -13,6 +13,7 @@ git add .
 git commit -m "Update site changes"
 git push origin main
 
+----
  NotebookLM MCP Error:
 
  npx @m4ykeldev/notebooklm-mcp auth

@@ -1,4 +1,4 @@
-import aboutPage from './aboutPage'
+﻿import aboutPage from './aboutPage'
 import oldSessionsPage from './oldSessionsPage'
 import release from './release'
 import spotlightArtist from './spotlightArtist'
@@ -7,6 +7,7 @@ import resourceArticle from './resourceArticle'
 import subscriber from './subscriber'
 import newsletterSettings from './newsletterSettings'
 import socialLink from './socialLink'
+import broadcastEmail from './broadcastEmail'
 
 export const schemaTypes = [
   release,
@@ -17,5 +18,6 @@ export const schemaTypes = [
   resourceArticle,
   subscriber,
   newsletterSettings,
+  broadcastEmail,
   socialLink,
 ]
