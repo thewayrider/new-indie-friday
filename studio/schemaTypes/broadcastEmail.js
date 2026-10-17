@@ -1,3 +1,5 @@
+import { BroadcastDispatcherInput } from '../components/BroadcastDispatcherInput'
+
 export default {
   name: 'broadcastEmail',
   title: 'Broadcast Email',
@@ -9,6 +11,14 @@ export default {
       type: 'string',
       description: 'Used for your reference in Sanity Studio (e.g. "Weekly Blast: The Beths" or "Oct 2026 Editorial Note").',
       validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'broadcastControls',
+      title: 'Send Controls',
+      type: 'string',
+      components: {
+        input: BroadcastDispatcherInput,
+      },
     },
     {
       name: 'campaignType',
