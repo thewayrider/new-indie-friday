@@ -22,7 +22,7 @@ export default {
       title: 'Admin Test Email Address',
       type: 'string',
       description: 'Where preview/test emails are sent before broadcasting to all subscribers.',
-      initialValue: 'kim@streamusique.com',
+      initialValue: 'kim.rampling@gmail.com',
     },
     {
       name: 'senderEmail',

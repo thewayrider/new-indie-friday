@@ -129,7 +129,7 @@ export default async function handler(req, res) {
 
     // Determine recipient list
     let recipients = [];
-    const adminEmail = settings?.adminTestEmail || 'kim@streamusique.com';
+    const adminEmail = settings?.adminTestEmail || 'kim.rampling@gmail.com';
 
     if (isTest) {
       recipients = [adminEmail];

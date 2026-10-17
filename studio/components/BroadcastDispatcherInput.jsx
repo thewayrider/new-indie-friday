@@ -113,7 +113,7 @@ export function BroadcastDispatcherInput() {
           </Text>
         ) : (
           <Text size={1} muted>
-            You can test how this email looks in your own inbox before broadcasting to subscribers.
+            You can test how this email looks in your inbox (kim.rampling@gmail.com) before broadcasting to all subscribers.
           </Text>
         )}
 
@@ -122,7 +122,7 @@ export function BroadcastDispatcherInput() {
             mode="ghost"
             tone="default"
             icon={EnvelopeIcon}
-            text={isSendingTest ? 'Sending Test...' : 'Send Preview Test to Kim'}
+            text={isSendingTest ? 'Sending Test...' : 'Send Preview Test (kim.rampling@gmail.com)'}
             disabled={isSendingTest || isBroadcasting}
             onClick={handleSendTest}
           />
