@@ -59,9 +59,12 @@ export default async function handler(req, res) {
       }
     }
 
-    // Fetch the broadcast document with referenced music/spotlight data
+    const cleanId = broadcastId.replace(/^drafts\./, '');
+    const draftId = `drafts.${cleanId}`;
+
+    // Fetch the broadcast document with referenced music/spotlight data (favoring most recent draft/published version)
     const broadcast = await sanityClient.fetch(
-      `*[_type == "broadcastEmail" && _id == $id][0]{
+      `*[_type == "broadcastEmail" && (_id == $draftId || _id == $cleanId)] | order(_updatedAt desc)[0]{
         _id,
         title,
         campaignType,
@@ -87,7 +90,7 @@ export default async function handler(req, res) {
           "coverImageUrl": mainImage.asset->url
         }
       }`,
-      { id: broadcastId }
+      { cleanId, draftId }
     );
 
     if (!broadcast) {

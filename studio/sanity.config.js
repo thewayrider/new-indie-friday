@@ -12,6 +12,10 @@ import {
   TagIcon,
   DocumentsIcon,
 } from '@sanity/icons'
+import {
+  SendTestBroadcastAction,
+  SendLiveBroadcastAction,
+} from './actions/broadcastActions'
 
 export default defineConfig({
   name: 'default',
@@ -190,5 +194,14 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+
+  document: {
+    actions: (prev, context) => {
+      if (context.schemaType === 'broadcastEmail') {
+        return [...prev, SendTestBroadcastAction, SendLiveBroadcastAction]
+      }
+      return prev
+    },
   },
 })
