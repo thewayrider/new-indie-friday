@@ -1,3 +1,5 @@
+import { orderRankField } from '@sanity/orderable-document-list'
+
 export default {
   name: 'release',
   title: 'Release',
@@ -181,12 +183,7 @@ export default {
       description: 'Add links to the artist\'s social media or website.',
     },
 	
-	{
-      name: 'orderRank',
-      title: 'Order Rank',
-      type: 'string',
-      hidden: true,
-    },
+    orderRankField({ type: 'release', newItemPosition: 'before' }),
   ],
   preview: {
     select: {
