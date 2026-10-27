@@ -85,7 +85,7 @@ export default function ResourcesListing() {
             <div className="flex-shrink-0 pt-2">
               <img 
                 src={displayImageUrl} 
-                alt=""
+                alt={item.title || "Resource article"}
                 className="w-16 h-16 md:w-20 md:h-20 object-cover border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]" 
               />
             </div>
@@ -126,7 +126,7 @@ export default function ResourcesListing() {
           <span>Resources</span>
           <img 
             src="/favicon-black.png" 
-            alt="" 
+            alt="Resources" 
             aria-hidden="true" 
             className="inline-block w-[0.58em] h-[0.58em] md:w-[0.62em] md:h-[0.62em] ml-2 md:ml-3 align-middle opacity-95 select-none object-contain"
           />

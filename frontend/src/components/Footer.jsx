@@ -115,7 +115,7 @@ export default function Footer() {
                 <span>Curated New Song Releases by Kim Rampling</span>
                 <img 
                   src="/headphones.png" 
-                  alt="" 
+                  alt="Headphones" 
                   aria-hidden="true" 
                   className="inline-block w-3.5 h-3.5 object-contain opacity-75 select-none"
                 />
@@ -181,7 +181,7 @@ export default function Footer() {
                 <span>New Indie Friday</span>
                 <img 
                   src="/headphones.png" 
-                  alt="" 
+                  alt="Headphones" 
                   aria-hidden="true" 
                   className="inline-block w-3.5 h-3.5 object-contain opacity-80 select-none"
                 />

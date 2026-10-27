@@ -242,7 +242,7 @@ export default function Releases({ releases = [], homePage = null, alumniRelease
                 <span>New Releases</span>
                 <img 
                   src="/headphones.png" 
-                  alt="" 
+                  alt="Headphones" 
                   aria-hidden="true" 
                   className="inline-block w-5 h-5 md:w-7 md:h-7 object-contain opacity-90 select-none"
                 />

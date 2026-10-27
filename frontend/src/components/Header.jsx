@@ -179,7 +179,7 @@ export default function Header() {
         </button>
 
         <div className="flex flex-col items-center">
-          <h1 className="m-0 p-0 flex items-center leading-none">
+          <div className="m-0 p-0 flex items-center leading-none">
             <NavLink
               to="/"
               onClick={handleHomeClick}
@@ -188,12 +188,12 @@ export default function Header() {
               <span>New Indie Friday</span>
               <img 
                 src="/headphones.png" 
-                alt="" 
+                alt="Headphones" 
                 aria-hidden="true" 
                 className="inline-block w-[0.58em] h-[0.58em] md:w-[0.62em] md:h-[0.62em] ml-2 md:ml-3 align-middle opacity-95 select-none object-contain"
               />
             </NavLink>
-          </h1>
+          </div>
           <span className="text-gray-800 text-[1px] md:text-[11px] font-mono tracking-[0.15em] md:tracking-[0.3em] mt-1.5 ml-[0.5ch]">
             New Independent Music from Streamusique.com
           </span>

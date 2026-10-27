@@ -64,7 +64,7 @@ export default function Hero({ spotlightArtist, isLoading }) {
             <div className="flex items-center gap-2.5 pt-1">
               <img 
                 src="/headphones.png" 
-                alt="" 
+                alt="Headphones" 
                 aria-hidden="true" 
                 className="w-4 h-4 md:w-5 md:h-5 object-contain opacity-90 select-none"
               />
