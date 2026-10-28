@@ -38,6 +38,7 @@ export async function loader() {
       releaseType,
       albumOrEpName,
       genre,
+      musicPlatform,
       spotifyUrl,
       releaseDate,
       "slug": slug.current,

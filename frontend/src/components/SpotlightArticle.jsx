@@ -1,4 +1,5 @@
 import React from 'react';
+import MusicEmbed, { getPlatformLabel } from './MusicEmbed';
 import { Link } from 'react-router-dom';
 import { PortableText } from '@portabletext/react';
 
@@ -151,6 +152,7 @@ export default function SpotlightArticle(props) {
   const location = data.location;
   const songReleaseDate = data.songReleaseDate;
   const imageUrl = data.imageUrl;
+  const musicPlatform = data.musicPlatform;
   const spotifyUrl = data.spotifyUrl;
   const albumLinkUrl = data.albumLinkUrl;
   const blurb = data.blurb;
@@ -200,14 +202,11 @@ export default function SpotlightArticle(props) {
         <div className="flex flex-col md:flex-row gap-10 md:gap-14">
 
           <aside className="w-full md:w-[320px] flex-shrink-0 space-y-6">
-            {embedUrl ? (
-              <iframe
-                src={embedUrl}
-                width="100%"
-                height="152"
-                frameBorder="0"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                title={'Spotify player for ' + artistName}
+            {spotifyUrl ? (
+              <MusicEmbed
+                url={spotifyUrl}
+                platform={musicPlatform}
+                title={artistName}
               />
             ) : null}
 
@@ -287,7 +286,7 @@ export default function SpotlightArticle(props) {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-black underline underline-offset-2 hover:text-cobalt transition"
                           >
-                            Listen on Spotify ↗
+                            Listen on {getPlatformLabel(item.spotifyUrl, item.musicPlatform)} ↗
                           </a>
                         </div>
                       ) : null}

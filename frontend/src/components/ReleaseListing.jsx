@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { PortableText } from '@portabletext/react';
 import LikeDislike from './LikeDislike';
+import MusicEmbed from './MusicEmbed';
 
 export const RELEASES_PER_PAGE = 5;
 
@@ -16,6 +17,7 @@ export function buildQuery(page) {
       releaseType,
       albumOrEpName,
       genre,
+      musicPlatform,
       spotifyUrl,
       releaseDate,
       "slug": slug.current,
@@ -123,15 +125,12 @@ function ReleaseEntry({ release }) {
 
       {/* EMBED + BLURB */}
       <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
-        {embedUrl ? (
+        {release.spotifyUrl ? (
           <div className="w-full md:w-[280px] flex-shrink-0">
-            <iframe
-              src={embedUrl}
-              width="100%"
-              height="152"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              title={'Spotify player for ' + release.songTitle}
+            <MusicEmbed
+              url={release.spotifyUrl}
+              platform={release.musicPlatform}
+              title={release.songTitle}
             />
           </div>
         ) : null}

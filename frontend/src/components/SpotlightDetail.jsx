@@ -11,11 +11,13 @@ const QUERY = `*[_type == "spotlightArtist" && slug.current == $slug][0]{
   location,
   songReleaseDate,
   "imageUrl": image.asset->url,
+  musicPlatform,
   spotifyUrl,
   albumLinkUrl,
   subsequentReleases[]{
     title,
     releaseDate,
+    musicPlatform,
     spotifyUrl,
     note
   },

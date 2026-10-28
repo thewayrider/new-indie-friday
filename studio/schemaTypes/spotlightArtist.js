@@ -124,10 +124,26 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'musicPlatform',
+      title: 'Music Platform (Featured Song)',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Spotify', value: 'spotify' },
+          { title: 'SoundCloud', value: 'soundcloud' },
+          { title: 'Bandcamp', value: 'bandcamp' },
+          { title: 'Apple Music', value: 'appleMusic' },
+          { title: 'YouTube', value: 'youtube' },
+        ],
+      },
+      initialValue: 'spotify',
+      description: 'Streaming/music platform for the featured song.',
+    },
+    {
       name: 'spotifyUrl',
-      title: 'Spotify URL (Featured Song)',
+      title: 'Music Platform URL (Featured Song)',
       type: 'url',
-      description: 'The specific song chosen to complement this Spotlight post — used for the embed.',
+      description: 'Link to the specific song chosen for this Spotlight post — used for the embed.',
       validation: (Rule) =>
         Rule.uri({ scheme: ['http', 'https'] }),
     },
@@ -162,8 +178,23 @@ export default {
               validation: (Rule) => Rule.required(),
             },
             {
+              name: 'musicPlatform',
+              title: 'Music Platform',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Spotify', value: 'spotify' },
+                  { title: 'SoundCloud', value: 'soundcloud' },
+                  { title: 'Bandcamp', value: 'bandcamp' },
+                  { title: 'Apple Music', value: 'appleMusic' },
+                  { title: 'YouTube', value: 'youtube' },
+                ],
+              },
+              initialValue: 'spotify',
+            },
+            {
               name: 'spotifyUrl',
-              title: 'Spotify URL',
+              title: 'Music Platform URL',
               type: 'url',
               validation: (Rule) =>
                 Rule.required().uri({ scheme: ['http', 'https'] }),

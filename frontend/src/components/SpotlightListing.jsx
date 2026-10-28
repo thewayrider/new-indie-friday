@@ -12,11 +12,13 @@ const QUERY = `{
     location,
     songReleaseDate,
     "imageUrl": image.asset->url,
+    musicPlatform,
     spotifyUrl,
     albumLinkUrl,
     subsequentReleases[]{
       title,
       releaseDate,
+      musicPlatform,
       spotifyUrl,
       note
     },

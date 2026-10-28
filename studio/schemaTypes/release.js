@@ -121,10 +121,26 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'musicPlatform',
+      title: 'Music Platform',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Spotify', value: 'spotify' },
+          { title: 'SoundCloud', value: 'soundcloud' },
+          { title: 'Bandcamp', value: 'bandcamp' },
+          { title: 'Apple Music', value: 'appleMusic' },
+          { title: 'YouTube', value: 'youtube' },
+        ],
+      },
+      initialValue: 'spotify',
+      description: 'Select the primary streaming/music platform for this release.',
+    },
+    {
       name: 'spotifyUrl',
-      title: 'Spotify URL',
+      title: 'Music Platform URL',
       type: 'url',
-      description: 'Link to the track, album, or artist page on Spotify',
+      description: 'Link to the track, album, or artist page on the selected music platform (Spotify, SoundCloud, etc.)',
       validation: (Rule) =>
         Rule.required().uri({
           scheme: ['http', 'https'],

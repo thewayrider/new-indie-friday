@@ -3,6 +3,7 @@ import { PortableText } from '@portabletext/react';
 import { client } from '../client';
 import { buildMeta, SITE_URL } from '../seo';
 import LikeDislike from './LikeDislike';
+import MusicEmbed from './MusicEmbed';
 
 const QUERY = `*[_type == "release" && slug.current == $slug][0]{
   _id,
@@ -11,6 +12,7 @@ const QUERY = `*[_type == "release" && slug.current == $slug][0]{
   releaseType,
   albumOrEpName,
   genre,
+  musicPlatform,
   spotifyUrl,
   discoverySource,
   discoveryUrl,
@@ -256,15 +258,12 @@ export default function ReleaseDetail() {
 
           {/* EMBED + BLURB */}
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
-            {embedUrl ? (
+            {data.spotifyUrl ? (
               <div className="w-full md:w-[280px] flex-shrink-0">
-                <iframe
-                  src={embedUrl}
-                  width="100%"
-                  height="152"
-                  frameBorder="0"
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  title={'Spotify player for ' + data.songTitle}
+                <MusicEmbed
+                  url={data.spotifyUrl}
+                  platform={data.musicPlatform}
+                  title={data.songTitle}
                 />
               </div>
             ) : null}

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { getPlatformLabel } from './MusicEmbed';
 import { Link } from 'react-router-dom';
 import { MOCK_AUDITION_POOL, MOCK_EXTRAS } from './mockData';
 
@@ -297,7 +298,7 @@ export default function Releases({ releases = [], homePage = null, alumniRelease
                             target="_blank"
                             rel="noopener noreferrer"
                             className="shrink-0 p-1.5 text-xs font-mono font-bold bg-neutral-900 text-white rounded hover:bg-cobalt transition"
-                            title="Listen on Spotify"
+                            title={`Listen on ${getPlatformLabel(item.spotifyUrl, item.musicPlatform)}`}
                           >
                             ♫ Listen
                           </a>
