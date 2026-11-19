@@ -46,7 +46,13 @@ export async function loader() {
     },
     "homePage": *[_type == "homePage"][0]{
       spotifyPlaylistUrl,
-      curatorSelectionTitle
+      curatorSelectionTitle,
+      standoutSongs[]{
+        songTitle,
+        artistName,
+        blurb,
+        spotifyUrl
+      }
     }
   }`;
 
@@ -90,7 +96,12 @@ export default function Home() {
           Welcome to New Indie Friday, your curated weekly destination for discovering the best new independent music. Every Friday, curator Kim Rampling meticulously selects and highlights the latest and greatest releases across indie rock, alternative rock, surf rock, and post-punk, with a special focus on the vibrant music scenes of Australia and New Zealand. Whether you are looking for our featured Artist Spotlight, uncovering hidden gems in our Weekly Picks, or diving into deep retrospective reviews of classic indie tracks in our Old Sessions, we provide a rich, distraction-free listening experience. Dive into our hand-picked selections, stream the tracks directly, and support independent musicians globally. Stay in the loop with our weekly newsletter and never miss a drop!
         </p>
       </div>
-      <Hero spotlightArtist={spotlightArtist} isLoading={false} />
+      <Hero
+        spotlightArtist={spotlightArtist}
+        latestRelease={releases[0] || null}
+        homePage={homePage}
+        isLoading={false}
+      />
       <Releases releases={releases} homePage={homePage} alumniReleases={alumniReleases} />
     </>
   );

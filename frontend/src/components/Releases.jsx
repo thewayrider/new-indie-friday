@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { getPlatformLabel } from './MusicEmbed';
 import { Link } from 'react-router-dom';
-import { MOCK_AUDITION_POOL, MOCK_EXTRAS } from './mockData';
+import { MOCK_EXTRAS } from './mockData';
 
 function ExplainerModal({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -21,22 +21,22 @@ function ExplainerModal({ isOpen, onClose }) {
           <div className="flex gap-4">
             <div className="w-10 h-10 shrink-0 bg-yellow-400 text-black flex items-center justify-center font-bold rounded-full border-2 border-black">2</div>
             <div>
-              <h4 className="font-bold text-lg">The Audition Pool</h4>
-              <p className="text-sm text-gray-700">The shortlist. These are the tracks that stood out from the raw feed and are brought in for extended listening.</p>
+              <h4 className="font-bold text-lg">The Weekly Song Pool</h4>
+              <p className="text-sm text-gray-700">The shortlist. These are the tracks that stood out from the raw feed and are brought in for extended listening in the Weekly Pool Songs playlist.</p>
             </div>
           </div>
           <div className="flex gap-4">
             <div className="w-10 h-10 shrink-0 bg-orange-500 text-white flex items-center justify-center font-bold rounded-full border-2 border-black">3</div>
             <div>
-              <h4 className="font-bold text-lg">The Curated Cut</h4>
-              <p className="text-sm text-gray-700">The final filter. The curated tracks make it to the front of the 'Audition Pool' section on the front page.</p>
+              <h4 className="font-bold text-lg">Standout Songs</h4>
+              <p className="text-sm text-gray-700">The final filter. Standouts selected from the Weekly Song Pool are featured in the Standout Songs popout right in the Hero.</p>
             </div>
           </div>
           <div className="flex gap-4">
             <div className="w-10 h-10 shrink-0 bg-black text-white flex items-center justify-center font-bold rounded-full border-2 border-black">4</div>
             <div>
               <h4 className="font-bold text-lg">New Releases</h4>
-              <p className="text-sm text-gray-700">One track is chosen each time for inclusion on the front page.</p>
+              <p className="text-sm text-gray-700">Top picks are featured as full New Releases on the front page and in the New Releases archive.</p>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@ function ExplainerModal({ isOpen, onClose }) {
   );
 }
 
-function ReleaseCard({ release, extra }) {
+function ReleaseCard({ release }) {
   const {
     songTitle = 'Untitled',
     artistName = 'Unknown Artist',
@@ -93,7 +93,7 @@ function ReleaseCard({ release, extra }) {
             </span>
           </div>
         )}
-        
+
         {/* View Release Overlay */}
         <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300">
            <div className="bg-black/70 px-5 py-2.5 flex items-center justify-center gap-2.5 text-white transform scale-95 group-hover:scale-100 transition-transform duration-300">
@@ -101,8 +101,6 @@ function ReleaseCard({ release, extra }) {
              <span className="font-bold uppercase tracking-[0.2em] text-[11px]">View Release</span>
            </div>
         </div>
-        
-
       </Link>
 
       <div className="pt-4 flex-grow flex flex-col">
@@ -124,18 +122,7 @@ function ReleaseCard({ release, extra }) {
   );
 }
 
-function getSpotifyEmbedUrl(spotifyUrl) {
-  if (!spotifyUrl) return null;
-  try {
-    const url = new URL(spotifyUrl);
-    return 'https://open.spotify.com/embed' + url.pathname;
-  } catch (e) {
-    return null;
-  }
-}
-
-export default function Releases({ releases = [], homePage = null, alumniReleases = [] }) {
-  const [activeTab, setActiveTab] = useState('curated'); // 'curated' | 'pool'
+export default function Releases({ releases = [], alumniReleases = [] }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAlumniOpen, setIsAlumniOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -150,13 +137,8 @@ export default function Releases({ releases = [], homePage = null, alumniRelease
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-  
-  const curatedReleases = releases.slice(0, 6);
 
-  const defaultSpotifyUrl = "https://open.spotify.com/embed/playlist/07mpfeaseGbIdKBvQPwwEd?utm_source=generator&si=e3ceb2d91ba4442d";
-  const embedUrl = homePage?.spotifyPlaylistUrl 
-    ? getSpotifyEmbedUrl(homePage.spotifyPlaylistUrl) || defaultSpotifyUrl
-    : defaultSpotifyUrl;
+  const curatedReleases = releases.slice(0, 6);
 
   // Generate JSON-LD for SEO
   const jsonLd = {
@@ -185,14 +167,14 @@ export default function Releases({ releases = [], homePage = null, alumniRelease
     <section className="bg-[#e8e2d9] w-full py-12 md:py-16 border-t border-black/10">
       {/* Inject JSON-LD */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      
+
       <ExplainerModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        
+
         {/* Integrated Section Header & Curation Process */}
         <div className="flex flex-col gap-5 mb-8 pb-4 border-b-2 border-black">
-          
+
           {/* Slim Editorial Process Bar */}
           <div className="relative flex flex-col md:flex-row items-center justify-center gap-3 text-xs md:text-sm font-mono text-gray-800 pb-4 border-b border-black/10">
             <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 text-center px-4 md:px-32">
@@ -212,19 +194,19 @@ export default function Releases({ releases = [], homePage = null, alumniRelease
                 Weekly Song Pool
               </span>
               <span className="text-black font-black">➔</span>
-              <span className="font-bold text-gray-900">Selected Tracks</span>
+              <span className="font-bold text-gray-900">Standout Songs</span>
               <span className="text-black font-black">➔</span>
               <span className="flex items-center gap-1.5 font-bold text-gray-900">
                 <svg className="w-3.5 h-3.5 text-cobalt shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
                   <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
                 </svg>
-                New Release
+                New Releases
               </span>
             </div>
 
             <div className="md:absolute md:right-0 md:w-[300px] flex justify-center">
-              <button 
+              <button
                 onClick={() => setIsModalOpen(true)}
                 className="shrink-0 bg-transparent text-black text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 hover:bg-white hover:text-black transition-all border-2 border-black rounded shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-y-[1px] hover:translate-x-[1px]"
               >
@@ -233,7 +215,7 @@ export default function Releases({ releases = [], homePage = null, alumniRelease
             </div>
           </div>
 
-          {/* Main Title & Tabs Row */}
+          {/* Main Title & Spotlight Alumni Row */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 relative">
             <div>
               <span className="block text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.25em] text-black/60 mb-1">
@@ -241,16 +223,16 @@ export default function Releases({ releases = [], homePage = null, alumniRelease
               </span>
               <h2 className="text-2xl md:text-4xl font-fraunces font-black tracking-tight text-black flex items-center gap-2.5">
                 <span>New Releases</span>
-                <img 
-                  src="/headphones.png" 
-                  alt="Headphones" 
-                  aria-hidden="true" 
+                <img
+                  src="/headphones.png"
+                  alt="Headphones"
+                  aria-hidden="true"
                   className="inline-block w-5 h-5 md:w-7 md:h-7 object-contain opacity-90 select-none"
                 />
               </h2>
             </div>
 
-            {/* Spotlight Alumni: Out This Week Dropdown (Option A: only appears when >= 1 recent release) */}
+            {/* Spotlight Alumni: Out This Week Dropdown */}
             {alumniReleases && alumniReleases.length > 0 && (
               <div ref={dropdownRef} className="relative self-start md:self-end">
                 <button
@@ -260,7 +242,7 @@ export default function Releases({ releases = [], homePage = null, alumniRelease
                   aria-expanded={isAlumniOpen}
                 >
                   <span className="w-2 h-2 rounded-full bg-cobalt inline-block animate-pulse"></span>
-                  <span>'Spotlight Artists' - new this week</span>
+                  <span>&apos;Spotlight Artists&apos; - new this week</span>
                   <span className="text-[10px] font-black">{isAlumniOpen ? '▲' : '▼'}</span>
                 </button>
 
@@ -285,7 +267,7 @@ export default function Releases({ releases = [], homePage = null, alumniRelease
                             {item.artistName}
                           </p>
                           <p className="text-[11px] text-gray-700 truncate">
-                            "{item.title}"
+                            &quot;{item.title}&quot;
                           </p>
                           <span className="text-[9px] font-mono text-gray-400">
                             {item.releaseDate && new Date(item.releaseDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
@@ -309,60 +291,25 @@ export default function Releases({ releases = [], homePage = null, alumniRelease
                 )}
               </div>
             )}
-            
-            <div className="w-full sm:w-[300px] flex bg-white border-2 border-black p-1 rounded-full shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-              <button 
-                onClick={() => setActiveTab('curated')}
-                className={`flex-1 py-1.5 px-3 text-center rounded-full text-xs md:text-[13px] font-bold transition-colors ${activeTab === 'curated' ? 'bg-neutral-800 text-white' : 'bg-transparent text-gray-700 hover:text-black hover:bg-gray-100'}`}
-              >
-                New Releases
-              </button>
-              <button 
-                onClick={() => setActiveTab('pool')}
-                className={`flex-1 py-1.5 px-3 text-center rounded-full text-xs md:text-[13px] font-bold transition-colors ${activeTab === 'pool' ? 'bg-neutral-800 text-white' : 'bg-transparent text-gray-700 hover:text-black hover:bg-gray-100'}`}
-              >
-                Weekly Song Pool
-              </button>
-            </div>
           </div>
         </div>
 
-        {/* Tab 1: The Curated Cut */}
-        {activeTab === 'curated' && (
-          <div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-              {curatedReleases.map(function (release, i) {
-                return (
-                  <ReleaseCard key={release._id || i} release={release} extra={MOCK_EXTRAS[i % MOCK_EXTRAS.length]} />
-                );
-              })}
-            </div>
-
-            {curatedReleases.length === 0 && (
-              <p className="text-center text-sm font-mono text-gray-500 py-12">
-                No releases available at this time.
-              </p>
-            )}
+        {/* Curated New Releases Grid */}
+        <div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+            {curatedReleases.map(function (release, i) {
+              return (
+                <ReleaseCard key={release._id || i} release={release} />
+              );
+            })}
           </div>
-        )}
 
-        {/* Tab 2: The Audition Pool */}
-        {activeTab === 'pool' && (
-          <div className="w-full">
-            <iframe 
-              data-testid="embed-iframe" 
-              style={{ borderRadius: '12px' }} 
-              src={embedUrl} 
-              width="100%" 
-              height="950" 
-              frameBorder="0" 
-              allowFullScreen="" 
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-              loading="lazy"
-              title="The Audition Pool"
-            ></iframe>
-          </div>
-        )}
+          {curatedReleases.length === 0 && (
+            <p className="text-center text-sm font-mono text-gray-500 py-12">
+              No releases available at this time.
+            </p>
+          )}
+        </div>
       </div>
     </section>
   );
