@@ -22,3 +22,12 @@
 
 ## Future / Travel Environments
 - **Chromebook Remote Setup (KL Trip)**: Target architecture for mobile development on an Acer Chromebook, leveraging the always-on Mini PC via Tailscale or cloud-based IDEs to maintain access to all projects.
+
+## Android Debian VM & Deployment Notes (`NewIndieFriday`)
+- **Frontend (`frontend/`)**:
+  - Shared storage (`/storage/emulated/10`) uses `virtiofs`, which blocks `.bin` symlinks. Install with `npm install --no-bin-links --cache "$HOME/.cache/projects/frontend/npm"`.
+  - Run dev/build directly via Node: `node ./node_modules/@react-router/dev/bin.js dev --host 0.0.0.0 --port 5173` (or `build`). If Vite HMR doesn't pick up edits across `virtiofs`, restart the dev server.
+  - Note: With `ssr: false` and `prerender()`, non-prerendered temporary routes cannot export `loader`/`clientLoader` (use `useEffect` fetch instead).
+- **Sanity Studio (`studio/`)**:
+  - Copy Studio source files (`package.json`, `package-lock.json`, `sanity.cli.js`, `sanity.config.js`, `schemaTypes`, `actions`, `components`, `static`) to the VM's native `ext4` disk (`~/nif-studio`) with `ulimit -n 65536`, then run `npm install --legacy-peer-deps`, `npx sanity login`, and `npx sanity deploy` to avoid `virtiofs` stalls and `EMFILE` open-file limits.
+  - **Curation Schema (`studio/schemaTypes/homePage.js`)**: Keeps `name: 'homePage'` for data compatibility, titled **`Song Pool`** in Studio, and holds `spotifyPlaylistUrl` (`Weekly Pool Songs`) + `standoutSongs` (`Standout Songs`).
