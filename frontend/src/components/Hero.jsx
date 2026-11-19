@@ -294,7 +294,7 @@ export default function Hero({ spotlightArtist, latestRelease = null, homePage =
                 <img
                   src="/doobie-brothers-toulouse-street.png"
                   alt="Doobie Brothers - Toulouse Street"
-                  className="w-[128px] h-[128px] object-cover border-2 border-black/70 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 ease-out group-hover/album:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)] group-hover/album:opacity-85 relative"
+                  className="w-[128px] h-[128px] object-cover border-2 border-black/70 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 ease-out origin-top-right group-hover/album:scale-[1.45] group-hover/album:z-30 group-hover/album:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.3)] relative"
                 />
               </div>
               <div className="text-[10px] md:text-xs font-mono font-bold uppercase tracking-widest text-black relative z-20">
