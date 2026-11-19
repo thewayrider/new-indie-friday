@@ -139,32 +139,34 @@ export default function Hero({ spotlightArtist, latestRelease = null, homePage =
           <div className="xl:col-span-5 flex flex-col justify-center py-1">
             {latestRelease ? (
               <div className="flex flex-col sm:flex-row items-center gap-5 w-full">
-                <Link
-                  to={`/new-releases/${latestRelease.slug}`}
-                  className="group relative block w-full max-w-[310px] sm:w-[270px] xl:w-[300px] flex-shrink-0 aspect-square bg-gray-300 overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
-                >
-                  <span className="absolute top-3 left-3 z-10 bg-cobalt text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2.5 py-1">
+                <div className="relative w-full max-w-[310px] sm:w-[270px] xl:w-[300px] flex-shrink-0">
+                  <span className="absolute -top-7 left-0 z-10 bg-cobalt text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2.5 py-1">
                     Latest Release Pick
                   </span>
-                  {latestRelease.albumArtUrl ? (
-                    <img
-                      src={latestRelease.albumArtUrl}
-                      alt={`${latestRelease.songTitle} by ${latestRelease.artistName}`}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gray-800 text-gray-400 text-xs font-mono">
-                      Cover Art
-                    </div>
-                  )}
+                  <Link
+                    to={`/new-releases/${latestRelease.slug}`}
+                    className="group relative block w-full aspect-square bg-gray-300 overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+                  >
+                    {latestRelease.albumArtUrl ? (
+                      <img
+                        src={latestRelease.albumArtUrl}
+                        alt={`${latestRelease.songTitle} by ${latestRelease.artistName}`}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gray-800 text-gray-400 text-xs font-mono">
+                        Cover Art
+                      </div>
+                    )}
 
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <div className="bg-black/70 px-5 py-2.5 flex items-center justify-center gap-2.5 text-white transform scale-95 group-hover:scale-100 transition-transform duration-300">
-                      <img src="/headphones.png" alt="Headphones" aria-hidden="true" className="w-4 h-4 object-contain select-none invert" />
-                      <span className="font-bold uppercase tracking-[0.2em] text-[11px]">View Release</span>
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <div className="bg-black/70 px-5 py-2.5 flex items-center justify-center gap-2.5 text-white transform scale-95 group-hover:scale-100 transition-transform duration-300">
+                        <img src="/headphones.png" alt="Headphones" aria-hidden="true" className="w-4 h-4 object-contain select-none invert" />
+                        <span className="font-bold uppercase tracking-[0.2em] text-[11px]">View Release</span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
 
                 <div className="flex-1 flex flex-col justify-center items-center sm:items-start text-center sm:text-left min-w-0">
                   <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-black/60 mb-1">
