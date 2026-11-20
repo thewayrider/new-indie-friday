@@ -122,6 +122,19 @@ function ReleaseCard({ release }) {
   );
 }
 
+function BackToTopButton({ className = '' }) {
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  return (
+    <button
+      type="button"
+      onClick={scrollToTop}
+      className={`text-[10px] md:text-[11px] font-mono font-bold uppercase tracking-widest text-black hover:text-cobalt transition-colors cursor-pointer whitespace-nowrap ${className}`}
+    >
+      ↑ Back to Top
+    </button>
+  );
+}
+
 export default function Releases({ releases = [], alumniReleases = [] }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAlumniOpen, setIsAlumniOpen] = useState(false);
@@ -164,7 +177,7 @@ export default function Releases({ releases = [], alumniReleases = [] }) {
   };
 
   return (
-    <section className="bg-[#e8e2d9] w-full py-12 md:py-16 border-t border-black/10">
+    <section className="bg-[#e8e2d9] w-full py-12 md:py-16 border-t border-black/10 overflow-x-hidden">
       {/* Inject JSON-LD */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
@@ -215,8 +228,14 @@ export default function Releases({ releases = [], alumniReleases = [] }) {
             </div>
           </div>
 
-          {/* Main Title & Spotlight Alumni Row */}
+          {/* Main Title & Spotlight Alumni Row + Top Pair of Back-to-Top Buttons */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 relative">
+            <div className="hidden xl:flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-full w-[calc((100vw-80rem)/2)]">
+              <BackToTopButton />
+            </div>
+            <div className="hidden xl:flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-full w-[calc((100vw-80rem)/2)]">
+              <BackToTopButton />
+            </div>
             <div>
               <span className="block text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.25em] text-black/60 mb-1">
                 Curated Weekly Selections
@@ -309,6 +328,17 @@ export default function Releases({ releases = [], alumniReleases = [] }) {
               No releases available at this time.
             </p>
           )}
+
+          {/* Bottom Pair of Back-to-Top Buttons (just under release metadata row) */}
+          <div className="relative mt-2 h-6 flex items-center justify-center">
+            <div className="hidden xl:flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-full w-[calc((100vw-80rem)/2)]">
+              <BackToTopButton />
+            </div>
+            <div className="hidden xl:flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-full w-[calc((100vw-80rem)/2)]">
+              <BackToTopButton />
+            </div>
+            <BackToTopButton className="xl:hidden" />
+          </div>
         </div>
       </div>
     </section>
