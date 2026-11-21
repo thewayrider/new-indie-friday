@@ -57,89 +57,13 @@ export default function Hero({ spotlightArtist, latestRelease = null, homePage =
   return (
     <section className="relative w-full bg-[#e8e2d9] border-b border-black/15">
       <div className="w-full px-6 md:px-12 py-8 md:py-10 lg:min-h-[calc(100vh-125px)] flex flex-col justify-between gap-8">
-        {/* TOP ROW: FULL HERO WIDTH — FEATURED SPOTLIGHT (7 cols) + LATEST RELEASE PICK (5 cols) */}
+        {/* TOP ROW: FULL HERO WIDTH — LATEST RELEASE PICK (7 cols) + FEATURED SPOTLIGHT (5 cols) */}
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* LEFT PROMINENCE: FEATURED ALBUM / ARTIST SPOTLIGHT (7 cols) */}
+          {/* LEFT PROMINENCE: LATEST RELEASE PICK (7 cols — larger image) */}
           <div className="xl:col-span-7 flex flex-col justify-start py-1">
-            <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
-              <Link
-                to={spotlightLink}
-                className="group relative w-full md:w-[51%] flex-shrink-0 overflow-hidden bg-gray-200 block self-start"
-              >
-                <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2 py-1 border-l-2 border-cobalt">
-                  {designation}
-                </span>
-
-                {imageUrl ? (
-                  <img
-                    src={imageUrl}
-                    alt={artistName}
-                    className="w-full aspect-[4/3] object-cover transition-opacity duration-200 group-hover:opacity-85"
-                  />
-                ) : (
-                  <div className="w-full aspect-[4/3] bg-gray-300 flex items-center justify-center">
-                    <span className="text-gray-400 text-[11px] font-mono uppercase tracking-widest">
-                      Image coming soon
-                    </span>
-                  </div>
-                )}
-
-                <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors duration-200">
-                  <span className="text-white text-[11px] font-mono font-black uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    Read the Spotlight →
-                  </span>
-                </div>
-              </Link>
-
-              <div className="flex-1 flex flex-col justify-between gap-5 md:min-h-[260px]">
-                <div>
-                  <div className="flex items-center gap-2 text-xs md:text-sm font-mono font-bold uppercase tracking-[0.22em] text-black/80 mb-2.5">
-                    <img
-                      src="/headphones.png"
-                      alt="Headphones"
-                      aria-hidden="true"
-                      className="w-4 h-4 md:w-5 md:h-5 object-contain opacity-90 select-none"
-                    />
-                    <span>{designation}</span>
-                  </div>
-
-                  <h2 className="font-fraunces font-black text-2xl md:text-3xl tracking-tight leading-tight text-black">
-                    {artistName}
-                  </h2>
-
-                  {albumSubtitle && (
-                    <p className="font-mono text-sm md:text-base font-semibold text-black/80 mt-2.5">
-                      {albumSubtitle}
-                    </p>
-                  )}
-
-                  <p className="font-mono text-sm md:text-base text-gray-700 leading-relaxed mt-3.5">
-                    {teaser}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
-                  <Link
-                    to={spotlightLink}
-                    className="inline-block bg-black text-white text-[11px] font-black uppercase tracking-widest px-7 py-4 hover:bg-cobalt transition-all border border-black shadow-[3px_3px_0px_0px_#2563eb]"
-                  >
-                    {buttonLabel} →
-                  </Link>
-                  {featuredDate && (
-                    <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
-                      {formatDate(featuredDate)}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT OF TOP ROW: LATEST RELEASE PICK (5 cols) */}
-          <div className="xl:col-span-5 flex flex-col justify-center py-1">
             {latestRelease ? (
-              <div className="flex flex-col sm:flex-row items-center gap-5 w-full">
-                <div className="relative w-full max-w-[310px] sm:w-[270px] xl:w-[300px] flex-shrink-0">
+              <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center">
+                <div className="relative w-full md:w-[51%] flex-shrink-0 self-start">
                   <span className="absolute -top-7 left-0 z-10 bg-cobalt text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2.5 py-1">
                     Latest Release Pick
                   </span>
@@ -168,8 +92,8 @@ export default function Hero({ spotlightArtist, latestRelease = null, homePage =
                   </Link>
                 </div>
 
-                <div className="flex-1 flex flex-col justify-center items-center sm:items-start text-center sm:text-left min-w-0">
-                  <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-black/60 mb-1">
+                <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left min-w-0 gap-3">
+                  <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-[0.18em] text-black/60">
                     <span>{latestRelease.releaseType || 'Single'}</span>
                     {latestRelease.releaseDate && (
                       <>
@@ -180,18 +104,24 @@ export default function Hero({ spotlightArtist, latestRelease = null, homePage =
                   </div>
 
                   <Link to={`/new-releases/${latestRelease.slug}`} className="group/title">
-                    <h3 className="font-fraunces font-black text-2xl md:text-3xl leading-tight text-black group-hover/title:text-cobalt transition-colors">
+                    <h2 className="font-fraunces font-black text-3xl md:text-4xl tracking-tight leading-tight text-black group-hover/title:text-cobalt transition-colors">
                       {latestRelease.songTitle}
-                    </h3>
-                    <p className="font-mono text-xs md:text-sm font-bold text-black/80 mt-1">
+                    </h2>
+                    <p className="font-mono text-sm md:text-base font-bold text-black/80 mt-2">
                       {latestRelease.artistName}
                     </p>
                   </Link>
 
-                  <div className="pt-3.5 flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
+                  {latestRelease.albumOrEpName && (
+                    <p className="text-xs font-mono text-gray-600">
+                      From: {latestRelease.albumOrEpName}
+                    </p>
+                  )}
+
+                  <div className="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-3">
                     <Link
                       to={`/new-releases/${latestRelease.slug}`}
-                      className="inline-block bg-black text-white text-[10px] font-black uppercase tracking-widest px-4 py-2.5 hover:bg-cobalt transition-colors"
+                      className="inline-block bg-black text-white text-[11px] font-black uppercase tracking-widest px-6 py-3.5 hover:bg-cobalt transition-all border border-black shadow-[3px_3px_0px_0px_#2563eb]"
                     >
                       Listen &amp; Read →
                     </Link>
@@ -200,7 +130,7 @@ export default function Hero({ spotlightArtist, latestRelease = null, homePage =
                         href={latestRelease.spotifyUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block bg-white text-black text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-2.5 border border-black hover:bg-black hover:text-white transition-colors"
+                        className="inline-block bg-white text-black text-[11px] font-mono font-bold uppercase tracking-wider px-4 py-3.5 border border-black hover:bg-black hover:text-white transition-colors"
                       >
                         ♫ Spotify ↗
                       </a>
@@ -209,6 +139,80 @@ export default function Hero({ spotlightArtist, latestRelease = null, homePage =
                 </div>
               </div>
             ) : null}
+          </div>
+
+          {/* RIGHT OF TOP ROW: FEATURED ALBUM / ARTIST SPOTLIGHT (5 cols — compact image) */}
+          <div className="xl:col-span-5 flex flex-col justify-center py-1">
+            <div className="flex flex-col sm:flex-row items-center gap-5 w-full">
+              <Link
+                to={spotlightLink}
+                className="group relative w-full max-w-[310px] sm:w-[270px] xl:w-[300px] flex-shrink-0 overflow-hidden bg-gray-200 block"
+              >
+                <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2 py-1 border-l-2 border-cobalt">
+                  {designation}
+                </span>
+
+                {imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    alt={artistName}
+                    className="w-full aspect-[4/3] object-cover transition-opacity duration-200 group-hover:opacity-85"
+                  />
+                ) : (
+                  <div className="w-full aspect-[4/3] bg-gray-300 flex items-center justify-center">
+                    <span className="text-gray-400 text-[11px] font-mono uppercase tracking-widest">
+                      Image coming soon
+                    </span>
+                  </div>
+                )}
+
+                <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors duration-200">
+                  <span className="text-white text-[11px] font-mono font-black uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    Read the Spotlight →
+                  </span>
+                </div>
+              </Link>
+
+              <div className="flex-1 flex flex-col justify-center items-center sm:items-start text-center sm:text-left min-w-0 gap-2.5">
+                <div className="flex items-center gap-2 text-[10px] md:text-xs font-mono font-bold uppercase tracking-[0.2em] text-black/80">
+                  <img
+                    src="/headphones.png"
+                    alt="Headphones"
+                    aria-hidden="true"
+                    className="w-3.5 h-3.5 md:w-4 md:h-4 object-contain opacity-90 select-none"
+                  />
+                  <span>{designation}</span>
+                </div>
+
+                <h2 className="font-fraunces font-black text-2xl md:text-3xl tracking-tight leading-tight text-black">
+                  {artistName}
+                </h2>
+
+                {albumSubtitle && (
+                  <p className="font-mono text-xs md:text-sm font-semibold text-black/80">
+                    {albumSubtitle}
+                  </p>
+                )}
+
+                <p className="font-mono text-xs md:text-sm text-gray-700 leading-relaxed line-clamp-3">
+                  {teaser}
+                </p>
+
+                <div className="pt-1 flex flex-wrap items-center justify-center sm:justify-start gap-3">
+                  <Link
+                    to={spotlightLink}
+                    className="inline-block bg-black text-white text-[10px] font-black uppercase tracking-widest px-5 py-3 hover:bg-cobalt transition-all border border-black shadow-[3px_3px_0px_0px_#2563eb]"
+                  >
+                    {buttonLabel} →
+                  </Link>
+                  {featuredDate && (
+                    <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">
+                      {formatDate(featuredDate)}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
