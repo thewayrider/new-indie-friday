@@ -282,22 +282,15 @@ export default function Hero({ spotlightArtist, latestRelease = null, homePage =
 
           {/* RIGHT SIDE: DOOBIE BROTHERS QUOTE + ALBUM COVER */}
           <div className="lg:w-[340px] xl:w-[380px] flex-shrink-0 flex flex-col justify-end gap-5">
-            <p className="font-fraunces text-base lg:text-xl italic leading-relaxed text-black/90 text-left">
+            <p className="font-fraunces text-sm lg:text-lg italic leading-relaxed text-black/85 text-left">
               &ldquo;Don&apos;t you feel it growing, day by day<br />
               People getting ready for the news<br />
               Some are happy, some are sad<br />
               Oh, we got to let the music play&rdquo;
             </p>
 
-            <div className="group/album relative flex items-center justify-start gap-5 mt-2">
-              <div className="relative w-[128px] h-[128px] flex-shrink-0">
-                <img
-                  src="/doobie-brothers-toulouse-street.png"
-                  alt="Doobie Brothers - Toulouse Street"
-                  className="w-[128px] h-[128px] object-cover border-2 border-black/70 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 ease-out origin-top-right group-hover/album:scale-[1.45] group-hover/album:z-30 group-hover/album:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.3)] relative"
-                />
-              </div>
-              <div className="text-[10px] md:text-xs font-mono font-bold uppercase tracking-widest text-black relative z-20">
+            <div className="group/album relative flex items-center justify-between gap-5 mt-2">
+              <div className="text-[9px] md:text-[11px] font-mono font-bold uppercase tracking-widest text-black relative z-20">
                 <a
                   href="https://open.spotify.com/track/7Ar4G7Ci11gpt6sfH9Cgz5?si=6232a0844d0f4d10"
                   target="_blank"
@@ -307,9 +300,16 @@ export default function Hero({ spotlightArtist, latestRelease = null, homePage =
                   Listen to the Music
                 </a>
                 <br />
-                <span className="text-black/60 text-[9px] md:text-[10px]">
+                <span className="text-black/60 text-[8px] md:text-[9px]">
                   - The Doobie Brothers
                 </span>
+              </div>
+              <div className="relative w-[128px] h-[128px] flex-shrink-0">
+                <img
+                  src="/doobie-brothers-toulouse-street.png"
+                  alt="Doobie Brothers - Toulouse Street"
+                  className="w-[128px] h-[128px] object-cover border-2 border-black/70 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 ease-out origin-top-right group-hover/album:scale-[1.45] group-hover/album:z-30 group-hover/album:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.3)] relative"
+                />
               </div>
             </div>
           </div>
