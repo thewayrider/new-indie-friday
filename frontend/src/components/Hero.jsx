@@ -57,13 +57,13 @@ export default function Hero({ spotlightArtist, latestRelease = null, homePage =
   return (
     <section className="relative w-full bg-[#e8e2d9] border-b border-black/15">
       <div className="w-full px-6 md:px-12 py-8 md:py-10 lg:min-h-[calc(100vh-125px)] flex flex-col justify-between gap-8">
-        {/* TOP ROW: FULL HERO WIDTH — LATEST RELEASE PICK (7 cols) + FEATURED SPOTLIGHT (5 cols) */}
+        {/* TOP ROW: FULL HERO WIDTH — LATEST RELEASE PICK (6 cols) + FEATURED SPOTLIGHT (6 cols) */}
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* LEFT PROMINENCE: LATEST RELEASE PICK (7 cols — larger image) */}
-          <div className="xl:col-span-7 flex flex-col justify-start py-1">
+          {/* LEFT PROMINENCE: LATEST RELEASE PICK (same size as New Releases cards below) */}
+          <div className="xl:col-span-6 flex flex-col justify-start py-1">
             {latestRelease ? (
               <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center">
-                <div className="relative w-full md:w-[51%] flex-shrink-0 self-start">
+                <div className="relative w-full max-w-[360px] sm:w-[320px] xl:w-[360px] flex-shrink-0 self-start">
                   <span className="absolute -top-7 left-0 z-10 bg-cobalt text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2.5 py-1">
                     Latest Release Pick
                   </span>
@@ -141,12 +141,12 @@ export default function Hero({ spotlightArtist, latestRelease = null, homePage =
             ) : null}
           </div>
 
-          {/* RIGHT OF TOP ROW: FEATURED ALBUM / ARTIST SPOTLIGHT (5 cols — compact image) */}
-          <div className="xl:col-span-5 flex flex-col justify-center py-1">
-            <div className="flex flex-col sm:flex-row items-center gap-5 w-full">
+          {/* RIGHT OF TOP ROW: FEATURED ALBUM / ARTIST SPOTLIGHT (just over half the Latest Release image size) */}
+          <div className="xl:col-span-6 flex flex-col justify-center py-1">
+            <div className="flex flex-col sm:flex-row items-center gap-6 w-full">
               <Link
                 to={spotlightLink}
-                className="group relative w-full max-w-[310px] sm:w-[270px] xl:w-[300px] flex-shrink-0 overflow-hidden bg-gray-200 block"
+                className="group relative w-full max-w-[220px] sm:w-[200px] xl:w-[220px] flex-shrink-0 overflow-hidden bg-gray-200 block"
               >
                 <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2 py-1 border-l-2 border-cobalt">
                   {designation}
