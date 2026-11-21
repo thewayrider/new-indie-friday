@@ -146,7 +146,7 @@ export default function Hero({ spotlightArtist, latestRelease = null, homePage =
             <div className="flex flex-col sm:flex-row items-center gap-6 w-full">
               <Link
                 to={spotlightLink}
-                className="group relative w-full max-w-[235px] sm:w-[215px] xl:w-[235px] flex-shrink-0 overflow-hidden bg-gray-200 block"
+                className="group relative w-full max-w-[250px] sm:w-[230px] xl:w-[250px] flex-shrink-0 overflow-hidden bg-gray-200 block"
               >
                 <span className="absolute top-3 left-3 z-10 bg-black text-white text-[9px] font-mono font-black uppercase tracking-[0.2em] px-2 py-1 border-l-2 border-cobalt">
                   {designation}
