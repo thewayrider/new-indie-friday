@@ -25,15 +25,22 @@ const navClass = ({ isActive }) =>
     : 'hover:text-cobalt transition text-gray-500 font-bold';
 
 const TASTEMAKERS = [
-  { name: 'Futuremag Music', url: 'https://www.futuremagmusic.net' },
-  { name: 'Triple J Unearthed', url: 'https://www.abc.net.au/triplejunearthed' },
   { name: 'Bandcamp Indie', url: 'https://bandcamp.com' },
-  { name: 'Happy Mag', url: 'https://happymag.tv' },
+  { name: 'MusicBrainz', url: 'https://musicbrainz.org' },
+  { name: 'Triple J Unearthed', url: 'https://www.abc.net.au/triplejunearthed' },
+  { name: 'ListenBrainz', url: 'https://listenbrainz.org' },
+  { name: 'AIR Charts', url: 'https://air.org.au' },
   { name: 'AMRAP Charts', url: 'https://amrap.org.au' },
+  { name: 'Futuremag Music', url: 'https://www.futuremagmusic.net' },
+  { name: 'Roots Mag & NZ Musician', url: 'https://www.rootsmag.nz' },
+  { name: 'Nialler9', url: 'https://nialler9.com' },
+  { name: 'Deezer Editorial', url: 'https://www.deezer.com' },
+  { name: 'The Note', url: 'https://www.thenote.com.au' },
+  { name: 'New Releases Now', url: 'https://www.newreleasesnow.com' },
+  { name: 'US Indie Radar', url: 'https://www.brooklynvegan.com' },
+  { name: 'Global 24h Radar', url: 'https://www.thelineofbestfit.com' },
   { name: 'chosic.com', url: 'https://www.chosic.com' },
   { name: 'allmusic.com', url: 'https://www.allmusic.com' },
-  { name: 'Roots Online NZ', url: 'https://rootsmusic.co.nz' },
-  { name: 'AIR Charts', url: 'https://air.org.au' },
 ];
 
 export default function Footer() {
