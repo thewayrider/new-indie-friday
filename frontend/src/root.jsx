@@ -31,6 +31,13 @@ export const meta = () => [
   },
 ];
 
+const gaConfig = `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5FZRB4MCW2');
+`;
+
 const statcounterConfig =
   'var sc_project=13335607;var sc_invisible=1;var sc_security="c33e5b6b";';
 
@@ -44,19 +51,27 @@ export function Layout({ children }) {
         <meta name="theme-color" content="#e8e2d9" />
         <Meta />
         <Links />
+        {/* Google Analytics (GA4) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-5FZRB4MCW2"
+        ></script>
+        <script dangerouslySetInnerHTML={{ __html: gaConfig }} />
+        {/* Rybbit Analytics */}
         <script
           src="https://app.rybbit.io/api/script.js?siteId=e22eedcebabd"
           defer
         ></script>
+        {/* Statcounter config in <head> before deferred counter.js to prevent React 19 async script hoisting race */}
+        <script dangerouslySetInnerHTML={{ __html: statcounterConfig }} />
+        <script src="https://www.statcounter.com/counter/counter.js" defer></script>
       </head>
       <body>
         {children}
         <ScrollRestoration />
         <Scripts />
 
-        {/* Statcounter (migrated from index.html) */}
-        <script dangerouslySetInnerHTML={{ __html: statcounterConfig }} />
-        <script src="https://www.statcounter.com/counter/counter.js" async></script>
+        {/* Statcounter noscript fallback */}
         <noscript>
           <div className="statcounter">
             <a
